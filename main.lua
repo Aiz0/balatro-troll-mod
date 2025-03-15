@@ -5,7 +5,7 @@ local function new_troll_joker(joker)
         take_ownership = false,
         loc_txt = G.localization.descriptions.Joker[original_joker.key], -- use original jokers description
     }, original_joker)
-    troll_joker.mod = nil --crashes if I don't do this
+    troll_joker.mod = nil                                                --crashes if I don't do this
     SMODS.Joker(SMODS.merge_defaults(joker, troll_joker))
 end
 
@@ -13,3 +13,5 @@ end
 for i, joker in ipairs(NFS.getDirectoryItems(SMODS.current_mod.path .. "jokers")) do
     new_troll_joker(assert(SMODS.load_file("jokers/" .. joker))())
 end
+
+assert(SMODS.load_file("utils.lua"))()

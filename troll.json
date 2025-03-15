@@ -2,7 +2,7 @@
   "id": "troll-mod-id-pending",
   "name": "Troll mod name pending",
   "display_name": "Troll Mod",
-  "author": ["Aiz"],
+  "author": ["Aiz", "Stargazer"],
   "description": "a mod with troll",
   "prefix": "troll_prefix_pending",
   "main_file": "main.lua",
