@@ -1,7 +1,7 @@
 {
   "id": "troll-mod-id-pending",
   "name": "Troll mod name pending",
-  "display_name": "You shouldn't see this",
+  "display_name": "Troll Mod",
   "author": ["Aiz"],
   "description": "a mod with troll",
   "prefix": "troll_prefix_pending",
