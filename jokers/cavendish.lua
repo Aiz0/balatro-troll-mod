@@ -2,6 +2,7 @@
     key = "cavendish",
     config = {
         extra = {
+            Xmult = 3,
             odds = 1000,
             rot = 1,
         }
