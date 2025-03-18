@@ -7,15 +7,13 @@
         },
     },
     add_to_deck = function(self, card, from_debuff)
+        card.ability.extra.original_probabilities = G.GAME.probabilities
         for k, v in pairs(G.GAME.probabilities) do
-            card.ability.extra.original_probabilities = G.GAME.probabilities[k]
             G.GAME.probabilities[k] = 0;
         end
     end,
     remove_from_deck = function(self, card, from_debuff)
-        for k, v in pairs(G.GAME.probabilities) do
-            G.GAME.probabilities[k] = card.ability.extra.original_probabilities;
-        end
+        G.GAME.probabilities = card.ability.extra.original_probabilities
     end,
     calculate = function(self, card, context)
         if card.ability.name == 'Oops! All 6s' then
