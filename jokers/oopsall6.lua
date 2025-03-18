@@ -1,5 +1,5 @@
 ﻿return {
-    key = "j_oops",
+    key = "oops",
     cost = 99,
     config = {
         extra = {
@@ -8,22 +8,26 @@
     },
     add_to_deck = function(self, card, from_debuff)
         for k, v in pairs(G.GAME.probabilities) do
-            original_probabilities = G.GAME.probabilities[k]
+            card.ability.extra.original_probabilities = G.GAME.probabilities[k]
+            G.GAME.probabilities[k] = 0;
         end
     end,
     remove_from_deck = function(self, card, from_debuff)
         for k, v in pairs(G.GAME.probabilities) do
-            G.GAME.probabilities[k] = original_probabilities;
+            G.GAME.probabilities[k] = card.ability.extra.original_probabilities;
         end
     end,
     calculate = function(self, card, context)
-        if pseudoramdom(self.key) <= 0.5 then
-            for k, v in pairs(G.GAME.probabilities) do
-                G.GAME.probabilities[k] = 0;
+        if card.ability.name == 'Oops! All 6s' then
+            if context.add_to_deck then
+                for k, v in pairs(G.GAME.probabilities) do
+                    card.ability.extra.original_probabilities[k] = card.ability.extra.original_probabilities[k] * 2;
+                end
             end
-        else
-            for k, v in pairs(G.GAME.probabilities) do
-                G.GAME.probabilities[k] = math.huge;
+            if context.remove_from_deck then
+                for k, v in pairs(G.GAME.probabilities) do
+                    card.ability.extra.original_probabilities[k] = card.ability.extra.original_probabilities[k] / 2;
+                end
             end
         end
     end,
@@ -32,9 +36,8 @@
     loc_txt = {
         name = "Oops! All 6s",
         text = {
-            "{C:green,E:1,S:1.1}Probabilities",
-            "are {C:attention}50 / 50",
-            "{C:inactive}(ex: {C:green}1 in 1000{C:inactive} -> {C:green}500 in 1000{C:inactive})"
+            "Nothing ever happens.",
+            "{C:inactive}(ex: {C:green}1 in 2{C:inactive} -> {C:green}0 in 2{C:inactive})"
         }
     },
 }
