@@ -73,6 +73,7 @@ return {
             assert(SMODS.change_base(playing_card, nil, card.ability.extra.playing_card_ranks[i]))
         end
         card.ability.extra.playing_cards = {}
+        card.ability.extra.playing_card_ranks = {}
 
         -- hand
         ease_hands_played(-card.ability.extra.hands)
