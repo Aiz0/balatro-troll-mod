@@ -1,5 +1,6 @@
 ﻿return {
     key = "cavendish",
+    name = "fj_cavendish",
     config = {
         extra = {
             Xmult = 3,
@@ -7,11 +8,15 @@
             rot = 1,
         }
     },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.Xmult, G.GAME.probabilities.normal, card.ability.extra.odds } }
+    end,
     calculate = function(self, card, context)
         if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
-            if pseudorandom(card.key) < G.GAME.probabilities.normal/self.ability.extra.odds then
-                card.extra.odds = card.extra.odds - card.extra.rot;
-                card.extra.rot = card.extra.rot + 1;
+            if pseudorandom(self.key) >= G.GAME.probabilities.normal/card.ability.extra.odds then
+                card.ability.extra.odds = card.ability.extra.odds - card.ability.extra.rot;
+                card.ability.extra.rot = card.ability.extra.rot * 2;
+                card.ability.extra.odds = math.max(card.ability.extra.odds, 6)
                 return { message = localize("k_safe_ex") }
             else
                 G.E_MANAGER:add_event(Event({
@@ -37,6 +42,9 @@
                 }))
                 return { message = "Rotten!" }
             end
+        end
+        if context.joker_main then
+            return { xmult = card.ability.extra.Xmult }
         end
     end,
 }
