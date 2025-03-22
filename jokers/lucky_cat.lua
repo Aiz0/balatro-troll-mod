@@ -1,0 +1,27 @@
+return {
+    key = "lucky_cat",
+    calculate = function(self, card, context)
+        if
+            context.individual
+            and context.cardarea == G.play
+            and not context.blueprint
+            and context.other_card.lucky_trigger
+        then
+            card.ability.x_mult = card.ability.x_mult + card.ability.extra
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.MULT,
+                func = function()
+                    --TODO: localize
+                    if pseudorandom(self.key) < G.GAME.probabilities.normal / 1 then
+                        SMODS.calculate_effect({ message = "Mega Jackpot!" }, card)
+                        for i = 1, 100 do
+                            ease_dollars(1)
+                            delay(2)
+                        end
+                    end
+                end,
+            }
+        end
+    end,
+}
