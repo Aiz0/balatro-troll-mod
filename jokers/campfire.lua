@@ -31,27 +31,32 @@
 
 return {
     key = "campfire",
+    name = "fj_campfire",
     cost = 9,
     config = {
         extra = {
-            xmult_mod = 0.25,
-            xmult = 1.5,
-        }
+            x_mult_mod = 0.25,
+            x_mult = 1.5,
+        },
+        name = "fj_campfire",
     },
     calculate = function(self, card, context)
-        if context.selling_card and not (card == context.other_card) then -- selling adds fuel to the fire
-            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_mod
+        if context.selling_card and not context.blueprint then -- selling adds fuel to the fire
+            card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
+            G.E_MANAGER:add_event(Event({
+                func = function() card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex')}); return true
+                end}))
         end
         if context.after then -- reduce xMult when a hand is scored
-            card.ability.extra.xmult = card.ability.extra.xmult - card.ability.extra.xmult_mod
-            if card.ability.extra.xmult <= 0 then
-                folly_ulits:replace("charcoal") -- get charcoaled idiot
+            card.ability.extra.x_mult = card.ability.extra.x_mult - card.ability.extra.x_mult_mod
+            if card.ability.extra.x_mult <= 0 then
+                folly_utils:replace(card, "charcoal") -- get charcoaled idiot
             end
         end
         if context.joker_main then
-            if not card.ability.extra.xmult == 1 then -- just a check for if the card does anything.
+            if card.ability.extra.x_mult ~= 1 then -- just a check for if the card does anything.
                 return {
-                    xmult = card.ability.extra.xmult,
+                    xmult = card.ability.extra.x_mult,
                 }
             end
         end
@@ -59,7 +64,7 @@ return {
 
     -- localization
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult_mod, card.ability.extra.xmult } }
+        return { vars = { card.ability.extra.x_mult_mod, card.ability.extra.x_mult } }
     end,
     loc_txt = {
         name = "Campfire",

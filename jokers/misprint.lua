@@ -4,9 +4,9 @@
         if
         context.joker_main then
             if pseudorandom(self.key) > 0.5 then
-                return { mult = 23 }
+                return { mult = card.ability.extra.min }
             else
-                return { mult = 0 }
+                return { mult = card.ability.extra.max }
             end
         end
     end,
