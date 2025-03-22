@@ -1,4 +1,4 @@
-﻿folly_ulits = {
+﻿folly_utils = {
     replace = function(card, other)
         G.E_MANAGER:add_event(Event({
             func = function() -- first play some sound effects and juice up card
@@ -24,5 +24,9 @@
                 return true
             end,
         }))
-    end
+    end,
+
+    prefix = {
+        joker = "j_"..SMODS.current_mod.prefix.."_"
+    }
 }

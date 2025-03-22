@@ -4,8 +4,9 @@
         extra = {
             mult = -5,
         },
+        extra_value = -6,
     },
-    cost = -10,
+    cost = 1,
     in_pool = function(self, args) return false end,
     calculate = function(self, card, context)
         if context.joker_main then return {
@@ -50,7 +51,7 @@ return {
         if context.after then -- reduce xMult when a hand is scored
             card.ability.extra.x_mult = card.ability.extra.x_mult - card.ability.extra.x_mult_mod
             if card.ability.extra.x_mult <= 0 then
-                folly_utils:replace(card, "charcoal") -- get charcoaled idiot
+                folly_utils.replace(card, folly_utils.prefix.joker.."charcoal") -- get charcoaled idiot
             end
         end
         if context.joker_main then
