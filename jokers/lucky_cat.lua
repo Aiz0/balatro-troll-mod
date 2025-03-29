@@ -13,9 +13,10 @@ return {
                 colour = G.C.MULT,
                 func = function()
                     --TODO: localize
-                    if pseudorandom(self.key) < G.GAME.probabilities.normal / 1 then
+                    if pseudorandom(self.key) < G.GAME.probabilities.normal / 100 then
                         SMODS.calculate_effect({ message = "Mega Jackpot!" }, card)
                         for i = 1, 100 do
+                            --TODO: make this not speed up
                             ease_dollars(1)
                             delay(2)
                         end
