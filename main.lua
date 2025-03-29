@@ -13,4 +13,3 @@ end
 for i, joker in ipairs(NFS.getDirectoryItems(SMODS.current_mod.path .. "jokers")) do
     new_troll_joker(assert(SMODS.load_file("jokers/" .. joker))())
 end
-
