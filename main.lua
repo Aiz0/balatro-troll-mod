@@ -6,10 +6,12 @@ local function new_troll_joker(joker)
         loc_txt = G.localization.descriptions.Joker[original_joker.key], -- use original jokers description
     }, original_joker)
     troll_joker.mod = nil --crashes if I don't do this
+    if joker.loc_folly then troll_joker.generate_ui = nil end
     SMODS.Joker(SMODS.merge_defaults(joker, troll_joker))
 end
 
 -- load all jokers in joker dir
-for i, joker in ipairs(NFS.getDirectoryItems(SMODS.current_mod.path .. "jokers")) do
-    new_troll_joker(assert(SMODS.load_file("jokers/" .. joker))())
+for _, file in ipairs(NFS.getDirectoryItems(SMODS.current_mod.path .. "jokers")) do
+    local joker = assert(SMODS.load_file("jokers/" .. file))()
+    if type(joker) == "table" then new_troll_joker(joker) end
 end
