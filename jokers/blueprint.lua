@@ -61,6 +61,7 @@
 
 SMODS.Joker({
     key = "house",
+    rarity = 2,
     cost = 10,
     in_pool = function(self, args)
         return false
@@ -99,6 +100,7 @@ end
 
 SMODS.Joker({
     key = "mansion",
+    rarity = 3,
     cost = 10,
     config = {
         extra = {
@@ -122,7 +124,7 @@ SMODS.Joker({
                         trigger = 'after',
                         delay = 0.1,
                         func = function()
-                            v:start_dissolve({HEX("57ecab")}, nil, 1);
+                            v:start_dissolve({ HEX("57ecab") }, nil, 1);
                             table.insert(card.ability.extra.marked_for_remove, v)
                             return true
                         end
@@ -150,7 +152,7 @@ SMODS.Joker({
         if context.end_of_round and context.cardarea == G.jokers then
             remove_weird_freaky_invisible_cards(card.ability.extra.marked_for_remove)
         end
-        
+
         if context.joker_main and card.ability.extra.xmult ~= 1 then
             return {
                 xmult = card.ability.extra.xmult
@@ -171,9 +173,123 @@ SMODS.Joker({
         }
     },
     loc_vars = function(self, info_queue, card)
-        return { vars = { 
+        return { vars = {
             card.ability.extra.xmult_mod,
             card.ability.extra.xmult,
+        } }
+    end,
+})
+
+SMODS.DrawStep {
+    key = 'folly_debuff',
+    order = 70,
+    func = function(self)
+        if self.folly_debuff then
+            self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader)
+            if self.children.front and (self.ability.delayed or (self.ability.effect ~= 'Stone Card' and not self.config.center.replace_base_card)) then
+                self.children.front:draw_shader('debuff', nil, self.ARGS.send_to_shader)
+            end
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}
+
+SMODS.Sound({
+    key = "house_bach",
+    path = "house_bach.ogg"
+})
+
+local mod_prefix = SMODS.current_mod.prefix
+SMODS.Joker({
+    key = "dr_house",
+    rarity = 4,
+    cost = 10,
+    config = {
+        extra = 2
+    },
+    in_pool = function(self, args)
+        return false
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        if from_debuff then
+            card:set_debuff(false)
+        else
+            for i, v in pairs(G.playing_cards) do
+                SMODS.debuff_card(v, true, "house_md")
+            end
+            for i, v in pairs(G.jokers.cards) do
+                SMODS.debuff_card(v, true, "house_md")
+            end
+            play_sound(mod_prefix.."_house_bach", 1, 1)
+            G.E_MANAGER:add_event(Event({
+                trigger = "before",
+                delay = 2,
+                func = function()
+                    attention_text({
+                        scale = 2,
+                        text = "This Vexes Me",
+                        hold = 60,
+                        align = "cm",
+                        offset = { x = 0, y = 0 },
+                        major = G.play,
+                    })
+                    return true
+                end,
+            }))
+        end
+    end,
+    calculate = function(self, card, context)
+        if context.end_of_round then
+            for i, v in pairs(G.deck.cards) do
+                v.folly_debuff = nil
+            end
+        end
+        
+        if context.before then
+            for i, v in pairs(context.scoring_hand) do
+                if v.debuff then
+                    v:set_debuff(false)
+                    v.ability.x_mult = card.ability.extra
+                    v.folly_debuff = true
+                end
+            end
+        end
+
+        if context.other_joker then
+            if context.other_joker.debuff then
+                if context.blueprint then
+                    return {
+                        xmult = card.ability.extra
+                    }
+                end
+                local ret = context.other_joker:calculate_joker({
+                    cardarea = context.cardarea,
+                    full_hand = context.full_hand,
+                    scoring_hand = context.scoring_hand,
+                    scoring_name = context.scoring_name,
+                    poker_hands = context.poker_hands,
+                    joker_main = true });
+                card:juice_up()
+                ret.x_mult_mod = card.ability.extra
+                ret.message_card = context.other_joker
+                return ret
+            end
+        end
+    end,
+
+    -- localization
+    loc_txt = {
+        name = "Dr. House",
+        text = {
+            "{C:inactive}Debuffed {}cards still score.",
+            "{C:inactive}Debuffed{} cards",
+            "each give {X:mult,C:white}X#1#{} Mult",
+            "{C:dark_edition}But watch out!"
+        }
+    },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {
+            card.ability.extra,
         } }
     end,
 })
