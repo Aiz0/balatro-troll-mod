@@ -205,7 +205,10 @@ SMODS.Joker({
     rarity = 4,
     cost = 10,
     config = {
-        extra = 2
+        extra = {
+            xmult = 2,
+            redebuff = {}
+        }
     },
     in_pool = function(self, args)
         return false
@@ -243,13 +246,20 @@ SMODS.Joker({
             for i, v in pairs(G.deck.cards) do
                 v.folly_debuff = nil
             end
+            for i, v in pairs(card.ability.extra.redebuff) do
+                SMODS.debuff_card(v, true, "house_md")
+            end
         end
         
         if context.before then
             for i, v in pairs(context.scoring_hand) do
                 if v.debuff then
+                    if v.ability.debuff_sources["house_md"] then
+                        SMODS.debuff_card(v, false, "house_md")
+                        table.insert(card.ability.extra.redebuff, v)
+                    end
                     v:set_debuff(false)
-                    v.ability.x_mult = card.ability.extra
+                    v.ability.x_mult = card.ability.extra.xmult
                     v.folly_debuff = true
                 end
             end
@@ -259,7 +269,7 @@ SMODS.Joker({
             if context.other_joker.debuff then
                 if context.blueprint then
                     return {
-                        xmult = card.ability.extra
+                        xmult = card.ability.extra.xmult
                     }
                 end
                 local ret = context.other_joker:calculate_joker({
@@ -270,7 +280,7 @@ SMODS.Joker({
                     poker_hands = context.poker_hands,
                     joker_main = true });
                 card:juice_up()
-                ret.x_mult_mod = card.ability.extra
+                ret.x_mult_mod = card.ability.extra.xmult
                 ret.message_card = context.other_joker
                 return ret
             end
@@ -289,7 +299,7 @@ SMODS.Joker({
     },
     loc_vars = function(self, info_queue, card)
         return { vars = {
-            card.ability.extra,
+            card.ability.extra.xmult,
         } }
     end,
 })
