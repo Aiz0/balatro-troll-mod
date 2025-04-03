@@ -13,8 +13,7 @@ return {
                         playing_card:start_dissolve()
                     end
                 end
-                --TODO: localize
-                return { message = "Shoot the moon!" }
+                return { message = localize("k_folly_shoot_the_moon") }
             end
         end
     end,
