@@ -254,7 +254,7 @@ SMODS.Joker({
         if context.before then
             for i, v in pairs(context.scoring_hand) do
                 if v.debuff then
-                    if v.ability.debuff_sources["house_md"] then
+                    if v.ability.debuff_sources and v.ability.debuff_sources["house_md"] then
                         SMODS.debuff_card(v, false, "house_md")
                         table.insert(card.ability.extra.redebuff, v)
                     end
@@ -305,5 +305,25 @@ SMODS.Joker({
 })
 
 return {
-    key = "blueprint"
+    key = "blueprint",
+    calculate = function(self, card, context)
+        if context.end_of_round then
+            local other_joker = nil
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i] == self then other_joker = G.jokers.cards[i+1] end
+            end
+            if other_joker then
+                local suffix = "apartment"
+                if other_joker.rarity == 2 then
+                    suffix = "house"
+                elseif other_joker.rarity == 3 then
+                    suffix = "mansion"
+                elseif other_joker.rarity == 4 then
+                    suffix = "dr_house"
+                end
+
+                folly_utils.replace(card, folly_utils.prefix.joker..suffix)
+            end
+        end
+    end
 }
