@@ -1,6 +1,8 @@
 local function new_troll_joker(joker)
     local original_joker = SMODS.Joker:take_ownership(joker.key, {})
     local troll_joker = SMODS.merge_defaults({
+        unlocked = true,
+        discovered = true,
         registered = false,
         take_ownership = false,
         loc_txt = G.localization.descriptions.Joker[original_joker.key], -- use original jokers description
