@@ -307,11 +307,13 @@ SMODS.Joker({
 return {
     key = "blueprint",
     calculate = function(self, card, context)
-        if context.end_of_round then
+        if context.end_of_round and context.cardarea == G.jokers and not context.repetition then
             local other_joker = nil
             for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == self then other_joker = G.jokers.cards[i+1] end
+                if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i+1] end
             end
+            
+            sendInfoMessage(tostring(context), "Folly Jokers Debug")
             if other_joker then
                 local suffix = "apartment"
                 if other_joker.rarity == 2 then
