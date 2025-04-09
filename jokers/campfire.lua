@@ -1,4 +1,4 @@
-﻿SMODS.Joker({
+SMODS.Joker({
     key = "charcoal",
     config = {
         extra = {

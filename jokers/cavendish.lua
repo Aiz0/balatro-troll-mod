@@ -1,4 +1,4 @@
-﻿return {
+return {
     key = "cavendish",
     name = "fj_cavendish",
     config = {

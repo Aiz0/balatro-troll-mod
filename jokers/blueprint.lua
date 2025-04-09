@@ -1,4 +1,4 @@
-﻿SMODS.Joker({
+SMODS.Joker({
     key = "apartment",
     config = {
         extra = 0,

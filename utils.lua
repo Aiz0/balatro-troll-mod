@@ -1,4 +1,4 @@
-﻿folly_utils = {
+folly_utils = {
     replace = function(card, other)
         G.E_MANAGER:add_event(Event({
             func = function()

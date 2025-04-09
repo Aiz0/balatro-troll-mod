@@ -1,4 +1,4 @@
-﻿return {
+return {
     key = "misprint",
     calculate = function(self, card, context)
         if

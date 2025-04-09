@@ -1,4 +1,4 @@
-﻿return {
+return {
     key = "satellite",
     base_rate = folly_utils.stack(),
     add_to_deck = function(self, card, from_debuff)
