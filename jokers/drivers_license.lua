@@ -121,14 +121,26 @@ function Card:renew_drivers_license()
         self.children.use_button:remove()
         self.children.use_button = nil
     end
-    SMODS.calculate_effect({ message = localize("k_folly_drivers_license_renewed") }, self)
-    SMODS.debuff_card(self, false, "drivers_license_expired")
-    self.ability.drivers_license_renewed = true
-    self.children.center:set_sprite_pos({ x = 1, y = 0 })
 
-    self.area:remove_from_highlighted(self)
-    G.CONTROLLER.locks.selling_card = nil
-    G.CONTROLLER:recall_cardarea_focus("jokers")
+    G.E_MANAGER:add_event(Event({
+        trigger = "after",
+        delay = 0.1,
+        func = function()
+            SMODS.calculate_effect({ message = localize("k_folly_drivers_license_renewed") }, self)
+            SMODS.debuff_card(self, false, "drivers_license_expired")
+            self.ability.drivers_license_renewed = true
+            self.children.center:set_sprite_pos({ x = 1, y = 0 })
+
+            play_sound("card1")
+            inc_career_stat("c_shop_dollars_spent", self.cost)
+            if self.cost ~= 0 then ease_dollars(-self.cost) end
+
+            self.area:remove_from_highlighted(self)
+            G.CONTROLLER.locks.selling_card = nil
+            G.CONTROLLER:recall_cardarea_focus("jokers")
+            return true
+        end,
+    }))
 end
 
 return {
@@ -154,9 +166,10 @@ return {
             SMODS.debuff_card(card, true, "drivers_license_expired")
         end
     end,
+
     set_sprites = function(self, card, front)
         if card.ability and card.ability.drivers_license_renewed then
-            card.children.center.set_sprite_pos({ x = 1, y = 0 })
+            card.children.center:set_sprite_pos({ x = 1, y = 0 })
         end
     end,
 }
