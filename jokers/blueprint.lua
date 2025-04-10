@@ -167,6 +167,7 @@ SMODS.Joker({
     remove_from_deck = function(self, card, from_debuff)
         if from_debuff then
             card:set_debuff(false)
+            SMODS.debuff_card(v, false, "house_md")
         else
             for i, v in pairs(G.playing_cards) do
                 SMODS.debuff_card(v, true, "house_md")
