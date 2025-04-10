@@ -23,7 +23,6 @@ SMODS.Joker({
                     return {
                         message = localize('k_debuffed'),
                         colour = G.C.RED,
-                        card = card
                     }
                 else
                     card.ability.extra = card.ability.extra + temp_Chips
