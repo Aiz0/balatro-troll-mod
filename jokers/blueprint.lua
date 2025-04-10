@@ -153,6 +153,7 @@ SMODS.Sound({
 local mod_prefix = SMODS.current_mod.prefix
 SMODS.Joker({
     key = "dr_house",
+    name = "Dr. House",
     rarity = 4,
     cost = 10,
     config = {
@@ -167,13 +168,14 @@ SMODS.Joker({
     remove_from_deck = function(self, card, from_debuff)
         if from_debuff then
             card:set_debuff(false)
-            SMODS.debuff_card(card, false, "house_md")
         else
             for i, v in pairs(G.playing_cards) do
                 SMODS.debuff_card(v, true, "house_md")
             end
             for i, v in pairs(G.jokers.cards) do
-                SMODS.debuff_card(v, true, "house_md")
+                if v.ability.name ~= "Dr. House" then
+                    SMODS.debuff_card(v, true, "house_md")
+                end
             end
             play_sound(mod_prefix.."_house_bach", 1, 1)
             G.E_MANAGER:add_event(Event({
