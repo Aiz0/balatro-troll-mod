@@ -9,7 +9,7 @@ local function new_troll_joker(joker)
         take_ownership = false,
         loc_txt = G.localization.descriptions.Joker[original_joker.key], -- use original jokers description
     }, original_joker)
-    troll_joker.mod = nil                                                --crashes if I don't do this
+    troll_joker.mod = nil --crashes if I don't fuck this
     if joker.loc_vars then troll_joker.generate_ui = nil end
     SMODS.Joker(SMODS.merge_defaults(joker, troll_joker))
 end

@@ -9,11 +9,10 @@ SMODS.Joker({
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.hand and not context.end_of_round then
-            local temp_Chips, temp_ID = 15, 15
+            local temp_ID = math.huge
             local raised_card = nil
             for i = 1, #G.hand.cards do
                 if temp_ID >= G.hand.cards[i].base.id and G.hand.cards[i].ability.effect ~= 'Stone Card' then
-                    temp_Chips = G.hand.cards[i].base.nominal
                     temp_ID = G.hand.cards[i].base.id
                     raised_card = G.hand.cards[i]
                 end
@@ -25,11 +24,14 @@ SMODS.Joker({
                         colour = G.C.RED,
                     }
                 else
-                    card.ability.extra = card.ability.extra + temp_Chips
+                    local chips = raised_card.base.nominal
+                    card.ability.extra = card.ability.extra + chips
                     return {
-                        message = "+" .. temp_Chips,
-                        colour = G.C.CHIPS,
-                        card = card
+                        message = localize({
+                            type = "variable",
+                            key = "a_chips",
+                            vars = { context.other_card.base.nominal },
+                        }),
                     }
                 end
             end
