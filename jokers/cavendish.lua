@@ -1,6 +1,5 @@
 return {
     key = "cavendish",
-    name = "fj_cavendish",
     config = {
         extra = {
             Xmult = 3,
@@ -42,9 +41,6 @@ return {
                 }))
                 return { message = "Rotten!" }
             end
-        end
-        if context.joker_main then
-            return { xmult = card.ability.extra.Xmult }
         end
     end,
 }
