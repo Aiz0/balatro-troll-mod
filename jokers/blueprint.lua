@@ -8,7 +8,7 @@ SMODS.Joker({
         return false
     end,
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.hand then
+        if context.individual and context.cardarea == G.hand and not context.end_of_round then
             local temp_Chips, temp_ID = 15, 15
             local raised_card = nil
             for i = 1, #G.hand.cards do
@@ -43,16 +43,6 @@ SMODS.Joker({
     end,
 
     -- localization
-    loc_txt = {
-        name = "Apartment",
-        text = {
-            "This Joker gains",
-            "Chips equal to the",
-            "{C:attention}lowest{} ranked card",
-            "held in hand",
-            "{C:inactive}(Currently {C:chips}+#1# {C:inactive}Chips)"
-        }
-    },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra } }
     end,
@@ -77,25 +67,10 @@ SMODS.Joker({
     end,
 
     -- localization
-    loc_txt = {
-        name = "House",
-        text = {
-            "Every played {C:attention}card{}",
-            "permanently gains",
-            "{C:mult}+1{} Mult when scored",
-        }
-    },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra } }
     end,
 })
-
-function remove_weird_freaky_invisible_cards(card_table)
-    for i, v in pairs(card_table) do
-        v:remove()
-    end
-    card_table = {}
-end
 
 SMODS.Joker({
     key = "mansion",
@@ -105,30 +80,16 @@ SMODS.Joker({
         extra = {
             xmult_mod = 0.02,
             xmult = 1,
-            marked_for_remove = {}
         }
     },
     in_pool = function(self, args)
         return false
     end,
-    remove_from_deck = function(self, card, from_debuff)
-        remove_weird_freaky_invisible_cards(card.ability.extra.marked_for_remove)
-    end,
     calculate = function(self, card, context)
         if context.final_scoring_step and not context.blueprint then
             for k, v in ipairs(context.scoring_hand) do
-                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_mod
-                if v.base.nominal == 2 then
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.1,
-                        func = function()
-                            v:start_dissolve({ HEX("57ecab") }, nil, 1);
-                            table.insert(card.ability.extra.marked_for_remove, v)
-                            return true
-                        end
-                    }))
-                else
+                if v.base.nominal ~= 2 then
+                    card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_mod
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
                         delay = 0.1,
@@ -142,7 +103,7 @@ SMODS.Joker({
             end
 
             return {
-                message = "Evil Billionaire Power",
+                message = localize("k_folly_mansion"),
                 colour = G.C.RED,
                 card = card
             }
@@ -160,17 +121,6 @@ SMODS.Joker({
     end,
 
     -- localization
-    loc_txt = {
-        name = "Mansion",
-        text = {
-            "Reduces rank of",
-            "all {C:attention}scoring cards{}",
-            "in played hand",
-            "Gain {X:red,C:white}X#1#{} Mult",
-            "per rank reduced",
-            "{C:inactive}(Currently {X:red,C:white}X#2#{C:inactive} Mult)"
-        }
-    },
     loc_vars = function(self, info_queue, card)
         return { vars = {
             card.ability.extra.xmult_mod,
@@ -287,15 +237,6 @@ SMODS.Joker({
     end,
 
     -- localization
-    loc_txt = {
-        name = "Dr. House",
-        text = {
-            "{C:inactive}Debuffed {}cards still score.",
-            "{C:inactive}Debuffed{} cards",
-            "each give {X:mult,C:white}X#1#{} Mult",
-            "{C:dark_edition}But watch out!"
-        }
-    },
     loc_vars = function(self, info_queue, card)
         return { vars = {
             card.ability.extra.xmult,
@@ -312,14 +253,14 @@ return {
                 if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i+1] end
             end
             
-            sendInfoMessage(tostring(context), "Folly Jokers Debug")
             if other_joker then
+                local rarity = other_joker.config.center.rarity
                 local suffix = "apartment"
-                if other_joker.rarity == 2 then
+                if rarity == 2 then
                     suffix = "house"
-                elseif other_joker.rarity == 3 then
+                elseif rarity == 3 then
                     suffix = "mansion"
-                elseif other_joker.rarity == 4 then
+                elseif rarity == 4 then
                     suffix = "dr_house"
                 end
 

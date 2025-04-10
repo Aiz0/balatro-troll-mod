@@ -1,11 +1,13 @@
 return {
     key = "cavendish",
+    name = "fj_cavendish",
     config = {
         extra = {
             Xmult = 3,
             odds = 1000,
             rot = 1,
-        }
+        },
+        name = "fj_cavendish",
     },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.Xmult, G.GAME.probabilities.normal, card.ability.extra.odds } }
@@ -39,7 +41,7 @@ return {
                         return true
                     end,
                 }))
-                return { message = "Rotten!" }
+                return { message = localize("j_folly_cavendish") }
             end
         end
     end,
