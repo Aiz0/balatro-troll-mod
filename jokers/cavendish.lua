@@ -43,8 +43,5 @@ return {
                 return { message = "Rotten!" }
             end
         end
-        if context.joker_main then
-            return { xmult = card.ability.extra.Xmult }
-        end
     end,
 }
