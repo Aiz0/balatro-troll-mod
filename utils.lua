@@ -30,33 +30,25 @@ folly_utils = {
     prefix = {
         joker = "j_" .. SMODS.current_mod.prefix .. "_"
     },
-
-    stack = function()
-        return setmetatable({
-            -- stack table  
-            _stack = {},
-            -- size of stack
-            count = 0,
-
-            -- push an element to the stack underlying array
-            push = function(self, obj)
-                -- increment the index
-                self.count = self.count + 1
-                -- set the element at the end of the array
-                rawset(self._stack, self.count, obj)
-            end,
-
-            -- pop an element from the stack
-            pop = function(self)
-                -- decrement the index    
-                self.count = self.count - 1
-                -- remove and return the last element
-                return table.remove(self._stack)
-            end,
-        }, {
-            __index = function(self, index)
-                return rawget(self._stack, index)
-            end,
-        })
-    end
+    
+    log = {
+        Trace = function(message)
+            sendTraceMessage(message, "Folly Jokers | Trace");
+        end,
+        Debug = function(message)
+            sendDebugMessage(message, "Folly Jokers | Debug");
+        end,
+        Info = function(message)
+            sendInfoMessage(message, "Folly Jokers | Info");
+        end,
+        Warn = function(message)
+            sendWarnMessage(message, "Folly Jokers | Warn");
+        end,
+        Error = function(message)
+            sendErrorMessage(message, "Folly Jokers | Error");
+        end,
+        Fatal = function(message)
+            sendFatalMessage(message, "Folly Jokers | Fatal");
+        end,
+    }
 }
