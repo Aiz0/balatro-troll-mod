@@ -177,14 +177,14 @@ SMODS.Joker({
                     SMODS.debuff_card(v, true, "house_md")
                 end
             end
-            play_sound(mod_prefix.."_house_bach", 1, 1)
+            play_sound(mod_prefix .. "_house_bach", 1, 1)
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
                 delay = 2,
                 func = function()
                     attention_text({
                         scale = 2,
-                        text = "This Vexes Me",
+                        text = localize("k_folly_dr_house"),
                         hold = 60,
                         align = "cm",
                         offset = { x = 0, y = 0 },
@@ -203,8 +203,9 @@ SMODS.Joker({
             for i, v in pairs(card.ability.extra.redebuff) do
                 SMODS.debuff_card(v, true, "house_md")
             end
+            card.ability.extra.redebuff = {}
         end
-        
+
         if context.before then
             for i, v in pairs(context.scoring_hand) do
                 if v.debuff then
@@ -215,6 +216,8 @@ SMODS.Joker({
                     v:set_debuff(false)
                     v.ability.x_mult = card.ability.extra.xmult
                     v.folly_debuff = true
+                elseif v.folly_debuff then
+                    v.ability.x_mult = v.ability.x_mult + card.ability.extra.xmult
                 end
             end
         end
@@ -255,9 +258,11 @@ return {
         if context.end_of_round and context.cardarea == G.jokers and not context.repetition then
             local other_joker = nil
             for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i+1] end
+                if G.jokers.cards[i] == card then
+                    other_joker = G.jokers.cards[i + 1]
+                end
             end
-            
+
             if other_joker then
                 local rarity = other_joker.config.center.rarity
                 local suffix = "apartment"
@@ -269,7 +274,7 @@ return {
                     suffix = "dr_house"
                 end
 
-                folly_utils.replace(card, folly_utils.prefix.joker..suffix)
+                folly_utils.replace(card, folly_utils.prefix.joker .. suffix)
             end
         end
     end

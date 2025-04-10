@@ -5,6 +5,7 @@ return {
             k_folly_mega_jackpot = "Mega Jackpot!",
             k_folly_masion = "Evil Billionaire Power",
             k_folly_cavendish = "Rotten!",
+            k_folly_dr_house = "This Vexes Me",
         },
     },
     descriptions = {

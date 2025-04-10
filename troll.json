@@ -2,7 +2,7 @@
   "id": "folly",
   "name": "Folly",
   "display_name": "Folly",
-  "author": ["Aiz"],
+  "author": ["Aiz", "Stargazer"],
   "description": "a mod with folly (troll)",
   "prefix": "folly",
   "main_file": "main.lua",
