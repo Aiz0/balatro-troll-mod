@@ -1,6 +1,5 @@
 return {
     key = "cavendish",
-    name = "fj_cavendish",
     config = {
         extra = {
             Xmult = 3,
