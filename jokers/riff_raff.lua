@@ -41,6 +41,7 @@ return {
                     G.GAME.joker_buffer = 0
                     return true
                 end}))
+            card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = localize('k_plus_joker'), colour = G.C.BLUE})
         end
     end,
     loc_vars = function(self, info_queue, card)
