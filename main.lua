@@ -1,4 +1,5 @@
 assert(SMODS.load_file("utils.lua"))()
+assert(SMODS.load_file("override.lua"))()
 
 SMODS.Atlas({
     key = "jokers",
