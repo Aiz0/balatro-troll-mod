@@ -11,7 +11,7 @@ return {
     },
     descriptions = {
         Joker = {
-            j_folly_campfire = {
+            j_folly_campfire_alt = {
                 name = "Campfire",
                 text = {
                     "This Joker gains {X:mult,C:white}X#1#{} Mult for",
