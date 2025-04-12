@@ -6,12 +6,15 @@ return {
             k_folly_masion = "Evil Billionaire Power",
             k_folly_cavendish = "Rotten!",
             k_folly_dr_house = "This Vexes Me",
+            k_folly_drivers_license_expired = "Expired!",
+            k_folly_renew_drivers_license = "Renew",
+            k_folly_drivers_license_renewed = "Renewed!",
             k_folly_greed = "Greed!",
         },
     },
     descriptions = {
         Joker = {
-            j_folly_campfire = {
+            j_folly_campfire_alt = {
                 name = "Campfire",
                 text = {
                     "This Joker gains {X:mult,C:white}X#1#{} Mult for",
