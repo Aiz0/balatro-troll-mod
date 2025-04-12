@@ -73,8 +73,8 @@ return {
                 text = {
                     "It's {C:common}Common",
                     "{C:chips}+#1#{} Chips"
-                }
-            }
-        }
-    }
+                },
+            },
+        },
+    },
 }
