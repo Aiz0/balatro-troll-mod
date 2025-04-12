@@ -6,6 +6,22 @@ SMODS.Atlas({
 })
 
 return {
+    key = "trading",
+    name = "fj_trading",
+    atlas = "folly_trading",
+    pos = { x = 0, y = 2 },
+    config = {
+        extra = {
+            discards = 1,
+            level = 1,
+            attack = 4,
+            max_health = 3,
+            health = 3,
+            money = 3,
+        },
+        name = "fj_trading",
+    },
+    
     calculate = function(self, card, context)
         if context.first_hand_drawn and not context.blueprint then
             local eval = function()
@@ -105,21 +121,6 @@ return {
     update_atlas_stats = function(card)
         card.children.center:set_sprite_pos({ x = card.ability.extra.attack - 4, y = card.ability.extra.health - 1 })
     end,
-    key = "trading",
-    name = "fj_trading",
-    atlas = "folly_trading",
-    pos = { x = 0, y = 2 },
-    config = {
-        extra = {
-            discards = 1,
-            level = 1,
-            attack = 4,
-            max_health = 3,
-            health = 3,
-            money = 3,
-        },
-        name = "fj_trading",
-    },
     set_sprites = function(self, card, front)
         if card.ability then
             self.update_atlas_stats(card)
