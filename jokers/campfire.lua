@@ -55,6 +55,8 @@ return {
 
     -- localization
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.x_mult_mod, card.ability.extra.x_mult } }
+        return { 
+            key = self.key..'_alt',
+            vars = { card.ability.extra.x_mult_mod, card.ability.extra.x_mult } }
     end,
 }
