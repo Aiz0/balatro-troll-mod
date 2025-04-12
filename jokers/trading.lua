@@ -1,22 +1,22 @@
 level_stat_sheet = {
     { discards = 1, attack = 4, max_health = 3, money = 3 }, -- 1
     { discards = 1, attack = 4, max_health = 4, money = 3 }, -- 2
-    { discards = 1, attack = 5, max_health = 5, money = 3 }, -- 3
+    { discards = 1, attack = 4, max_health = 5, money = 3 }, -- 3
     { discards = 1, attack = 5, max_health = 6, money = 3 }, -- 4
-    { discards = 1, attack = 6, max_health = 7, money = 4 }, -- 5
-    { discards = 1, attack = 6, max_health = 8, money = 4 }, -- 6
-    { discards = 1, attack = 7, max_health = 9, money = 4 }, -- 7
-    { discards = 2, attack = 7, max_health = 10, money = 4 }, -- 8
-    { discards = 2, attack = 8, max_health = 11, money = 5 }, -- 9
-    { discards = 2, attack = 8, max_health = 12, money = 5 }, -- 10
-    { discards = 2, attack = 9, max_health = 13, money = 5 }, -- 11
-    { discards = 2, attack = 9, max_health = 14, money = 5 }, -- 12
-    { discards = 2, attack = 10, max_health = 15, money = 6 }, -- 13
-    { discards = 2, attack = 10, max_health = 16, money = 6 }, -- 14
-    { discards = 3, attack = 11, max_health = 17, money = 6 }, -- 15
-    { discards = 3, attack = 11, max_health = 18, money = 6 }, -- 16
-    { discards = 3, attack = 12, max_health = 19, money = 7 }, -- 17
-    { discards = 3, attack = 12, max_health = 20, money = 7 }, -- 18
+    { discards = 1, attack = 5, max_health = 7, money = 4 }, -- 5
+    { discards = 1, attack = 5, max_health = 8, money = 4 }, -- 6
+    { discards = 1, attack = 6, max_health = 9, money = 4 }, -- 7
+    { discards = 2, attack = 6, max_health = 10, money = 4 }, -- 8
+    { discards = 2, attack = 7, max_health = 11, money = 5 }, -- 9
+    { discards = 2, attack = 7, max_health = 12, money = 5 }, -- 10
+    { discards = 2, attack = 8, max_health = 13, money = 5 }, -- 11
+    { discards = 2, attack = 8, max_health = 14, money = 5 }, -- 12
+    { discards = 2, attack = 9, max_health = 15, money = 6 }, -- 13
+    { discards = 2, attack = 9, max_health = 16, money = 6 }, -- 14
+    { discards = 3, attack = 10, max_health = 17, money = 6 }, -- 15
+    { discards = 3, attack = 10, max_health = 18, money = 6 }, -- 16
+    { discards = 3, attack = 11, max_health = 19, money = 7 }, -- 17
+    { discards = 3, attack = 12, max_health = 19, money = 7 }, -- 18
     { discards = 3, attack = 13, max_health = 20, money = 7 }, -- 19
     { discards = 3, attack = 14, max_health = 20, money = 7 }, -- 20
 }
