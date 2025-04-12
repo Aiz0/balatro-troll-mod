@@ -11,15 +11,6 @@ return {
     },
     descriptions = {
         Joker = {
-            j_folly_campfire = {
-                name = "Campfire",
-                text = {
-                    "This Joker gains {X:mult,C:white}X#1#{} Mult for",
-                    "each card sold and loses {X:mult,C:white}X#1#{} Mult",
-                    "for each hand played",
-                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
-                },
-            },
             j_folly_charcoal = {
                 name = "Charcoal",
                 text = {

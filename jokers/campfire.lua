@@ -57,4 +57,14 @@ return {
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.x_mult_mod, card.ability.extra.x_mult } }
     end,
+    
+    loc_txt = {
+        name = "Campfire",
+        text = {
+            "This Joker gains {X:mult,C:white}X#1#{} Mult for",
+            "each card sold and loses {X:mult,C:white}X#1#{} Mult",
+            "for each hand played",
+            "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+        },
+    },
 }
