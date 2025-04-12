@@ -111,10 +111,6 @@ SMODS.Joker({
             }
         end
 
-        if context.end_of_round and context.cardarea == G.jokers then
-            remove_weird_freaky_invisible_cards(card.ability.extra.marked_for_remove)
-        end
-
         if context.joker_main and card.ability.extra.xmult ~= 1 then
             return {
                 xmult = card.ability.extra.xmult

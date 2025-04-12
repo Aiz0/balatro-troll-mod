@@ -7,6 +7,9 @@ return {
             k_folly_cavendish = "Rotten!",
             k_folly_dr_house = "This Vexes Me",
             k_folly_greed = "Greed!",
+            k_folly_tc = "Level Up!",
+            k_folly_tc_heal = "Heal!",
+            k_folly_tc_damage = " Damage!",
         },
     },
     descriptions = {
@@ -66,6 +69,23 @@ return {
                     "{C:inactive}Debuffed{} cards",
                     "each give {X:mult,C:white}X#1#{} Mult",
                     "{C:dark_edition}But watch out!",
+                },
+            },
+            j_folly_trading_alt = {
+                name = "Trading Card",
+                text = {
+                    "If {C:attention}first discard{} of round",
+                    "has only {C:attention}#1#{} card, destroy",
+                    "it and earn {C:money}$#2#{}",
+                },
+            },
+            j_folly_trading_alt_multiple = {
+                name = "Trading Card",
+                text = {
+                    "If {C:attention}first discard{} of round",
+                    "has up to {C:attention}#1#{} cards, destroy",
+                    "them and earn {C:money}$#2#{}",
+                    "per card destroyed",
                 },
             },
         },
