@@ -71,6 +71,13 @@ return {
                     "{C:dark_edition}But watch out!",
                 },
             },
+            j_folly_common = {
+                name = "Common",
+                text = {
+                    "It's {C:common}Common",
+                    "{C:chips}+#1#{} Chips"
+                },
+            },
         },
     },
 }

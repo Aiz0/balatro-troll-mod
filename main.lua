@@ -8,6 +8,13 @@ SMODS.Atlas({
     py = 95,
 })
 
+SMODS.Atlas({
+    key = "jokers",
+    path = "jokers.png",
+    px = 71,
+    py = 95,
+})
+
 local function new_troll_joker(joker)
     local original_joker = SMODS.Joker:take_ownership(joker.key, {})
     local troll_joker = SMODS.merge_defaults({
