@@ -47,8 +47,11 @@ return {
 
         if context.end_of_round and context.cardarea == G.jokers then
             card.ability.extra.health = card.ability.extra.max_health
-            SMODS.calculate_effect({ message = localize("k_folly_tc_heal"), colour = G.C.BLUE }, card)
             self.update_atlas_stats(card)
+            return {
+                message = localize("k_folly_tc_heal"),
+                colour = G.C.BLUE,
+            }
         end
     end,
 
