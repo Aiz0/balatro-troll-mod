@@ -6,6 +6,9 @@ return {
             k_folly_masion = "Evil Billionaire Power",
             k_folly_cavendish = "Rotten!",
             k_folly_dr_house = "This Vexes Me",
+            k_folly_drivers_license_expired = "Expired!",
+            k_folly_renew_drivers_license = "Renew",
+            k_folly_drivers_license_renewed = "Renewed!",
             k_folly_greed = "Greed!",
             k_folly_tc = "Level Up!",
             k_folly_tc_heal = "Heal!",
@@ -72,6 +75,7 @@ return {
                     "{C:dark_edition}But watch out!",
                 },
             },
+
             j_folly_trading_alt = {
                 name = "Trading Card",
                 text = {
@@ -87,6 +91,11 @@ return {
                     "has up to {C:attention}#1#{} cards, destroy",
                     "them and earn {C:money}$#2#{}",
                     "per card destroyed",
+            j_folly_common = {
+                name = "Common",
+                text = {
+                    "It's {C:common}Common",
+                    "{C:chips}+#1#{} Chips"
                 },
             },
         },

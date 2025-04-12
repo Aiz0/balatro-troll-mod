@@ -1,4 +1,19 @@
 assert(SMODS.load_file("utils.lua"))()
+assert(SMODS.load_file("override.lua"))()
+
+SMODS.Atlas({
+    key = "jokers",
+    path = "jokers.png",
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = "jokers",
+    path = "jokers.png",
+    px = 71,
+    py = 95,
+})
 
 local function new_troll_joker(joker)
     local original_joker = SMODS.Joker:take_ownership(joker.key, {})
