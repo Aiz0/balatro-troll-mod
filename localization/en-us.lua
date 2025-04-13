@@ -91,6 +91,8 @@ return {
                     "has up to {C:attention}#1#{} cards, destroy",
                     "them and earn {C:money}$#2#{}",
                     "per card destroyed",
+                }
+            },
             j_folly_common = {
                 name = "Common",
                 text = {
@@ -106,8 +108,8 @@ return {
                     "Grants between",
                     "{X:mult,C:white}X#1#{} to {X:green,C:white}X#2#{} Mult",
                     "no rank or suit",
-                    "{C:inactive}(affected by probability)"
-                }
+                    "{C:inactive}(affected by probability)",
+                },
             },
         },
     },
