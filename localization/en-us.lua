@@ -72,5 +72,16 @@ return {
                 },
             },
         },
+        Enhanced = {
+            m_folly_burnt = {
+                name = "Burnt Card",
+                text = {
+                    "Grants between",
+                    "{X:mult,C:white}X#1#{} to {X:green,C:white}X#2#{} Mult",
+                    "no rank or suit",
+                    "{C:inactive}(affected by probability)"
+                }
+            },
+        },
     },
 }
