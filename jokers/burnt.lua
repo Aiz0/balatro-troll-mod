@@ -8,7 +8,7 @@ SMODS.Enhancement({
             base_gain = 2,
         },
     },
-    burn = 1,
+    burn = 2,
     always_scores = true,
     calculate = function(self, card, context)
         if context.before then
@@ -25,7 +25,6 @@ SMODS.Enhancement({
     loc_vars = function(self, info_queue, card)
         return { vars = {
             card.ability.extra.base,
-            card.ability.extra.base_gain,
         }, }
     end,
 })

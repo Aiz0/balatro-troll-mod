@@ -105,11 +105,9 @@ return {
             m_folly_burnt = {
                 name = "Burnt Card",
                 text = {
-                    "{C:mult}+#1#{} Mult",
-                    "All burnt cards gain",
-                    "{C:mult}+#2#{} Mult when scored,",
-                    "resets when new",
-                    "hand is played",
+                    "{C:mult}+#1#{} Mult for",
+                    "each burnt card",
+                    "scored this hand",
                 },
             },
         },
