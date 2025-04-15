@@ -2,24 +2,30 @@ SMODS.Enhancement({
     key = "burnt",
     atlas = "folly_enhancers",
     pos = { x = 0, y = 0 },
-    min = 0.5,
-    max = 1.5,
-    replace_base_card = true,
-    no_rank = true,
-    no_suit = true,
-    overrides_base_rank = true,
+    config = {
+        extra = {
+            base = 2,
+            base_gain = 2,
+        },
+    },
+    burn = 1,
     always_scores = true,
     calculate = function(self, card, context)
+        if context.before then
+            self.burn = card.ability.extra.base
+        end
         if context.main_scoring and context.cardarea == G.play then
+            local mult = self.burn
+            self.burn = self.burn + card.ability.extra.base_gain
             return {
-                x_mult = folly_utils.lerp(self.min, self.max * G.GAME.probabilities.normal, pseudorandom(self.key))
+                mult = mult
             }
         end
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = {
-            self.min,
-            self.max * G.GAME.probabilities.normal,
+            card.ability.extra.base,
+            card.ability.extra.base_gain,
         }, }
     end,
 })
@@ -33,18 +39,19 @@ local mod_prefix = SMODS.current_mod.prefix
 return {
     key = "burnt",
     calculate = function(self, card, context)
-        if context.individual then
+        if context.discard and context.other_card then
             local other_card = context.other_card
-            if other_card.config.center ~= G.P_CENTERS.m_folly_burnt and pseudorandom(self.key) < G.GAME.probabilities.normal / 12 then
+            if other_card.config.center ~= G.P_CENTERS.m_folly_burnt and pseudorandom(self.key) < G.GAME.probabilities.normal / 20 then
+                other_card:set_ability(G.P_CENTERS.m_folly_burnt, nil, true)
                 G.E_MANAGER:add_event(Event({
                     delay = 1,
+                    trigger = "before",
                     func = function()
                         play_sound(mod_prefix .. "_it_burns")
                         other_card:juice_up()
                         return true
                     end
                 }))
-                other_card:set_ability(G.P_CENTERS.m_folly_burnt, nil, true)
             end
         end
     end

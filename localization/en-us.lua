@@ -105,10 +105,11 @@ return {
             m_folly_burnt = {
                 name = "Burnt Card",
                 text = {
-                    "Grants between",
-                    "{X:mult,C:white}X#1#{} to {X:green,C:white}X#2#{} Mult",
-                    "no rank or suit",
-                    "{C:inactive}(affected by probability)",
+                    "{C:mult}+#1#{} Mult",
+                    "All burnt cards gain",
+                    "{C:mult}+#2#{} Mult when scored,",
+                    "resets when new",
+                    "hand is played",
                 },
             },
         },
