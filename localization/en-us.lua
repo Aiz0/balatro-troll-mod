@@ -14,7 +14,19 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_damage = "Defeat!",
-            
+            k_folly_moonbase_alpha_999 = "9999999!",
+            k_folly_moonbase_alpha_question_mark_exclamation_point = "?!?!",
+            k_folly_moonbase_alpha_aeiou = "aeiou",
+            k_folly_moonbase_alpha_big_american_tts = "Big American TTS!",
+            k_folly_moonbase_alpha_brbrbrbrbrbrbrbr = "brbrbrbr",
+            k_folly_moonbase_alpha_holla_holla_get_dollar = "holla holla get $!",
+            k_folly_moonbase_alpha_john_madden_football = "John Madden!",
+            k_folly_moonbase_alpha_im_laughing_for_real_right_now = "I'm laughing for real right now!",
+            k_folly_moonbase_alpha_mark = "mark!",
+            k_folly_moonbase_alpha_snake = "snake?",
+            k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
+            k_folly_moonbase_alpha_uuuuuuuuuuuuuuuuuuuuu = "uuuuuuuuuuuuuuu",
+
             --Object Types
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
@@ -95,13 +107,13 @@ return {
                     "has up to {C:attention}#1#{} cards, destroy",
                     "them and earn {C:money}$#2#{}",
                     "per card destroyed",
-                }
+                },
             },
             j_folly_common = {
                 name = "Common",
                 text = {
                     "It's {C:common}Common",
-                    "{C:chips}+#1#{} Chips"
+                    "{C:chips}+#1#{} Chips",
                 },
             },
         },
