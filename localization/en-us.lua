@@ -91,11 +91,23 @@ return {
                     "has up to {C:attention}#1#{} cards, destroy",
                     "them and earn {C:money}$#2#{}",
                     "per card destroyed",
+                }
+            },
             j_folly_common = {
                 name = "Common",
                 text = {
                     "It's {C:common}Common",
                     "{C:chips}+#1#{} Chips"
+                },
+            },
+        },
+        Enhanced = {
+            m_folly_burnt = {
+                name = "Burnt Card",
+                text = {
+                    "{C:mult}+#1#{} Mult for",
+                    "each burnt card",
+                    "scored this hand",
                 },
             },
         },

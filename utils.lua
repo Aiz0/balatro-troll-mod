@@ -50,5 +50,9 @@ folly_utils = {
         Fatal = function(message)
             sendFatalMessage(message, "Folly Jokers | Fatal");
         end,
-    }
+    },
+    
+    lerp = function(a, b, t)
+        return a + (b - a) * t
+    end
 }
