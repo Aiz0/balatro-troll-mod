@@ -16,7 +16,6 @@ SMODS.Enhancement({
             }
         end
     end,
-    loc_txt = G.localization.descriptions.Enhanced.m_folly_burnt,
     loc_vars = function(self, info_queue, card)
         return { vars = {
             self.min,
