@@ -9,7 +9,6 @@ SMODS.Enhancement({
         },
     },
     burn = 2,
-    always_scores = true,
     calculate = function(self, card, context)
         if context.before then
             self.burn = card.ability.extra.base
