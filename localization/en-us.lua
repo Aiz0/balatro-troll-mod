@@ -27,6 +27,9 @@ return {
             k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
             k_folly_moonbase_alpha_uuuuuuuuuuuuuuuuuuuuu = "uuuuuuuuuuuuuuu",
         },
+        labels = {
+            folly_mark_sticker = "Marked",
+        },
     },
     descriptions = {
         Joker = {
@@ -110,6 +113,15 @@ return {
                 text = {
                     "It's {C:common}Common",
                     "{C:chips}+#1#{} Chips",
+                },
+            },
+        },
+        Other = {
+            folly_mark_sticker = {
+                name = "Marked",
+                text = {
+                    "This card has",
+                    "been {C:attention}marked",
                 },
             },
         },
