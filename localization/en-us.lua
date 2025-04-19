@@ -31,6 +31,9 @@ return {
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
         },
+        labels = {
+            folly_mark_sticker = "Marked",
+        },
     },
     descriptions = {
         Joker = {
@@ -135,6 +138,15 @@ return {
                     "Converts up to",
                     "{C:attention}2{} selected cards",
                     "to {C:attention}this{} card",
+                },
+            },
+        },
+        Other = {
+            folly_mark_sticker = {
+                name = "Marked",
+                text = {
+                    "This card has",
+                    "been {C:attention}marked",
                 },
             },
         },

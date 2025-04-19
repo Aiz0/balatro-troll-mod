@@ -1,3 +1,13 @@
+SMODS.Sticker({
+    key = "mark_sticker",
+    pos = { x = 4, y = 1 }, --invisible
+    badge_colour = G.C.MULT,
+    rate = 0,
+    sets = {
+        Joker = false,
+    },
+})
+
 local space_sounds = { --duration will be removed later since i have no use for it
     { key = "moonbase_alpha_999", duration = 3 },
     { key = "moonbase_alpha_aeiou", duration = 3 },
@@ -53,9 +63,10 @@ return {
             else
                 retval.level_up = true
             end
+
             if sound.key == "moonbase_alpha_mark" then
                 for _, playing_card in pairs(context.scoring_hand) do
-                    playing_card.ability.folly_marked = true --will figure out this soon
+                    playing_card:add_sticker("folly_mark_sticker", true)
                 end
             elseif sound.key == "moonbase_alpha_question_mark_exclamation_point" then
                 -- shuffle jokers cards
