@@ -20,7 +20,6 @@ local space_sounds = { --duration will be removed later since i have no use for 
     { key = "moonbase_alpha_question_mark_exclamation_point", duration = 5 },
     { key = "moonbase_alpha_snake", duration = 3 },
     { key = "moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu", duration = 5 },
-    { key = "moonbase_alpha_uuuuuuuuuuuuuuuuuuuuu", duration = 30 },
 }
 
 for _, sound in pairs(space_sounds) do
@@ -29,8 +28,6 @@ for _, sound in pairs(space_sounds) do
         path = sound.key .. ".ogg",
     })
 end
--- remove final sound since it should only play when joker is removed
-table.remove(space_sounds)
 
 local mod_prefix = SMODS.current_mod.prefix
 
@@ -107,8 +104,5 @@ return {
             end
             return retval
         end
-    end,
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then play_sound(mod_prefix .. "_" .. "moonbase_alpha_uuuuuuuuuuuuuuuuuuuuu") end
     end,
 }
