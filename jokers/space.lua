@@ -8,24 +8,24 @@ SMODS.Sticker({
     },
 })
 
-local space_sounds = { --duration will be removed later since i have no use for it
-    { key = "moonbase_alpha_999", duration = 3 },
-    { key = "moonbase_alpha_aeiou", duration = 3 },
-    { key = "moonbase_alpha_big_american_tts", duration = 2 },
-    { key = "moonbase_alpha_brbrbrbrbrbrbrbr", duration = 2.5 },
-    { key = "moonbase_alpha_holla_holla_get_dollar", duration = 1.5 },
-    { key = "moonbase_alpha_im_laughing_for_real_right_now", duration = 2 },
-    { key = "moonbase_alpha_john_madden_football", duration = 5 },
-    { key = "moonbase_alpha_mark", duration = 2 },
-    { key = "moonbase_alpha_question_mark_exclamation_point", duration = 5 },
-    { key = "moonbase_alpha_snake", duration = 3 },
-    { key = "moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu", duration = 5 },
+local space_sounds = {
+    "moonbase_alpha_999",
+    "moonbase_alpha_aeiou",
+    "moonbase_alpha_big_american_tts",
+    "moonbase_alpha_brbrbrbrbrbrbrbr",
+    "moonbase_alpha_holla_holla_get_dollar",
+    "moonbase_alpha_im_laughing_for_real_right_now",
+    "moonbase_alpha_john_madden_football",
+    "moonbase_alpha_mark",
+    "moonbase_alpha_question_mark_exclamation_point",
+    "moonbase_alpha_snake",
+    "moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu",
 }
 
 for _, sound in pairs(space_sounds) do
     SMODS.Sound({
-        key = sound.key,
-        path = sound.key .. ".ogg",
+        key = sound,
+        path = sound .. ".ogg",
     })
 end
 
@@ -47,25 +47,24 @@ return {
             and pseudorandom(self.key) < G.GAME.probabilities.normal / card.ability.extra
         then
             local sound = pseudorandom_element(space_sounds, pseudoseed(self.key))
-            sendDebugMessage(sound.key)
 
             local retval = {
-                message = localize("k_" .. mod_prefix .. "_" .. sound.key),
-                sound = mod_prefix .. "_" .. sound.key,
+                message = localize("k_" .. mod_prefix .. "_" .. sound),
+                sound = mod_prefix .. "_" .. sound,
             }
-            if sound.key == "moonbase_alpha_holla_holla_get_dollar" then
+            if sound == "moonbase_alpha_holla_holla_get_dollar" then
                 retval.dollars = 1
-            elseif sound.key == "moonbase_alpha_im_laughing_for_real_right_now" then
+            elseif sound == "moonbase_alpha_im_laughing_for_real_right_now" then
                 retval.func = function() level_up_hand(card, context.scoring_name, nil, -1) end
             else
                 retval.level_up = true
             end
 
-            if sound.key == "moonbase_alpha_mark" then
+            if sound == "moonbase_alpha_mark" then
                 for _, playing_card in pairs(context.scoring_hand) do
                     playing_card:add_sticker("folly_mark_sticker", true)
                 end
-            elseif sound.key == "moonbase_alpha_question_mark_exclamation_point" then
+            elseif sound == "moonbase_alpha_question_mark_exclamation_point" then
                 -- shuffle jokers cards
                 -- for funnsies
                 retval.func = function()
