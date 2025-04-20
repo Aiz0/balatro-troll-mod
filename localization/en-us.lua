@@ -91,6 +91,8 @@ return {
                     "has up to {C:attention}#1#{} cards, destroy",
                     "them and earn {C:money}$#2#{}",
                     "per card destroyed",
+                },
+            },
             j_folly_common = {
                 name = "Common",
                 text = {
