@@ -70,36 +70,29 @@ return {
                 -- for funnsies
                 retval.func = function()
                     G.E_MANAGER:add_event(Event({
-                        trigger = "after",
-                        delay = 0.2,
                         func = function()
-                            G.E_MANAGER:add_event(Event({
-                                func = function()
-                                    G.jokers:shuffle("aajk")
-                                    play_sound("cardSlide1", 0.85)
-                                    return true
-                                end,
-                            }))
-                            delay(0.15)
-                            G.E_MANAGER:add_event(Event({
-                                func = function()
-                                    G.jokers:shuffle("aajk")
-                                    play_sound("cardSlide1", 1.15)
-                                    return true
-                                end,
-                            }))
-                            delay(0.15)
-                            G.E_MANAGER:add_event(Event({
-                                func = function()
-                                    G.jokers:shuffle("aajk")
-                                    play_sound("cardSlide1", 1)
-                                    return true
-                                end,
-                            }))
-                            delay(0.5)
+                            G.jokers:shuffle("aajk")
+                            play_sound("cardSlide1", 0.85)
                             return true
                         end,
                     }))
+                    delay(0.15)
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.jokers:shuffle("aajk")
+                            play_sound("cardSlide1", 1.15)
+                            return true
+                        end,
+                    }))
+                    delay(0.15)
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.jokers:shuffle("aajk")
+                            play_sound("cardSlide1", 1)
+                            return true
+                        end,
+                    }))
+                    delay(0.5)
                 end
             end
             return retval
