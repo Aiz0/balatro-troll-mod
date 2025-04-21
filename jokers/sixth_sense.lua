@@ -100,7 +100,15 @@ return {
                         local seal = SMODS.poll_seal({ mod = 10 })
                         create_card:set_seal(seal)
                         create_card.ability.seal = seal
-                        local enhancement = SMODS.poll_enhancement({ mod = 6 })
+                        local enhancement = SMODS.poll_enhancement({ mod = 6, options = {
+                            "m_bonus",
+                            "m_mult",
+                            "m_wild",
+                            "m_glass",
+                            "m_steel",
+                            "m_gold",
+                            "m_lucky",
+                        } })
                         create_card.ability.enhancement = enhancement
                         create_card:set_sprites(G.P_CENTERS[enhancement])
                         area:emplace(create_card)
