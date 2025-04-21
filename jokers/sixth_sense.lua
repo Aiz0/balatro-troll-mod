@@ -12,8 +12,6 @@ SMODS.ConsumableType({
     }
 })
 
-SMODS.create_loc_dump()
-
 SMODS.Consumable({
     key = "six",
     set = "funny",
