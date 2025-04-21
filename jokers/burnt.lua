@@ -4,26 +4,24 @@ SMODS.Enhancement({
     pos = { x = 0, y = 0 },
     config = {
         extra = {
-            base = 2,
             base_gain = 2,
         },
     },
-    burn = 2,
+    burn = 0, --Static member, mult gained for each burnt card played
     calculate = function(self, card, context)
         if context.before then
-            self.burn = card.ability.extra.base
+            self.burn = 0
         end
         if context.main_scoring and context.cardarea == G.play then
-            local mult = self.burn
             self.burn = self.burn + card.ability.extra.base_gain
             return {
-                mult = mult
+                mult = self.burn
             }
         end
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = {
-            card.ability.extra.base,
+            card.ability.extra.base_gain,
         }, }
     end,
 })
