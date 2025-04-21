@@ -47,6 +47,10 @@ SMODS.Consumable({
                 return true
             end }))
         end
+        G.E_MANAGER:add_event(Event({ trigger = 'after', func = function()
+            G.hand:unhighlight_all()
+            return true
+        end }))
     end,
     in_pool = function(self, args)
         return false
