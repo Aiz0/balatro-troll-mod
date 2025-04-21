@@ -15,6 +15,9 @@ return {
             k_folly_tc_damage = " Damage!",
             k_folly_tc_damage = "Defeat!",
         },
+        labels = {
+            folly_funny = "Funny :)",
+        },
     },
     descriptions = {
         Joker = {
@@ -98,6 +101,14 @@ return {
                 text = {
                     "It's {C:common}Common",
                     "{C:chips}+#1#{} Chips"
+                },
+            },
+        },
+        funny = {
+            c_folly_six = {
+                name = "Six",
+                text = {
+                    "What?",
                 },
             },
         },
