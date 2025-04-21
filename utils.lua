@@ -30,7 +30,7 @@ folly_utils = {
     prefix = {
         joker = "j_" .. SMODS.current_mod.prefix .. "_"
     },
-    
+
     log = {
         Trace = function(message)
             sendTraceMessage(message, "Folly Jokers | Trace");
@@ -50,5 +50,5 @@ folly_utils = {
         Fatal = function(message)
             sendFatalMessage(message, "Folly Jokers | Fatal");
         end,
-    }
+    },
 }
