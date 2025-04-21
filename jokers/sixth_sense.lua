@@ -2,14 +2,6 @@ SMODS.ConsumableType({
     key = "funny",
     primary_colour = HEX("FFFFFF"),
     secondary_colour = HEX("FC03CE"),
-    loc_txt = {
-        name = 'Funny :)', -- TODO figure out how to localize this shit
-        collection = 'Funny :)',
-        undiscovered = {
-            name = 'Funny :)',
-            text = { 'Funny :)' },
-        },
-    }
 })
 
 SMODS.Consumable({
