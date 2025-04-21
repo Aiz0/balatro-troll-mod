@@ -12,11 +12,13 @@ SMODS.ConsumableType({
     }
 })
 
+SMODS.create_loc_dump()
+
 SMODS.Consumable({
     key = "six",
     set = "funny",
     config = {
-        max_highlighted = 1,
+        max_highlighted = 2,
     },
     no_collection = true,
     use = function(self, card, area, copier)
