@@ -15,9 +15,6 @@ return {
             k_folly_tc_damage = " Damage!",
             k_folly_tc_damage = "Defeat!",
         },
-        labels = {
-            folly_funny = "Funny :)",
-        },
     },
     descriptions = {
         Joker = {

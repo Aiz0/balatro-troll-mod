@@ -2,6 +2,14 @@ SMODS.ConsumableType({
     key = "funny",
     primary_colour = HEX("FFFFFF"),
     secondary_colour = HEX("FC03CE"),
+    loc_txt = {
+        name = 'Funny :)', -- TODO figure out how to localize this shit
+        collection = 'Funny :)',
+        undiscovered = {
+            name = 'Funny :)',
+            text = { 'Funny :)' },
+        },
+    }
 })
 
 SMODS.Consumable({
@@ -76,27 +84,37 @@ return {
     },
     prev_state = nil,
     calculate = function(self, card, context)
-        if context.individual and not self.prev_state and context.cardarea == G.play and
-                #context.full_hand == 1 and context.full_hand[1]:get_id() == 6
-                and G.GAME.current_round.hands_played == 0 then
-            local area = G.consumeables
-            local create_card = SMODS.create_card({
-                key = 'c_folly_six'
-            })
-            local edition_rate = 2
-            local edition = poll_edition('standard_edition' .. G.GAME.round_resets.ante, edition_rate, true)
-            local suit = random_suit()
-            create_card.ability.suit = suit
-            SMODS.change_base(create_card, random_suit(), '6')
-            create_card:set_edition(edition, true, true)
-            create_card.ability.edition = edition
-            local seal = SMODS.poll_seal({ mod = 10 })
-            create_card:set_seal(seal)
-            create_card.ability.seal = seal
-            local enhancement = SMODS.poll_enhancement({ mod = 6 })
-            create_card.ability.enhancement = enhancement
-            create_card:set_sprites(G.P_CENTERS[enhancement])
-            area:emplace(create_card)
+        if context.destroying_card and #context.full_hand == 1 and context.full_hand[1]:get_id() == 6 and G.GAME.current_round.hands_played == 0 then
+            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'before',
+                    func = function()
+                        local area = G.consumeables
+                        local create_card = SMODS.create_card({
+                            key = 'c_folly_six'
+                        })
+                        local edition_rate = 2
+                        local edition = poll_edition('standard_edition' .. G.GAME.round_resets.ante, edition_rate, true)
+                        local suit = random_suit()
+                        create_card.ability.suit = suit
+                        SMODS.change_base(create_card, random_suit(), '6')
+                        create_card:set_edition(edition, true, true)
+                        create_card.ability.edition = edition
+                        local seal = SMODS.poll_seal({ mod = 10 })
+                        create_card:set_seal(seal)
+                        create_card.ability.seal = seal
+                        local enhancement = SMODS.poll_enhancement({ mod = 6 })
+                        create_card.ability.enhancement = enhancement
+                        create_card:set_sprites(G.P_CENTERS[enhancement])
+                        area:emplace(create_card)
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end,
+                }))
+            end
+            return true
         end
+        return nil
     end
 }
