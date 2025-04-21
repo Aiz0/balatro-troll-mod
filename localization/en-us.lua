@@ -14,9 +14,17 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_damage = "Defeat!",
+            k_funny = "Funny :)",
+            b_funny_cards = "Funny :)",
         },
     },
     descriptions = {
+        Other = {
+            undiscovered_funny = {
+                name = "Funny :)",
+                text = { "Funny :)" },
+            },
+        },
         Joker = {
             j_folly_campfire_alt = {
                 name = "Campfire",
