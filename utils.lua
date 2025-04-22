@@ -56,5 +56,22 @@ folly_utils = {
     
     lerp = function(a, b, t)
         return a + (b - a) * t
-    end
+    end,
+
+    ---Shuffles Jokers in Joker area.
+    ---@param shuffles number? Defaults to 3
+    shuffle_jokers = function(shuffles)
+        shuffles = shuffles or 3
+        for i = 1, shuffles do
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.jokers:shuffle("aajk")
+                    play_sound("cardSlide1", 1)
+                    return true
+                end,
+            }))
+            delay(0.15)
+        end
+        delay(0.35) --extra delay when done
+    end,
 }
