@@ -60,12 +60,14 @@ folly_utils = {
 
     ---Shuffles Jokers in Joker area.
     ---@param shuffles number? Defaults to 3
-    shuffle_jokers = function(shuffles)
+    ---@param area any? Defaults to G.jokers
+    shuffle_cardarea = function(area, shuffles)
         shuffles = shuffles or 3
+        area = area or G.jokers
         for i = 1, shuffles do
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    G.jokers:shuffle("aajk")
+                    area:shuffle("aajk")
                     play_sound("cardSlide1", 1)
                     return true
                 end,

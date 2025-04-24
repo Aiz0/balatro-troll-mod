@@ -64,10 +64,13 @@ return {
                 for _, playing_card in pairs(context.scoring_hand) do
                     playing_card:add_sticker("folly_mark_sticker", true)
                 end
-            elseif sound == "moonbase_alpha_question_mark_exclamation_point" or true then
+            elseif sound == "moonbase_alpha_question_mark_exclamation_point" then
                 -- shuffle jokers cards
                 -- for funnsies
-                retval.func = function() folly_utils.shuffle_jokers() end
+                retval.func = function() folly_utils.shuffle_cardarea() end
+            elseif sound == "moonbase_alpha_aeiou" then
+                -- shuffle played cards
+                retval.func = function() folly_utils.shuffle_cardarea(G.play) end
             end
             return retval
         end
