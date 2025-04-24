@@ -9,17 +9,17 @@ SMODS.Sticker({
 })
 
 local space_sounds = {
-    "moonbase_alpha_999",
-    "moonbase_alpha_aeiou",
-    "moonbase_alpha_big_american_tts",
-    "moonbase_alpha_brbrbrbrbrbrbrbr",
-    "moonbase_alpha_holla_holla_get_dollar",
-    "moonbase_alpha_im_laughing_for_real_right_now",
-    "moonbase_alpha_john_madden_football",
-    "moonbase_alpha_mark",
-    "moonbase_alpha_question_mark_exclamation_point",
-    "moonbase_alpha_snake",
-    "moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu",
+    nine = "moonbase_alpha_999",
+    aeiou = "moonbase_alpha_aeiou",
+    big_americal_tts = "moonbase_alpha_big_american_tts",
+    brbrbr = "moonbase_alpha_brbrbrbrbrbrbrbr",
+    dollar = "moonbase_alpha_holla_holla_get_dollar",
+    lmao = "moonbase_alpha_im_laughing_for_real_right_now",
+    john_madden = "moonbase_alpha_john_madden_football",
+    mark = "moonbase_alpha_mark",
+    question_mark = "moonbase_alpha_question_mark_exclamation_point",
+    snake = "moonbase_alpha_snake",
+    uuu = "moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu",
 }
 
 for _, sound in pairs(space_sounds) do
@@ -51,28 +51,28 @@ return {
             local retval = {
                 message = localize("k_" .. mod_prefix .. "_" .. sound),
                 sound = mod_prefix .. "_" .. sound,
+                level_up = true,
             }
-            if sound == "moonbase_alpha_holla_holla_get_dollar" then
+            if sound == space_sounds.dollar then
+                retval.level_up = false
                 retval.dollars = 1
-            elseif sound == "moonbase_alpha_im_laughing_for_real_right_now" then
+            elseif sound == space_sounds.lmao then
+                retval.level_up = false
                 retval.func = function() level_up_hand(card, context.scoring_name, nil, -1) end
-            elseif sound == "moonbase_alpha_big_american_tts" then
+            elseif sound == space_sounds.big_americal_tts then
                 -- level up twice
-                -- "Holy cow, two big ones" - Northernlion
+                -- "Holy cow, two big ones" -
+                retval.level_up = false
                 retval.func = function() level_up_hand(card, context.scoring_name, nil, 2) end
-            else
-                retval.level_up = true
-            end
-
-            if sound == "moonbase_alpha_mark" then
+            elseif sound == space_sounds.mark then
                 for _, playing_card in pairs(context.scoring_hand) do
                     playing_card:add_sticker("folly_mark_sticker", true)
                 end
-            elseif sound == "moonbase_alpha_question_mark_exclamation_point" then
+            elseif sound == space_sounds.question_mark then
                 -- shuffle jokers cards
                 -- for funnsies
                 retval.func = function() folly_utils.shuffle_cardarea() end
-            elseif sound == "moonbase_alpha_aeiou" then
+            elseif sound == space_sounds.aeiou then
                 -- shuffle played cards
                 retval.func = function() folly_utils.shuffle_cardarea(G.play) end
             end
