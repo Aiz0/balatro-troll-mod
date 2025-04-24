@@ -56,6 +56,10 @@ return {
                 retval.dollars = 1
             elseif sound == "moonbase_alpha_im_laughing_for_real_right_now" then
                 retval.func = function() level_up_hand(card, context.scoring_name, nil, -1) end
+            elseif sound == "moonbase_alpha_big_american_tts" then
+                -- level up twice
+                -- "Holy cow, two big ones" - Northernlion
+                retval.func = function() level_up_hand(card, context.scoring_name, nil, 2) end
             else
                 retval.level_up = true
             end
