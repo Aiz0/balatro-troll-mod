@@ -1,6 +1,7 @@
 return {
     key = "oops",
     config = {
+        name = "fj_oops",
         extra = {
             joker_limit = 0,
             consumables_limit = 0,
