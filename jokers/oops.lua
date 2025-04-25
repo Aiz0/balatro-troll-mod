@@ -6,8 +6,6 @@ return {
             consumables_limit = 0,
             hand_size_offset = 0,
             odds = 0,
-            playing_cards = {},
-            playing_card_ranks = {},
             hands = 0,
             discards = 0,
             dollars = 0,
@@ -33,8 +31,6 @@ return {
 
         -- set cards to 6s
         for _, playing_card in ipairs(G.playing_cards) do
-            table.insert(card.ability.extra.playing_cards, playing_card)
-            table.insert(card.ability.extra.playing_card_ranks, playing_card.base.value)
             assert(SMODS.change_base(playing_card, nil, "6"))
         end
 
@@ -67,13 +63,6 @@ return {
         G.hand:change_size(-card.ability.extra.hand_size_offset)
 
         G.GAME.probabilities.normal = G.GAME.probabilities.normal / card.ability.extra.odds
-
-        -- set cards to back to what they were before
-        for i, playing_card in ipairs(card.ability.extra.playing_cards) do
-            assert(SMODS.change_base(playing_card, nil, card.ability.extra.playing_card_ranks[i]))
-        end
-        card.ability.extra.playing_cards = {}
-        card.ability.extra.playing_card_ranks = {}
 
         -- hand
         ease_hands_played(-card.ability.extra.hands)
