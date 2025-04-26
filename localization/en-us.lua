@@ -14,17 +14,9 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_damage = "Defeat!",
-            k_funny = "Funny :)",
-            b_funny_cards = "Funny :)",
         },
     },
     descriptions = {
-        Other = {
-            undiscovered_funny = {
-                name = "Funny :)",
-                text = { "Funny :)" },
-            },
-        },
         Joker = {
             j_folly_campfire_alt = {
                 name = "Campfire",
@@ -99,13 +91,23 @@ return {
                     "has up to {C:attention}#1#{} cards, destroy",
                     "them and earn {C:money}$#2#{}",
                     "per card destroyed",
-                },
+                }
             },
             j_folly_common = {
                 name = "Common",
                 text = {
                     "It's {C:common}Common",
                     "{C:chips}+#1#{} Chips"
+                },
+            },
+        },
+        Enhanced = {
+            m_folly_burnt = {
+                name = "Burnt Card",
+                text = {
+                    "{C:mult}+#1#{} Mult for",
+                    "each burnt card",
+                    "scored this hand",
                 },
             },
         },

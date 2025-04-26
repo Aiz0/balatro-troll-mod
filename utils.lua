@@ -30,7 +30,7 @@ folly_utils = {
     prefix = {
         joker = "j_" .. SMODS.current_mod.prefix .. "_"
     },
-
+    
     log = {
         Trace = function(message)
             sendTraceMessage(message, "Folly Jokers | Trace");
@@ -51,4 +51,8 @@ folly_utils = {
             sendFatalMessage(message, "Folly Jokers | Fatal");
         end,
     },
+    
+    lerp = function(a, b, t)
+        return a + (b - a) * t
+    end
 }
