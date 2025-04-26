@@ -55,7 +55,8 @@ return {
             }
             if sound == space_sounds.dollar then
                 retval.level_up = false
-                retval.dollars = 1
+                -- use func instead of retval.dollar since it has better timing
+                retval.func = function() ease_dollars(1) end
             elseif sound == space_sounds.lmao then
                 retval.level_up = false
                 retval.func = function() level_up_hand(card, context.scoring_name, nil, -1) end
