@@ -14,6 +14,8 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_damage = "Defeat!",
+            k_folly_bull_angry = "Angry!",
+            k_folly_red_bull = "Red bull!",
         },
     },
     descriptions = {
@@ -91,13 +93,29 @@ return {
                     "has up to {C:attention}#1#{} cards, destroy",
                     "them and earn {C:money}$#2#{}",
                     "per card destroyed",
-                }
+                },
             },
             j_folly_common = {
                 name = "Common",
                 text = {
                     "It's {C:common}Common",
-                    "{C:chips}+#1#{} Chips"
+                    "{C:chips}+#1#{} Chips",
+                },
+            },
+            j_folly_angry_bull = {
+                name = "Angry Bull",
+                text = {
+                    "{C:chips}+#1#{} Chips for",
+                    "each {C:money}$1{} you have",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                    "{C:eternal}Eternal",
+                },
+            },
+            j_folly_red_bull = {
+                name = "Red Bull",
+                text = {
+                    "This space has intentionally",
+                    "been left blank.",
                 },
             },
         },
