@@ -110,6 +110,15 @@ return {
                     "scored this hand",
                 },
             },
+            m_folly_jimbo = {
+                name = "Joker",
+                text = {
+                    "{C:mult}+4{} Mult",
+                    "Counts as {C:attention}best",
+                    "suit or rank",
+                    "in {C:attention}poker hands"
+                },
+            }
         },
     },
 }
