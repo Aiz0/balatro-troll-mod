@@ -128,8 +128,9 @@ function get_straight(hand, min_length, skip, wrap)
                     local new_tuple = {key = {}, jimbo = 0}
                     for _,v in ipairs(tuple.key) do
                         new_tuple.key[#new_tuple.key+1] = v
-                        if v == SMODS.Ranks[SMODS.Rank.max_id.value] then -- back track by 4 if we don't have a "next" value
-                            next = SMODS.Ranks[SMODS.Rank.max_id.value - 4]
+                        folly_utils.log.Debug()
+                        if SMODS.Ranks[v].straight_edge then -- back track by 4 if we don't have a "next" value
+                            next = SMODS.Ranks[SMODS.Ranks[SMODS.Ranks[SMODS.Ranks[v].prev[1]].prev[1]].prev[1]].prev[1]
                         else
                             next = next_ranks(v)[1]
                         end
