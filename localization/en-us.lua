@@ -116,8 +116,8 @@ return {
                 name = "Six",
                 text = {
                     "What?",
-                    "Converts up to {C:attention}2",
-                    "selected cards",
+                    "Converts up to",
+                    "{C:attention}2{} selected cards",
                     "to {C:attention}this{} card",
                 },
             },
