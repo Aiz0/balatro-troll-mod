@@ -69,18 +69,6 @@ SMODS.Consumable({
     end
 })
 
-function random_suit()
-    local random = pseudorandom("suit") * 4
-    if random < 1 then
-        return "Hearts"
-    elseif random < 2 then
-        return "Diamonds"
-    elseif random < 3 then
-        return "Clubs"
-    end
-
-    return "Spades"
-end
 
 return {
     key = "sixth_sense",
