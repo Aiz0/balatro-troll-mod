@@ -117,6 +117,5 @@ return {
             end
             return true
         end
-        return nil
     end
 }
