@@ -9,14 +9,18 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
-    key = "jokers",
-    path = "jokers.png",
+    key = "enhancers",
+    path = "enhancers.png",
     px = 71,
     py = 95,
 })
 
 local function new_troll_joker(joker)
     local original_joker = SMODS.Joker:take_ownership(joker.key, {})
+    if not original_joker then
+        folly_utils.log.Error("No joker found with key: " .. joker.key)
+        return
+    end
     local troll_joker = SMODS.merge_defaults({
         unlocked = true,
         discovered = true,
