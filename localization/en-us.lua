@@ -14,6 +14,10 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_damage = "Defeat!",
+            
+            --Object Types
+            k_funny = "Funny :)",
+            b_funny_cards = "Funny :)",
         },
     },
     descriptions = {
@@ -108,6 +112,17 @@ return {
                     "{C:mult}+#1#{} Mult for",
                     "each burnt card",
                     "scored this hand",
+                },
+            },
+        },
+        funny = {
+            c_folly_six = {
+                name = "Six",
+                text = {
+                    "What?",
+                    "Converts up to",
+                    "{C:attention}2{} selected cards",
+                    "to {C:attention}this{} card",
                 },
             },
         },
