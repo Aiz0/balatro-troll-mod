@@ -11,7 +11,7 @@ SMODS.Sticker({
 local space_sounds = {
     nine = "moonbase_alpha_999",
     aeiou = "moonbase_alpha_aeiou",
-    big_americal_tts = "moonbase_alpha_big_american_tts",
+    big_american_tts = "moonbase_alpha_big_american_tts",
     brbrbr = "moonbase_alpha_brbrbrbrbrbrbrbr",
     dollar = "moonbase_alpha_holla_holla_get_dollar",
     lmao = "moonbase_alpha_im_laughing_for_real_right_now",
@@ -60,7 +60,7 @@ return {
             elseif sound == space_sounds.lmao then
                 retval.level_up = false
                 retval.func = function() level_up_hand(card, context.scoring_name, nil, -1) end
-            elseif sound == space_sounds.big_americal_tts then
+            elseif sound == space_sounds.big_american_tts then
                 -- level up twice
                 -- "Holy cow, two big ones" -
                 retval.level_up = false
