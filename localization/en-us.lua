@@ -14,6 +14,10 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_damage = "Defeat!",
+            
+            --Object Types
+            k_funny = "Funny :)",
+            b_funny_cards = "Funny :)",
         },
     },
     descriptions = {
