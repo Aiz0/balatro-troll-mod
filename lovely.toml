@@ -4,6 +4,19 @@ priority = 0
 
 [[patches]]
 [patches.pattern]
+target = "card.lua"
+pattern = "function Card:calculate_seal(context)"
+position = "after"
+payload = '''
+    if context.card_area == G.consumables then
+        return nil, true
+    end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
 target = 'functions/common_events.lua'
 pattern = 'function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)'
 position = 'after'
