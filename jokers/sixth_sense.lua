@@ -76,7 +76,6 @@ return {
     config = {
         extra = 1,
     },
-    prev_state = nil,
     calculate = function(self, card, context)
         if context.destroying_card and #context.full_hand == 1 and context.full_hand[1]:get_id() == 6 and G.GAME.current_round.hands_played == 0 then
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
