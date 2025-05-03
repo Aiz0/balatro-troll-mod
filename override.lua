@@ -72,6 +72,9 @@ function get_straight(hand, min_length, skip, wrap)
             table.insert(jimbos, v)
         end
     end
+    if #jimbos >= min_length then
+        return {straight = jimbos}
+    end
     min_length = min_length or 5
     if min_length < 2 then min_length = 2 end
     if #hand < min_length then return {} end
@@ -128,9 +131,8 @@ function get_straight(hand, min_length, skip, wrap)
                     local new_tuple = {key = {}, jimbo = 0}
                     for _,v in ipairs(tuple.key) do
                         new_tuple.key[#new_tuple.key+1] = v
-                        folly_utils.log.Debug()
                         if SMODS.Ranks[v].straight_edge then -- back track by 4 if we don't have a "next" value
-                            next = SMODS.Ranks[SMODS.Ranks[SMODS.Ranks[SMODS.Ranks[v].prev[1]].prev[1]].prev[1]].prev[1]
+                            next = folly_utils.get_previous_rank(v, 4)
                         else
                             next = next_ranks(v)[1]
                         end

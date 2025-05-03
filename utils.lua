@@ -54,5 +54,12 @@ folly_utils = {
     
     lerp = function(a, b, t)
         return a + (b - a) * t
-    end
+    end,
+    
+    get_previous_rank = function(key, offset)
+        if offset == 0 then
+            return key
+        end
+        return get_previous_rank(SMODS.Ranks[key].prev[1], offset - 1)
+    end,
 }
