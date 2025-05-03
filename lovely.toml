@@ -1,0 +1,24 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = 'function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)'
+position = 'after'
+payload = '''
+local astro_funny = SMODS.find_card('j_folly_astronomer')
+if _type == 'Planet' and next(astro_funny) then
+    local astros = {}
+    for i, v in pairs(astro_funny) do
+        if v.ability.extra.astro then
+            table.insert(astros, v.ability.extra.astro)
+        end
+    end
+    if next(astros) then
+        forced_key = pseudorandom_element(astros, pseudoseed('funny_astro'))
+    end
+end
+'''
+match_indent = true
