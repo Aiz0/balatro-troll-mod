@@ -102,9 +102,9 @@ return {
                         })
                         local edition_rate = 2
                         local edition = poll_edition('standard_edition' .. G.GAME.round_resets.ante, edition_rate, true)
-                        local suit = random_suit()
-                        created_card.ability.extra.suit = suit
-                        SMODS.change_base(created_card, suit, '6')
+                        local suit = pseudorandom_element(SMODS.Suits, pseudoseed('suit'))
+                        created_card.ability.extra.suit = suit.key
+                        SMODS.change_base(created_card, suit.key, '6')
                         created_card:set_edition(edition, true, true)
                         created_card.ability.extra.edition = edition
                         local seal = SMODS.poll_seal({ mod = 10 })
