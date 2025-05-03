@@ -62,7 +62,7 @@ return {
                 retval.func = function() level_up_hand(card, context.scoring_name, nil, -1) end
             elseif sound == space_sounds.big_american_tts then
                 -- level up twice
-                -- "Holy cow, two big ones" -
+                -- "Holy cow, two big ones" - Northernlion
                 retval.level_up = false
                 retval.func = function() level_up_hand(card, context.scoring_name, nil, 2) end
             elseif sound == space_sounds.mark then
