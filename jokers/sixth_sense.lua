@@ -72,7 +72,6 @@ SMODS.Consumable({
 
 return {
     key = "sixth_sense",
-    name = "fj_sixth_sense",
     config = {
         extra = 1,
     },
