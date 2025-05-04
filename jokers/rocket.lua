@@ -8,9 +8,9 @@ for i = 1, alien_sound_count do
     })
 end
 
-local function play_random_alien()
+local function play_random_alien(pitch)
     local sound = math.floor(math.random() * (alien_sound_count - 1) + 0.5 + 1)
-    play_sound(mod_prefix.."_alien_"..sound)
+    play_sound(mod_prefix.."_alien_"..sound, pitch)
 end
 
 SMODS.ObjectType({
@@ -59,7 +59,7 @@ SMODS.Joker({
                     G.E_MANAGER:add_event(Event({
                         trigger = "after",
                         func = function()
-                            play_random_alien()
+                            play_random_alien(1.5)
                             return true
                         end
                     }))
@@ -101,7 +101,7 @@ SMODS.Joker({
                     G.E_MANAGER:add_event(Event({
                         trigger = "after",
                         func = function()
-                            play_random_alien()
+                            play_random_alien(1)
                             return true
                         end
                     }))
@@ -143,7 +143,7 @@ SMODS.Joker({
                     G.E_MANAGER:add_event(Event({
                         trigger = "after",
                         func = function()
-                            play_random_alien()
+                            play_random_alien(0.5)
                             return true
                         end
                     }))
@@ -179,7 +179,7 @@ SMODS.Joker({
                     G.E_MANAGER:add_event(Event({
                         trigger = "after",
                         func = function()
-                            play_random_alien()
+                            play_random_alien(2)
                             return true
                         end
                     }))
