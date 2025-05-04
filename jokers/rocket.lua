@@ -49,6 +49,7 @@ SMODS.Joker({
             high = 50,
             chips = 5,
         },
+        no_collection = true,
     },
     calculate = function(self, card, context)
         if context.joker_main then
@@ -90,6 +91,7 @@ SMODS.Joker({
             high = 20,
             mult = 0,
         },
+        no_collection = true,
     },
     calculate = function(self, card, context)
         if context.joker_main then
@@ -131,6 +133,7 @@ SMODS.Joker({
             high = 5,
             mult = 1,
         },
+        no_collection = true,
     },
     calculate = function(self, card, context)
         if context.joker_main then
@@ -166,6 +169,9 @@ SMODS.Joker({
     atlas = "folly_aliens",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 4, y = 0 },
+    config = {
+        no_collection = true,
+    },
     calculate = function(self, card, context)
         if context.joker_main then
             return {
