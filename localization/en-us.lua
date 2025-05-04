@@ -104,6 +104,30 @@ return {
                     "{C:chips}+#1#{} Chips"
                 },
             },
+            j_folly_alien = {
+                name = "Alien",
+                text = {
+                    "{C:chips}+#1#{} chips"
+                }
+            },
+            j_folly_super_alien = {
+                name = "Super Alien",
+                text = {
+                    "{C:mult}+#1#{} Mult"
+                }
+            },
+            j_folly_giga_alien = {
+                name = "Giga Alien",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult"
+                }
+            },
+            j_folly_glorp_alien = {
+                name = "Glorp",
+                text = {
+                    "TBD"
+                }
+            }
         },
         Enhanced = {
             m_folly_burnt = {
@@ -126,5 +150,15 @@ return {
                 },
             },
         },
+        Planet = {
+            c_folly_strange_planet = {
+                name = "Strange Planet",
+                text = {
+                    "Beware of what",
+                    "lies beyond",
+                    "the stars"
+                }
+            }
+        }
     },
 }
