@@ -217,7 +217,7 @@ SMODS.Consumable({
         })
     end,
     can_use = function(self, card)
-        return true
+        return #G.jokers.cards < G.jokers.config.card_limit
     end
 })
 
