@@ -189,9 +189,6 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
-            local ran = pseudorandom(self.key)
-            local mult = folly_utils.lerp(card.ability.extra.low, card.ability.extra.high, ran)
-            card.ability.extra.mult = mult
         end
     end,
 })
