@@ -201,6 +201,9 @@ SMODS.Consumable({
     atlas = "folly_consumables",
     pos = { x = 0, y = 0 },
     set = "Planet",
+    config = {
+        no_collection = true,  
+    },
     in_pool = function(self, args)
         if next(SMODS.find_card("j_folly_rocket")) then -- I could technically return the result from the next but it feels weird
             return true
