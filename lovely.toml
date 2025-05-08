@@ -12,6 +12,8 @@ payload = '''
         return nil, true
     end
 '''
+match_indent = true
+times = 1
 
 [[patches]]
 [patches.pattern]
