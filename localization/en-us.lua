@@ -14,7 +14,8 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_dead = "Defeat!",
-            
+            k_folly_gluttenous = "Hungy",
+
             --Object Types
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
@@ -101,7 +102,7 @@ return {
                 name = "Common",
                 text = {
                     "It's {C:common}Common",
-                    "{C:chips}+#1#{} Chips"
+                    "{C:chips}+#1#{} Chips",
                 },
             },
         },
@@ -120,9 +121,9 @@ return {
                     "{C:mult}+4{} Mult",
                     "Counts as {C:attention}best",
                     "suit or rank",
-                    "in {C:attention}poker hands"
+                    "in {C:attention}poker hands",
                 },
-            }
+            },
         },
         funny = {
             c_folly_six = {
