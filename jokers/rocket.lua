@@ -3,32 +3,15 @@ local mod_prefix = SMODS.current_mod.prefix
 
 for i = 1, alien_sound_count do
     SMODS.Sound({
-        key = "alien_"..i,
-        path = "alien_"..i..".ogg"
+        key = "alien_" .. i,
+        path = "alien_" .. i .. ".ogg"
     })
 end
 
 local function play_random_alien(pitch)
     local sound = math.floor(math.random() * (alien_sound_count - 1) + 0.5 + 1)
-    play_sound(mod_prefix.."_alien_"..sound, pitch)
+    play_sound(mod_prefix .. "_alien_" .. sound, pitch)
 end
-
-SMODS.ObjectType({
-    key = "alien",
-    default = "j_folly_alien",
-    cards = {
-        ["j_folly_alien"] = true,
-        ["j_folly_super_alien"] = true,
-        ["j_folly_giga_alien"] = true,
-        ["j_folly_glorp_alien"] = true,
-    },
-    rarities = {
-        { key = "Common", rate = 0.4 },
-        { key = "Uncommon", rate = 0.3 },
-        { key = "Rare", rate = 0.2 },
-        { key = "Legendary", rate = 0.1 },
-    },
-})
 
 SMODS.Atlas({
     key = "aliens",
@@ -37,7 +20,7 @@ SMODS.Atlas({
     py = 95,
 })
 
-SMODS.Jokers:delete_card(SMODS.Joker({
+SMODS.Joker({
     key = "alien",
     rarity = 1,
     atlas = "folly_aliens",
@@ -51,6 +34,9 @@ SMODS.Jokers:delete_card(SMODS.Joker({
         },
     },
     no_collection = true,
+    in_pool = function(self, args)
+        return false
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -74,11 +60,11 @@ SMODS.Jokers:delete_card(SMODS.Joker({
         end
     end,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips }}
+        return { vars = { card.ability.extra.chips } }
     end
-}))
+})
 
-SMODS.Jokers:delete_card(SMODS.Joker({
+SMODS.Joker({
     key = "super_alien",
     rarity = 2,
     atlas = "folly_aliens",
@@ -92,6 +78,9 @@ SMODS.Jokers:delete_card(SMODS.Joker({
         },
     },
     no_collection = true,
+    in_pool = function(self, args)
+        return false
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -115,11 +104,11 @@ SMODS.Jokers:delete_card(SMODS.Joker({
         end
     end,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult }}
+        return { vars = { card.ability.extra.mult } }
     end
-}))
+})
 
-SMODS.Jokers:delete_card(SMODS.Joker({
+SMODS.Joker({
     key = "giga_alien",
     rarity = 3,
     atlas = "folly_aliens",
@@ -133,6 +122,9 @@ SMODS.Jokers:delete_card(SMODS.Joker({
         },
     },
     no_collection = true,
+    in_pool = function(self, args)
+        return false
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -156,11 +148,11 @@ SMODS.Jokers:delete_card(SMODS.Joker({
         end
     end,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult }}
+        return { vars = { card.ability.extra.mult } }
     end
-}))
+})
 
-SMODS.Jokers:delete_card(SMODS.Joker({
+SMODS.Joker({
     key = "glorp_alien",
     rarity = 4,
     atlas = "folly_aliens",
@@ -168,15 +160,19 @@ SMODS.Jokers:delete_card(SMODS.Joker({
     soul_pos = { x = 4, y = 0 },
     config = {
         extra = {
-            x_mult_mod_low = 0,
-            x_mult_mod_high = 0.5,
-            base = 1,
+            low = 0,
+            high = 0.5,
+            x_mult = 1,
         },
     },
     no_collection = true,
+    in_pool = function(self, args)
+        return false
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
+                x_mult = card.ability.extra.x_mult,
                 func = function()
                     G.E_MANAGER:add_event(Event({
                         trigger = "after",
@@ -189,29 +185,54 @@ SMODS.Jokers:delete_card(SMODS.Joker({
             }
         end
 
-        if not context.blueprint and context.using_consumeable and context.consumeable.key == "c_folly_strange_planet" then
-            
+        if not context.blueprint and context.using_consumeable and context.consumeable.ability.name == "c_folly_strange_planet" then
+            card.ability.extra.x_mult = card.ability.extra.x_mult + folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+            return {
+                message = localize('k_folly_glorp')
+            }
         end
     end,
-}))
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                card.ability.extra.low,
+                card.ability.extra.high,
+                card.ability.extra.x_mult
+            }
+        }
+    end
+})
 
 SMODS.Consumable({
     key = "strange_planet",
     atlas = "folly_consumables",
     pos = { x = 0, y = 0 },
     set = "Planet",
-    no_collection = true,
+    --no_collection = true,
     in_pool = function(self, args)
-        if next(SMODS.find_card("j_folly_rocket")) then -- I could technically return the result from the next but it feels weird
+        if next(SMODS.find_card("j_folly_rocket")) then
+            -- I could technically return the result from the next but it feels weird
             return true
         end
         return false
     end,
     use = function(self, card, area, copier)
+        local ran = pseudorandom(self.key)
+        local alien = "j_folly"
+        if ran > 0.9 then
+            alien = alien .. "_super"
+        elseif ran > 0.7 then
+            alien = alien .. "_giga"
+        elseif ran > 0.4 then
+            alien = alien .. "_glorp"
+        end
+        alien = alien .. "_alien"
+
         SMODS.add_card({
-            set = "alien",
+            key = alien,
             area = G.jokers
         })
+        play_sound("tarot2", 0.5)
     end,
     can_use = function(self, card)
         return #G.jokers.cards < G.jokers.config.card_limit
@@ -221,3 +242,4 @@ SMODS.Consumable({
 return {
     key = "rocket",
 }
+

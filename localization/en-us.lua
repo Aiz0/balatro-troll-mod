@@ -14,6 +14,7 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_damage = "Defeat!",
+            k_folly_glorp = "Glorp",
             
             --Object Types
             k_funny = "Funny :)",
@@ -125,9 +126,12 @@ return {
             j_folly_glorp_alien = {
                 name = "Glorp",
                 text = {
-                    "TBD"
-                }
-            }
+                    "This Joker gains",
+                    "{X:red,C:white}X#1#{} to {X:red,C:white}X#2#{} Mult every",
+                    "time a {C:planet}Strange Planet{} is used",
+                    "{C:inactive}(Currently {X:red,C:white}X#3#{C:inactive} Mult)",
+                },
+            },
         },
         Enhanced = {
             m_folly_burnt = {
