@@ -38,6 +38,9 @@ times = 1
 target = "functions/misc_functions.lua"
 pattern = "if hand[i]:is_suit(suit, nil, true) then flush_count = flush_count + 1;  t[#t+1] = hand[i] end"
 position = "after"
-payload = "if SMODS.has_enhancement(hand[i], 'm_folly_jimbo') then flush_count = flush_count + 1;  t[#t+1] = hand[i] end"
+payload = '''if SMODS.has_enhancement(hand[i], 'm_folly_jimbo') then
+  flush_count = flush_count + 1
+  t[#t+1] = hand[i]
+end'''
 match_indent = true
 times = 1
