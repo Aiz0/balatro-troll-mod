@@ -12,5 +12,46 @@ payload = '''
         return nil, true
     end
 '''
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "if hand[i]:get_id() == hand[j]:get_id() and i ~= j then"
+position = "at"
+payload = '''
+local lhs, rhs = hand[i]:get_id(), hand[j]:get_id()
+if SMODS.has_enhancement(hand[i], 'm_folly_jimbo') then
+  lhs = G.FUNCS.get_most_of_rank(hand)
+end
+if SMODS.has_enhancement(hand[j], 'm_folly_jimbo') then
+  rhs = G.FUNCS.get_most_of_rank(hand)
+end
+if lhs == rhs and i ~= j then'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "vals[curr[1]:get_id()] = curr"
+position = "at"
+payload = '''
+if SMODS.has_enhancement(curr[1], 'm_folly_jimbo') then
+  vals[G.FUNCS.get_most_of_rank(hand)] = curr
+else
+  vals[curr[1]:get_id()] = curr
+end'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "if hand[i]:is_suit(suit, nil, true) then flush_count = flush_count + 1;  t[#t+1] = hand[i] end"
+position = "after"
+payload = '''if SMODS.has_enhancement(hand[i], 'm_folly_jimbo') then
+  flush_count = flush_count + 1
+  t[#t+1] = hand[i]
+end'''
 match_indent = true
 times = 1
