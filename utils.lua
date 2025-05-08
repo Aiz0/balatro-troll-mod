@@ -53,8 +53,17 @@ folly_utils = {
         end,
     },
     
-    
     lerp = function(a, b, t)
         return a + (b - a) * t
+    end,
+
+    pseudorandom_range = function(min, max, seed)
+        local ran = pseudorandom(seed)
+        local ret = folly_utils.lerp(min, max, ran)
+        return ret
+    end,
+    
+    round = function(val)
+        return math.floor(val + 0.5)
     end
 }

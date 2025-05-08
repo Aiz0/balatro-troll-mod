@@ -1,4 +1,4 @@
-local alien_sound_count = 8
+local alien_sound_count = 12
 local mod_prefix = SMODS.current_mod.prefix
 
 for i = 1, alien_sound_count do
@@ -37,7 +37,7 @@ SMODS.Atlas({
     py = 95,
 })
 
-SMODS.Joker({
+SMODS.Jokers:delete_card(SMODS.Joker({
     key = "alien",
     rarity = 1,
     atlas = "folly_aliens",
@@ -49,8 +49,8 @@ SMODS.Joker({
             high = 50,
             chips = 5,
         },
-        no_collection = true,
     },
+    no_collection = true,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -59,7 +59,7 @@ SMODS.Joker({
                     G.E_MANAGER:add_event(Event({
                         trigger = "after",
                         func = function()
-                            play_random_alien(1.5)
+                            play_random_alien(1.25)
                             return true
                         end
                     }))
@@ -69,17 +69,16 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
-            local ran = pseudorandom(self.key)
-            local chips = folly_utils.lerp(card.ability.extra.low, card.ability.extra.high, ran)
-            card.ability.extra.chips = math.floor(chips + 0.5)
+            local chips = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+            card.ability.extra.chips = folly_utils.round(chips)
         end
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips }}
     end
-})
+}))
 
-SMODS.Joker({
+SMODS.Jokers:delete_card(SMODS.Joker({
     key = "super_alien",
     rarity = 2,
     atlas = "folly_aliens",
@@ -91,8 +90,8 @@ SMODS.Joker({
             high = 20,
             mult = 0,
         },
-        no_collection = true,
     },
+    no_collection = true,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -111,17 +110,16 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
-            local ran = pseudorandom(self.key)
-            local mult = folly_utils.lerp(card.ability.extra.low, card.ability.extra.high, ran)
-            card.ability.extra.mult = math.floor(mult + 0.5)
+            local mult = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+            card.ability.extra.mult = folly_utils.round(mult)
         end
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult }}
     end
-})
+}))
 
-SMODS.Joker({
+SMODS.Jokers:delete_card(SMODS.Joker({
     key = "giga_alien",
     rarity = 3,
     atlas = "folly_aliens",
@@ -133,8 +131,8 @@ SMODS.Joker({
             high = 5,
             mult = 1,
         },
-        no_collection = true,
     },
+    no_collection = true,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -143,7 +141,7 @@ SMODS.Joker({
                     G.E_MANAGER:add_event(Event({
                         trigger = "after",
                         func = function()
-                            play_random_alien(0.5)
+                            play_random_alien(0.75)
                             return true
                         end
                     }))
@@ -153,25 +151,29 @@ SMODS.Joker({
     end,
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
-            local ran = pseudorandom(self.key)
-            local mult = folly_utils.lerp(card.ability.extra.low, card.ability.extra.high, ran)
+            local mult = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
             card.ability.extra.mult = mult
         end
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult }}
     end
-})
+}))
 
-SMODS.Joker({
+SMODS.Jokers:delete_card(SMODS.Joker({
     key = "glorp_alien",
     rarity = 4,
     atlas = "folly_aliens",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 4, y = 0 },
     config = {
-        no_collection = true,
+        extra = {
+            x_mult_mod_low = 0,
+            x_mult_mod_high = 0.5,
+            base = 1,
+        },
     },
+    no_collection = true,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -179,28 +181,26 @@ SMODS.Joker({
                     G.E_MANAGER:add_event(Event({
                         trigger = "after",
                         func = function()
-                            play_random_alien(2)
+                            play_random_alien(1.5)
                             return true
                         end
                     }))
                 end
             }
         end
-    end,
-    add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
+
+        if not context.blueprint and context.using_consumeable and context.consumeable.key == "c_folly_strange_planet" then
+            
         end
     end,
-})
+}))
 
 SMODS.Consumable({
     key = "strange_planet",
     atlas = "folly_consumables",
     pos = { x = 0, y = 0 },
     set = "Planet",
-    config = {
-        no_collection = true,  
-    },
+    no_collection = true,
     in_pool = function(self, args)
         if next(SMODS.find_card("j_folly_rocket")) then -- I could technically return the result from the next but it feels weird
             return true
