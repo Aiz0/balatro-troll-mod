@@ -51,9 +51,6 @@ end
 
 return {
     key = "joker",
-    config = {
-        extra = 4
-    },
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
             local created_card = create_playing_card({
