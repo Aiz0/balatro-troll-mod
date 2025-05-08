@@ -64,3 +64,100 @@ G.FUNCS.folly_button_use = function(e)
     local card = e.config.ref_table
     card.config.center:folly_button_use(card)
 end
+
+function get_straight(hand, min_length, skip, wrap)
+    local jimbos = {}
+    for i, v in pairs(hand) do
+        if SMODS.has_enhancement(v, 'm_folly_jimbo') then
+            table.insert(jimbos, v)
+        end
+    end
+    if #jimbos >= min_length then
+        return {straight = jimbos}
+    end
+    min_length = min_length or 5
+    if min_length < 2 then min_length = 2 end
+    if #hand < min_length then return {} end
+    local ranks = {}
+    for k,_ in pairs(SMODS.Ranks) do ranks[k] = {} end
+    for _,card in ipairs(hand) do
+        local id = card:get_id()
+        if id > 0 then
+            for k,v in pairs(SMODS.Ranks) do
+                if v.id == id then table.insert(ranks[k], card); break end
+            end
+        end
+    end
+    local function next_ranks(key, start)
+        local rank = SMODS.Ranks[key]
+        local ret = {}
+        if not start and not wrap and rank.straight_edge then return ret end
+        for _,v in ipairs(rank.next) do
+            ret[#ret+1] = v
+            if skip and (wrap or not SMODS.Ranks[v].straight_edge) then
+                for _,w in ipairs(SMODS.Ranks[v].next) do
+                    ret[#ret+1] = w
+                end
+            end
+        end
+        return ret
+    end
+    local tuples = {}
+    local ret = {}
+    for _,k in ipairs(SMODS.Rank.obj_buffer) do
+        if next(ranks[k]) then
+            tuples[#tuples+1] = {key = {k}, jimbos = #jimbos}
+        end
+    end
+    for i = 2, #hand+1 do
+        local new_tuples = {}
+        for _, tuple in ipairs(tuples) do
+            local any_tuple
+            if i ~= #hand+1 then
+                for _,l in ipairs(next_ranks(tuple.key[i-1], i == 2)) do
+                    if next(ranks[l]) then
+                        local new_tuple = {key = {}, jimbo = 0}
+                        for _,v in ipairs(tuple.key) do
+                            new_tuple.key[#new_tuple.key+1] = v
+                        end
+                        new_tuple.key[#new_tuple.key+1] = l
+                        new_tuple.jimbos = tuple.jimbos
+                        new_tuples[#new_tuples+1] = new_tuple
+                        any_tuple = true
+                    end
+                end
+                if not any_tuple and tuple.jimbos > 0 then -- check if the we have a "jimbo token" in the tuple
+                    local next = 0
+                    local new_tuple = {key = {}, jimbo = 0}
+                    for _,v in ipairs(tuple.key) do
+                        new_tuple.key[#new_tuple.key+1] = v
+                        if SMODS.Ranks[v].straight_edge then -- back track by 4 if we don't have a "next" value
+                            next = folly_utils.get_previous_rank(v, 4)
+                        else
+                            next = next_ranks(v)[1]
+                        end
+                    end
+                    new_tuple.key[#new_tuple.key+1] = next
+                    new_tuple.jimbos = tuple.jimbos - 1
+                    new_tuples[#new_tuples+1] = new_tuple
+                    any_tuple = true
+                end
+            end
+            if i > min_length and not any_tuple then
+                local straight = {}
+                for _,v in ipairs(tuple.key) do
+                    for _,card in ipairs(ranks[v]) do
+                        straight[#straight+1] = card
+                    end
+                end
+                for j = 1, #jimbos do -- fill the empty slots with the jimbos we added
+                    straight[#straight+1] = jimbos[j]
+                end
+                ret[#ret+1] = straight
+            end
+        end
+        tuples = new_tuples
+    end
+    table.sort(ret, function(a,b) return #a > #b end)
+    return ret
+end
