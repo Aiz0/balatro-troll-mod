@@ -3,7 +3,7 @@ return {
         dictionary = {
             k_folly_shoot_the_moon = "Shoot the moon!",
             k_folly_mega_jackpot = "Mega Jackpot!",
-            k_folly_masion = "Evil Billionaire Power",
+            k_folly_mansion = "Evil Billionaire Power",
             k_folly_cavendish = "Rotten!",
             k_folly_dr_house = "This Vexes Me",
             k_folly_drivers_license_expired = "Expired!",
@@ -14,6 +14,10 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_dead = "Defeat!",
+            
+            --Object Types
+            k_funny = "Funny :)",
+            b_funny_cards = "Funny :)",
         },
     },
     descriptions = {
@@ -98,6 +102,27 @@ return {
                 text = {
                     "It's {C:common}Common",
                     "{C:chips}+#1#{} Chips"
+                },
+            },
+        },
+        Enhanced = {
+            m_folly_burnt = {
+                name = "Burnt Card",
+                text = {
+                    "{C:mult}+#1#{} Mult for",
+                    "each burnt card",
+                    "scored this hand",
+                },
+            },
+        },
+        funny = {
+            c_folly_six = {
+                name = "Six",
+                text = {
+                    "What?",
+                    "Converts up to",
+                    "{C:attention}2{} selected cards",
+                    "to {C:attention}this{} card",
                 },
             },
         },

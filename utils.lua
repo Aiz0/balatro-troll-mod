@@ -1,3 +1,4 @@
+local display_name = SMODS.current_mod.display_name
 folly_utils = {
     replace = function(card, other)
         G.E_MANAGER:add_event(Event({
@@ -33,22 +34,27 @@ folly_utils = {
     
     log = {
         Trace = function(message)
-            sendTraceMessage(message, "Folly Jokers | Trace");
+            sendTraceMessage(message, display_name);
         end,
         Debug = function(message)
-            sendDebugMessage(message, "Folly Jokers | Debug");
+            sendDebugMessage(message, display_name);
         end,
         Info = function(message)
-            sendInfoMessage(message, "Folly Jokers | Info");
+            sendInfoMessage(message,display_name);
         end,
         Warn = function(message)
-            sendWarnMessage(message, "Folly Jokers | Warn");
+            sendWarnMessage(message,display_name);
         end,
         Error = function(message)
-            sendErrorMessage(message, "Folly Jokers | Error");
+            sendErrorMessage(message, display_name);
         end,
         Fatal = function(message)
-            sendFatalMessage(message, "Folly Jokers | Fatal");
+            sendFatalMessage(message, display_name);
         end,
-    }
+    },
+    
+    
+    lerp = function(a, b, t)
+        return a + (b - a) * t
+    end
 }
