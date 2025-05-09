@@ -58,7 +58,7 @@ folly_utils = {
         return a + (b - a) * t
     end,
 
-    ---Shuffles Jokers in Joker area.
+    ---Shuffles Cards in cardarea.
     ---@param shuffles number? Defaults to 3
     ---@param area any? Defaults to G.jokers
     shuffle_cardarea = function(area, shuffles)
