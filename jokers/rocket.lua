@@ -202,7 +202,7 @@ SMODS.Consumable({
     atlas = "folly_consumables",
     pos = { x = 0, y = 0 },
     set = "Planet",
-    --no_collection = true,
+    no_collection = true,
     in_pool = function(self, args)
         return next(SMODS.find_card("j_folly_rocket")) ~= nil
     end,
@@ -220,7 +220,6 @@ SMODS.Consumable({
 
         SMODS.add_card({
             key = alien,
-            area = G.jokers
         })
         play_sound("tarot2", 0.5)
     end,
