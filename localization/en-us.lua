@@ -13,7 +13,7 @@ return {
             k_folly_tc = "Level Up!",
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
-            k_folly_tc_damage = "Defeat!",
+            k_folly_tc_dead = "Defeat!",
             
             --Object Types
             k_funny = "Funny :)",
@@ -95,7 +95,7 @@ return {
                     "has up to {C:attention}#1#{} cards, destroy",
                     "them and earn {C:money}$#2#{}",
                     "per card destroyed",
-                }
+                },
             },
             j_folly_common = {
                 name = "Common",
