@@ -53,11 +53,9 @@ SMODS.Joker({
             }
         end
     end,
-    add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            local chips = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
-            card.ability.extra.chips = folly_utils.round(chips)
-        end
+    set_ability = function(self, card, initial, delay_sprites)
+        local chips = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+        card.ability.extra.chips = folly_utils.round(chips)
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
@@ -97,11 +95,9 @@ SMODS.Joker({
             }
         end
     end,
-    add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            local mult = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
-            card.ability.extra.mult = folly_utils.round(mult)
-        end
+    set_ability = function(self, card, initial, delay_sprites)
+        local mult = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+        card.ability.extra.mult = folly_utils.round(mult)
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
@@ -118,7 +114,7 @@ SMODS.Joker({
         extra = {
             low = 1,
             high = 5,
-            mult = 1,
+            x_mult = 1,
         },
     },
     no_collection = true,
@@ -128,7 +124,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.joker_main then
             return {
-                x_mult = card.ability.extra.mult,
+                x_mult = card.ability.extra.x_mult,
                 func = function()
                     G.E_MANAGER:add_event(Event({
                         trigger = "after",
@@ -141,14 +137,12 @@ SMODS.Joker({
             }
         end
     end,
-    add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            local mult = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
-            card.ability.extra.mult = mult
-        end
+    set_ability = function(self, card, initial, delay_sprites)
+        local x_mult = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+        card.ability.extra.x_mult = x_mult
     end,
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult } }
+        return { vars = { card.ability.extra.x_mult } }
     end
 })
 
