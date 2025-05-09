@@ -210,11 +210,7 @@ SMODS.Consumable({
     set = "Planet",
     --no_collection = true,
     in_pool = function(self, args)
-        if next(SMODS.find_card("j_folly_rocket")) then
-            -- I could technically return the result from the next but it feels weird
-            return true
-        end
-        return false
+        return next(SMODS.find_card("j_folly_rocket")) ~= nil
     end,
     use = function(self, card, area, copier)
         local ran = pseudorandom(self.key)
