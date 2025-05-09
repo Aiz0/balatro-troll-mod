@@ -13,7 +13,7 @@ return {
             k_folly_tc = "Level Up!",
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
-            k_folly_tc_damage = "Defeat!",
+            k_folly_tc_dead = "Defeat!",
             k_folly_moonbase_alpha_999 = "9999999!",
             k_folly_moonbase_alpha_question_mark_exclamation_point = "?!?!",
             k_folly_moonbase_alpha_aeiou = "aeiou",
@@ -25,7 +25,7 @@ return {
             k_folly_moonbase_alpha_mark = "mark!",
             k_folly_moonbase_alpha_snake = "snake?",
             k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
-
+            
             --Object Types
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
@@ -128,6 +128,15 @@ return {
                     "scored this hand",
                 },
             },
+            m_folly_jimbo = {
+                name = "Joker",
+                text = {
+                    "{C:mult}+4{} Mult",
+                    "Counts as {C:attention}best",
+                    "suit or rank",
+                    "in {C:attention}poker hands"
+                },
+            }
         },
         funny = {
             c_folly_six = {

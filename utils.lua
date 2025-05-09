@@ -76,4 +76,12 @@ folly_utils = {
         end
         delay(0.35) --extra delay when done
     end,
+    
+    get_previous_rank = function(key, offset)
+        offset = offset or 1
+        if offset <= 0 then
+            return key
+        end
+        return get_previous_rank(SMODS.Ranks[key].prev[1], offset - 1)
+    end,
 }
