@@ -66,12 +66,6 @@ folly_utils = {
     end,
 
     pseudorandom_range = function(min, max, seed)
-        local ran = pseudorandom(seed)
-        local ret = folly_utils.lerp(min, max, ran)
-        return ret
-    end,
-    
-    round = function(val)
-        return math.floor(val + 0.5)
+        return folly_utils.lerp(min, max, pseudorandom(seed))
     end,
 }

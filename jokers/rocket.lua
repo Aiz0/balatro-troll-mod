@@ -55,7 +55,7 @@ SMODS.Joker({
     end,
     set_ability = function(self, card, initial, delay_sprites)
         local chips = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
-        card.ability.extra.chips = folly_utils.round(chips)
+        card.ability.extra.chips = round_number(chips, 0)
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
@@ -97,7 +97,7 @@ SMODS.Joker({
     end,
     set_ability = function(self, card, initial, delay_sprites)
         local mult = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
-        card.ability.extra.mult = folly_utils.round(mult)
+        card.ability.extra.mult = round_number(mult, 0)
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
@@ -208,13 +208,13 @@ SMODS.Consumable({
     end,
     use = function(self, card, area, copier)
         local ran = pseudorandom(self.key)
-        local alien = "j_folly"
+        local alien = "j_folly_"
         if ran > 0.9 then
-            alien = alien .. "_super"
+            alien = alien .. "super"
         elseif ran > 0.7 then
-            alien = alien .. "_giga"
+            alien = alien .. "giga"
         elseif ran > 0.4 then
-            alien = alien .. "_glorp"
+            alien = alien .. "glorp"
         end
         alien = alien .. "_alien"
 
