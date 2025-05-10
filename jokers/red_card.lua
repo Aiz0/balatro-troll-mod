@@ -32,9 +32,9 @@ return {
     end,
     remove_from_deck = function(self, card, from_debuff)
         local old = card.ability.extra.colour
-        card.extra.ability.colour = "red"
+        card.ability.extra.colour = "red"
         self.update_probabilities(card)
-        card.extra.ability.colour = old
+        card.ability.extra.colour = old
     end,
     set_sprites = function (self, card, front)
         if card.ability then
@@ -44,8 +44,8 @@ return {
     end,
     calculate = function(self, card, context)
         if context.skipping_booster and not context.blueprint then
-            self:switch_colour(card)
             card.ability.extra.triggers = card.ability.extra.triggers + 1
+            self:switch_colour(card)
             --red by default
             local vars = { card.ability.extra.mult }
             if card.ability.extra.colour == "blue" then
@@ -116,7 +116,11 @@ return {
         if next(oops) then
             probability_mult = probability_mult^#oops
         end
-        local probability = card.ability.extra.triggers * card.ability.extra.probability * probability_mult
+        local triggers = card.ability.extra.triggers
+        if card.ability.extra.colour ~= "green" then
+            triggers = triggers - 1
+        end
+        local probability = triggers * card.ability.extra.probability * probability_mult
         
         if card.ability.extra.colour == "green" then
             for i, v in pairs(G.GAME.probabilities) do
