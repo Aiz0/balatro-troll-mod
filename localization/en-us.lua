@@ -32,6 +32,12 @@ return {
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
         },
+        v_dictionary = {
+            a_folly_red_card = "+#1# Mult",
+            a_folly_blue_card = "+#1# Chips",
+            a_folly_yellow_card = "+$#1#",
+            a_folly_green_card = "+#1# Probability",
+        },
         labels = {
             folly_mark_sticker = "Marked",
         },
@@ -169,8 +175,8 @@ return {
                 name = "Yellow Card",
                 text = {
                     "Earn {C:money}$#1#{} at end of round",
-                    "Payout increases by {C:money}$#2#{}",
-                    "when any {C:attention}Booster Pack{} is skipped",
+                    "Payout increases by {C:money}$#2#{} when",
+                    "any {C:attention}Booster Pack{} is skipped",
                 },
             },
             j_folly_green_card = {
@@ -178,8 +184,8 @@ return {
                 text = {
                     "{C:green}+#1#{} to all listed",
                     "{C:green,E:1,S:1.1}probabilities",
-                    "increases by {C:green}+#2#{}",
-                    "when any {C:attention}Booster Pack{} is skipped",
+                    "increases by {C:green}+#2#{} when",
+                    "any {C:attention}Booster Pack{} is skipped",
                 },
             },
         },
