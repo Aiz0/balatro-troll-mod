@@ -33,7 +33,7 @@ return {
     remove_from_deck = function(self, card, from_debuff)
         local old = card.ability.extra.colour
         card.ability.extra.colour = "red"
-        card.ability.extra.triggers = card.ability.extra.triggers + 1 
+        card.ability.extra.triggers = card.ability.extra.triggers + 1
         self.update_probabilities(card)
         card.ability.extra.colour = old
     end,
@@ -115,7 +115,7 @@ return {
         local oops = SMODS.find_card("j_oops")
         local probability_mult = 1
         if next(oops) then
-            probability_mult = probability_mult^#oops
+            probability_mult = 2^#oops
         end
         local triggers = card.ability.extra.triggers
         if card.ability.extra.colour ~= "green" then
