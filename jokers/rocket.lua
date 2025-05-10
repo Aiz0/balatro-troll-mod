@@ -115,7 +115,6 @@ SMODS.Joker({
             x_mult = 1,
         },
     },
-    no_collection = true,
     in_pool = function(self, args)
         return false
     end,
