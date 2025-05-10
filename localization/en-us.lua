@@ -25,7 +25,7 @@ return {
             k_folly_moonbase_alpha_mark = "mark!",
             k_folly_moonbase_alpha_snake = "snake?",
             k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
-            
+
             --Object Types
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
@@ -116,6 +116,41 @@ return {
                 text = {
                     "It's {C:common}Common",
                     "{C:chips}+#1#{} Chips",
+                },
+            },
+            j_folly_red_card = {
+                name = "Red Card",
+                text = {
+                    "This Joker gains",
+                    "{C:red}+#1#{} Mult when any",
+                    "{C:attention}Booster Pack{} is skipped",
+                    "{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+                },
+            },
+            j_folly_blue_card = {
+                name = "Blue Card",
+                text = {
+                    "This Joker gains",
+                    "{C:blue}+#1#{} Chips when any",
+                    "{C:attention}Booster Pack{} is skipped",
+                    "{C:inactive}(Currently {C:blue}+#2#{C:inactive} Chips)",
+                },
+            },
+            j_folly_yellow_card = {
+                name = "Yellow Card",
+                text = {
+                    "Earn {C:money}$#1#{} at end of round",
+                    "Payout increases by {C:money}$#2#{}",
+                    "when any {C:attention}Booster Pack{} is skipped",
+                },
+            },
+            j_folly_green_card = {
+                name = "Green Card",
+                text = {
+                    "{C:green}+#1#{} to all listed",
+                    "{C:green,E:1,S:1.1}probabilities",
+                    "increases by {C:green}+#2#{}",
+                    "when any {C:attention}Booster Pack{} is skipped",
                 },
             },
         },
