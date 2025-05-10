@@ -44,8 +44,8 @@ return {
     end,
     calculate = function(self, card, context)
         if context.skipping_booster and not context.blueprint then
-            card.ability.extra.triggers = card.ability.extra.triggers + 1
             self:switch_colour(card)
+            card.ability.extra.triggers = card.ability.extra.triggers + 1
             --red by default
             local vars = { card.ability.extra.mult }
             if card.ability.extra.colour == "blue" then
