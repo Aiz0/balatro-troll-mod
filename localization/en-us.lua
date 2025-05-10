@@ -15,10 +15,26 @@ return {
             k_folly_tc_damage = " Damage!",
             k_folly_tc_dead = "Defeat!",
             k_folly_gluttenous = "Hungy",
-
+            k_folly_moonbase_alpha_999 = "9999999!",
+            k_folly_moonbase_alpha_question_mark_exclamation_point = "?!?!",
+            k_folly_moonbase_alpha_aeiou = "aeiou",
+            k_folly_moonbase_alpha_big_american_tts = "Big American TTS!",
+            k_folly_moonbase_alpha_brbrbrbrbrbrbrbr = "brbrbrbr",
+            k_folly_moonbase_alpha_holla_holla_get_dollar = "holla holla get $!",
+            k_folly_moonbase_alpha_john_madden_football = "John Madden!",
+            k_folly_moonbase_alpha_im_laughing_for_real_right_now = "I'm laughing for real right now!",
+            k_folly_moonbase_alpha_mark = "mark!",
+            k_folly_moonbase_alpha_snake = "snake?",
+            k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
+            k_folly_tc_damage = "Defeat!",
+            k_folly_glorp = "Glorp",
+            
             --Object Types
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
+        },
+        labels = {
+            folly_mark_sticker = "Marked",
         },
     },
     descriptions = {
@@ -105,6 +121,33 @@ return {
                     "{C:chips}+#1#{} Chips",
                 },
             },
+            j_folly_alien = {
+                name = "Alien",
+                text = {
+                    "{C:chips}+#1#{} chips"
+                }
+            },
+            j_folly_super_alien = {
+                name = "Super Alien",
+                text = {
+                    "{C:mult}+#1#{} Mult"
+                }
+            },
+            j_folly_giga_alien = {
+                name = "Giga Alien",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult"
+                }
+            },
+            j_folly_glorp_alien = {
+                name = "Glorp",
+                text = {
+                    "This Joker gains",
+                    "{X:red,C:white}X#1#{} to {X:red,C:white}X#2#{} Mult every",
+                    "time a {C:planet}Strange Planet{} is used",
+                    "{C:inactive}(Currently {X:red,C:white}X#3#{C:inactive} Mult)",
+                },
+            },
         },
         Enhanced = {
             m_folly_burnt = {
@@ -133,6 +176,25 @@ return {
                     "Converts up to",
                     "{C:attention}2{} selected cards",
                     "to {C:attention}this{} card",
+                },
+            },
+        },
+        Other = {
+            folly_mark_sticker = {
+                name = "Marked",
+                text = {
+                    "This card has",
+                    "been {C:attention}marked",
+                },
+            },
+        },
+        Planet = {
+            c_folly_strange_planet = {
+                name = "Strange Planet",
+                text = {
+                    "Beware of what",
+                    "lies beyond",
+                    "the stars"
                 },
             },
         },

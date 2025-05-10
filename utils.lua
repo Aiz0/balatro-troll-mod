@@ -53,9 +53,27 @@ folly_utils = {
         end,
     },
     
-    
     lerp = function(a, b, t)
         return a + (b - a) * t
+    end,
+
+    ---Shuffles Cards in cardarea.
+    ---@param shuffles number? Defaults to 3
+    ---@param area any? Defaults to G.jokers
+    shuffle_cardarea = function(area, shuffles)
+        shuffles = shuffles or 3
+        area = area or G.jokers
+        for i = 1, shuffles do
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    area:shuffle("aajk")
+                    play_sound("cardSlide1", 1)
+                    return true
+                end,
+            }))
+            delay(0.15)
+        end
+        delay(0.35) --extra delay when done
     end,
     
     get_previous_rank = function(key, offset)
@@ -64,5 +82,9 @@ folly_utils = {
             return key
         end
         return get_previous_rank(SMODS.Ranks[key].prev[1], offset - 1)
+    end,
+
+    pseudorandom_range = function(min, max, seed)
+        return folly_utils.lerp(min, max, pseudorandom(seed))
     end,
 }
