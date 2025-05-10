@@ -14,10 +14,24 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_dead = "Defeat!",
+            k_folly_moonbase_alpha_999 = "9999999!",
+            k_folly_moonbase_alpha_question_mark_exclamation_point = "?!?!",
+            k_folly_moonbase_alpha_aeiou = "aeiou",
+            k_folly_moonbase_alpha_big_american_tts = "Big American TTS!",
+            k_folly_moonbase_alpha_brbrbrbrbrbrbrbr = "brbrbrbr",
+            k_folly_moonbase_alpha_holla_holla_get_dollar = "holla holla get $!",
+            k_folly_moonbase_alpha_john_madden_football = "John Madden!",
+            k_folly_moonbase_alpha_im_laughing_for_real_right_now = "I'm laughing for real right now!",
+            k_folly_moonbase_alpha_mark = "mark!",
+            k_folly_moonbase_alpha_snake = "snake?",
+            k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
             
             --Object Types
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
+        },
+        labels = {
+            folly_mark_sticker = "Marked",
         },
     },
     descriptions = {
@@ -101,7 +115,7 @@ return {
                 name = "Common",
                 text = {
                     "It's {C:common}Common",
-                    "{C:chips}+#1#{} Chips"
+                    "{C:chips}+#1#{} Chips",
                 },
             },
         },
@@ -132,6 +146,15 @@ return {
                     "Converts up to",
                     "{C:attention}2{} selected cards",
                     "to {C:attention}this{} card",
+                },
+            },
+        },
+        Other = {
+            folly_mark_sticker = {
+                name = "Marked",
+                text = {
+                    "This card has",
+                    "been {C:attention}marked",
                 },
             },
         },
