@@ -28,12 +28,11 @@ SMODS.Joker({
     soul_pos = { x = 1, y = 0 },
     config = {
         extra = {
-            low = 5,
-            high = 50,
+            low = 0,
+            high = 100,
             chips = 5,
         },
     },
-    no_collection = true,
     in_pool = function(self, args)
         return false
     end,
@@ -71,11 +70,10 @@ SMODS.Joker({
     config = {
         extra = {
             low = 0,
-            high = 20,
+            high = 30,
             mult = 0,
         },
     },
-    no_collection = true,
     in_pool = function(self, args)
         return false
     end,
@@ -159,12 +157,11 @@ SMODS.Joker({
             x_mult = 1,
         },
     },
-    no_collection = true,
     in_pool = function(self, args)
         return false
     end,
     calculate = function(self, card, context)
-        if context.joker_main then
+        if context.joker_main and card.ability.extra.x_mult > 1 then
             return {
                 x_mult = card.ability.extra.x_mult,
                 func = function()
@@ -202,21 +199,20 @@ SMODS.Consumable({
     atlas = "folly_consumables",
     pos = { x = 0, y = 0 },
     set = "Planet",
-    no_collection = true,
     in_pool = function(self, args)
         return next(SMODS.find_card("j_folly_rocket")) ~= nil
     end,
     use = function(self, card, area, copier)
         local ran = pseudorandom(self.key)
         local alien = "j_folly_"
-        if ran > 0.9 then
-            alien = alien .. "super"
-        elseif ran > 0.7 then
-            alien = alien .. "giga"
-        elseif ran > 0.4 then
-            alien = alien .. "glorp"
+        if ran > 0.95 then
+            alien = alien .. "glorp_"
+        elseif ran > 0.8 then
+            alien = alien .. "giga_"
+        elseif ran > 0.5 then
+            alien = alien .. "super_"
         end
-        alien = alien .. "_alien"
+        alien = alien .. "alien"
 
         SMODS.add_card({
             key = alien,
