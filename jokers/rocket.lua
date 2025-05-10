@@ -13,19 +13,12 @@ local function play_random_alien(pitch)
     play_sound(mod_prefix .. "_alien_" .. sound, pitch)
 end
 
-SMODS.Atlas({
-    key = "aliens",
-    path = "aliens.png",
-    px = 71,
-    py = 95,
-})
-
 SMODS.Joker({
     key = "alien",
     rarity = 1,
-    atlas = "folly_aliens",
-    pos = { x = 0, y = 0 },
-    soul_pos = { x = 1, y = 0 },
+    atlas = "folly_jokers",
+    pos = { x = 0, y = 1 },
+    soul_pos = { x = 1, y = 1 },
     config = {
         extra = {
             low = 0,
@@ -64,9 +57,9 @@ SMODS.Joker({
 SMODS.Joker({
     key = "super_alien",
     rarity = 2,
-    atlas = "folly_aliens",
-    pos = { x = 0, y = 0 },
-    soul_pos = { x = 2, y = 0 },
+    atlas = "folly_jokers",
+    pos = { x = 0, y = 1 },
+    soul_pos = { x = 2, y = 1 },
     config = {
         extra = {
             low = 0,
@@ -105,9 +98,9 @@ SMODS.Joker({
 SMODS.Joker({
     key = "giga_alien",
     rarity = 3,
-    atlas = "folly_aliens",
-    pos = { x = 0, y = 0 },
-    soul_pos = { x = 3, y = 0 },
+    atlas = "folly_jokers",
+    pos = { x = 0, y = 1 },
+    soul_pos = { x = 3, y = 1 },
     config = {
         extra = {
             low = 1,
@@ -146,9 +139,9 @@ SMODS.Joker({
 SMODS.Joker({
     key = "glorp_alien",
     rarity = 4,
-    atlas = "folly_aliens",
-    pos = { x = 0, y = 0 },
-    soul_pos = { x = 4, y = 0 },
+    atlas = "folly_jokers",
+    pos = { x = 0, y = 1 },
+    soul_pos = { x = 4, y = 1 },
     config = {
         extra = {
             low = 0,
