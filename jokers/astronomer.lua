@@ -5,9 +5,13 @@ return {
             astro = nil
         },
     },
-    add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            card.ability.extra.astro = pseudorandom_element(G.P_CENTER_POOLS.Planet, pseudoseed(self.key)).key
+    set_ability = function(self, card, initial, delay_sprites)
+        local pool, pool_key = get_current_pool('Planet')
+        for i = #pool, 1, -1 do
+            if pool[i] == 'UNAVAILABLE' then
+                table.remove(pool, i)
+            end
         end
+        card.ability.extra.astro = pseudorandom_element(pool, pseudoseed(pool_key))
     end,
 }
