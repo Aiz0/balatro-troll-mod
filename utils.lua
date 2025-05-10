@@ -53,7 +53,6 @@ folly_utils = {
         end,
     },
     
-    
     lerp = function(a, b, t)
         return a + (b - a) * t
     end,
@@ -83,5 +82,9 @@ folly_utils = {
             return key
         end
         return get_previous_rank(SMODS.Ranks[key].prev[1], offset - 1)
+    end,
+
+    pseudorandom_range = function(min, max, seed)
+        return folly_utils.lerp(min, max, pseudorandom(seed))
     end,
 }
