@@ -16,7 +16,7 @@ G.FUNCS.get_most_of_rank = function(hand)
         vals[i] = {}
     end
     for i = #hand, 1, -1 do
-        if not SMODS.has_enhancement(hand[i], 'm_folly_jimbo') then
+        if not SMODS.has_enhancement(hand[i], "m_folly_jimbo") then
             table.insert(vals[hand[i]:get_id()], hand[i])
         end
     end
@@ -34,7 +34,7 @@ G.FUNCS.get_most_of_rank = function(hand)
             end
         end
     end
-    
+
     local highest = 0
     if next(most_table) then
         for _, v in pairs(most_table) do
@@ -54,8 +54,9 @@ return {
     add_to_deck = function(self, card, from_debuff)
         if not from_debuff then
             local created_card = create_playing_card({
-                front = pseudorandom_element(G.P_CARDS, pseudoseed('jimbo_fr_fr')),
-                center = G.P_CENTERS.c_base}, G.deck, nil, nil, nil, nil)
+                front = pseudorandom_element(G.P_CARDS, pseudoseed("jimbo_fr_fr")),
+                center = G.P_CENTERS.c_base,
+            }, G.deck, nil, nil, nil, nil)
             created_card:set_ability(G.P_CENTERS.m_folly_jimbo, nil, true)
             play_sound("tarot1")
         end

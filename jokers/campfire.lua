@@ -7,11 +7,15 @@ SMODS.Joker({
         extra_value = -6,
     },
     cost = 1,
-    in_pool = function(self, args) return false end,
+    in_pool = function(self, args)
+        return false
+    end,
     calculate = function(self, card, context)
-        if context.joker_main then return {
-            mult = -5,
-        } end
+        if context.joker_main then
+            return {
+                mult = -5,
+            }
+        end
     end,
 
     -- localization
@@ -35,13 +39,23 @@ return {
         if context.selling_card and not context.blueprint then -- selling adds fuel to the fire
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
             G.E_MANAGER:add_event(Event({
-                func = function() card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex')}); return true
-                end}))
+                func = function()
+                    card_eval_status_text(
+                        card,
+                        "extra",
+                        nil,
+                        nil,
+                        nil,
+                        { message = localize("k_upgrade_ex") }
+                    )
+                    return true
+                end,
+            }))
         end
         if context.after then -- reduce xMult when a hand is scored
             card.ability.extra.x_mult = card.ability.extra.x_mult - card.ability.extra.x_mult_mod
             if card.ability.extra.x_mult <= 0 then
-                folly_utils.replace(card, folly_utils.prefix.joker.."charcoal") -- get charcoaled idiot
+                folly_utils.replace(card, folly_utils.prefix.joker .. "charcoal") -- get charcoaled idiot
             end
         end
         if context.joker_main then
@@ -55,8 +69,9 @@ return {
 
     -- localization
     loc_vars = function(self, info_queue, card)
-        return { 
-            key = self.key..'_alt',
-            vars = { card.ability.extra.x_mult_mod, card.ability.extra.x_mult } }
+        return {
+            key = self.key .. "_alt",
+            vars = { card.ability.extra.x_mult_mod, card.ability.extra.x_mult },
+        }
     end,
 }

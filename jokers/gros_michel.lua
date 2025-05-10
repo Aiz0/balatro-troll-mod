@@ -1,7 +1,12 @@
 return {
     key = "gros_michel",
     calculate = function(self, card, context)
-        if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
+        if
+            context.end_of_round
+            and not context.individual
+            and not context.repetition
+            and not context.blueprint
+        then
             if #G.jokers.cards > 1 then
                 return { message = localize("k_safe_ex") }
             else

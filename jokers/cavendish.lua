@@ -10,13 +10,24 @@ return {
         name = "fj_cavendish",
     },
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.Xmult, G.GAME.probabilities.normal, card.ability.extra.odds } }
+        return {
+            vars = {
+                card.ability.extra.Xmult,
+                G.GAME.probabilities.normal,
+                card.ability.extra.odds,
+            },
+        }
     end,
     calculate = function(self, card, context)
-        if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
-            if pseudorandom(self.key) >= G.GAME.probabilities.normal/card.ability.extra.odds then
-                card.ability.extra.odds = card.ability.extra.odds - card.ability.extra.rot;
-                card.ability.extra.rot = card.ability.extra.rot * 2;
+        if
+            context.end_of_round
+            and not context.individual
+            and not context.repetition
+            and not context.blueprint
+        then
+            if pseudorandom(self.key) >= G.GAME.probabilities.normal / card.ability.extra.odds then
+                card.ability.extra.odds = card.ability.extra.odds - card.ability.extra.rot
+                card.ability.extra.rot = card.ability.extra.rot * 2
                 card.ability.extra.odds = math.max(card.ability.extra.odds, 6)
                 return { message = localize("k_safe_ex") }
             else
