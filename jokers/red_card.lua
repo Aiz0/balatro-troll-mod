@@ -33,6 +33,7 @@ return {
     remove_from_deck = function(self, card, from_debuff)
         local old = card.ability.extra.colour
         card.ability.extra.colour = "red"
+        card.ability.extra.triggers = card.ability.extra.triggers + 1 
         self.update_probabilities(card)
         card.ability.extra.colour = old
     end,
