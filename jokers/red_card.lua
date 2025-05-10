@@ -37,8 +37,10 @@ return {
         card.extra.ability.colour = old
     end,
     set_sprites = function (self, card, front)
-        local colour = colours[card.ability.extra.colour]
-        card.children.center:set_sprite_pos(colour.pos)
+        if card.ability then
+            local colour = colours[card.ability.extra.colour]
+            card.children.center:set_sprite_pos(colour.pos)
+        end
     end,
     calculate = function(self, card, context)
         if context.skipping_booster and not context.blueprint then
