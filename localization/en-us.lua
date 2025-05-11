@@ -14,6 +14,7 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_dead = "Defeat!",
+            k_folly_gluttenous = "Hungy",
             k_folly_moonbase_alpha_999 = "9999999!",
             k_folly_moonbase_alpha_question_mark_exclamation_point = "?!?!",
             k_folly_moonbase_alpha_aeiou = "aeiou",
