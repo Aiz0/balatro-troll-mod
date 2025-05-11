@@ -258,10 +258,12 @@ SMODS.Joker({
                     poker_hands = context.poker_hands,
                     joker_main = true,
                 })
-                card:juice_up()
-                ret.x_mult_mod = card.ability.extra.xmult
-                ret.message_card = context.other_joker
-                return ret
+                if ret then
+                    card:juice_up()
+                    ret.x_mult_mod = card.ability.extra.xmult
+                    ret.message_card = context.other_joker
+                    return ret
+                end
             end
         end
     end,
