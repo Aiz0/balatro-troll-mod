@@ -1,5 +1,7 @@
 SMODS.Joker({
     key = "apartment",
+    atlas = "folly_jokers",
+    pos = { x = 0, y = 2 },
     config = {
         extra = 0,
     },
@@ -55,6 +57,8 @@ SMODS.Joker({
 
 SMODS.Joker({
     key = "house",
+    atlas = "folly_jokers",
+    pos = { x = 1, y = 2 },
     rarity = 2,
     cost = 10,
     in_pool = function(self, args)
@@ -79,6 +83,8 @@ SMODS.Joker({
 
 SMODS.Joker({
     key = "mansion",
+    atlas = "folly_jokers",
+    pos = { x = 2, y = 2 },
     rarity = 3,
     cost = 10,
     config = {
@@ -135,6 +141,7 @@ SMODS.Joker({
 
 SMODS.DrawStep({
     key = "folly_debuff",
+    atlas = "folly_jokers",
     order = 70,
     func = function(self)
         if self.folly_debuff then
@@ -165,6 +172,9 @@ local mod_prefix = SMODS.current_mod.prefix
 SMODS.Joker({
     key = "dr_house",
     name = "Dr. House",
+    atlas = "folly_jokers",
+    pos = { x = 3, y = 2 },
+    soul_pos = { x = 4, y = 2 },
     rarity = 4,
     cost = 10,
     config = {
