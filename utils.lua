@@ -29,30 +29,30 @@ folly_utils = {
     end,
 
     prefix = {
-        joker = "j_" .. SMODS.current_mod.prefix .. "_"
+        joker = "j_" .. SMODS.current_mod.prefix .. "_",
     },
-    
+
     log = {
         Trace = function(message)
-            sendTraceMessage(message, display_name);
+            sendTraceMessage(message, display_name)
         end,
         Debug = function(message)
-            sendDebugMessage(message, display_name);
+            sendDebugMessage(message, display_name)
         end,
         Info = function(message)
-            sendInfoMessage(message,display_name);
+            sendInfoMessage(message, display_name)
         end,
         Warn = function(message)
-            sendWarnMessage(message,display_name);
+            sendWarnMessage(message, display_name)
         end,
         Error = function(message)
-            sendErrorMessage(message, display_name);
+            sendErrorMessage(message, display_name)
         end,
         Fatal = function(message)
-            sendFatalMessage(message, display_name);
+            sendFatalMessage(message, display_name)
         end,
     },
-    
+
     lerp = function(a, b, t)
         return a + (b - a) * t
     end,
@@ -75,7 +75,7 @@ folly_utils = {
         end
         delay(0.35) --extra delay when done
     end,
-    
+
     get_previous_rank = function(key, offset)
         offset = offset or 1
         if offset <= 0 then

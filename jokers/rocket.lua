@@ -4,7 +4,7 @@ local mod_prefix = SMODS.current_mod.prefix
 for i = 1, alien_sound_count do
     SMODS.Sound({
         key = "alien_" .. i,
-        path = "alien_" .. i .. ".ogg"
+        path = "alien_" .. i .. ".ogg",
     })
 end
 
@@ -39,19 +39,23 @@ SMODS.Joker({
                         func = function()
                             play_random_alien(1.25)
                             return true
-                        end
+                        end,
                     }))
-                end
+                end,
             }
         end
     end,
     set_ability = function(self, card, initial, delay_sprites)
-        local chips = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+        local chips = folly_utils.pseudorandom_range(
+            card.ability.extra.low,
+            card.ability.extra.high,
+            self.key
+        )
         card.ability.extra.chips = round_number(chips, 0)
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
-    end
+    end,
 })
 
 SMODS.Joker({
@@ -80,19 +84,23 @@ SMODS.Joker({
                         func = function()
                             play_random_alien(1)
                             return true
-                        end
+                        end,
                     }))
-                end
+                end,
             }
         end
     end,
     set_ability = function(self, card, initial, delay_sprites)
-        local mult = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+        local mult = folly_utils.pseudorandom_range(
+            card.ability.extra.low,
+            card.ability.extra.high,
+            self.key
+        )
         card.ability.extra.mult = round_number(mult, 0)
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
-    end
+    end,
 })
 
 SMODS.Joker({
@@ -121,19 +129,23 @@ SMODS.Joker({
                         func = function()
                             play_random_alien(0.75)
                             return true
-                        end
+                        end,
                     }))
-                end
+                end,
             }
         end
     end,
     set_ability = function(self, card, initial, delay_sprites)
-        local x_mult = folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+        local x_mult = folly_utils.pseudorandom_range(
+            card.ability.extra.low,
+            card.ability.extra.high,
+            self.key
+        )
         card.ability.extra.x_mult = x_mult
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.x_mult } }
-    end
+    end,
 })
 
 SMODS.Joker({
@@ -162,16 +174,25 @@ SMODS.Joker({
                         func = function()
                             play_random_alien(1.5)
                             return true
-                        end
+                        end,
                     }))
-                end
+                end,
             }
         end
 
-        if not context.blueprint and context.using_consumeable and context.consumeable.ability.name == "c_folly_strange_planet" then
-            card.ability.extra.x_mult = card.ability.extra.x_mult + folly_utils.pseudorandom_range(card.ability.extra.low, card.ability.extra.high, self.key)
+        if
+            not context.blueprint
+            and context.using_consumeable
+            and context.consumeable.ability.name == "c_folly_strange_planet"
+        then
+            card.ability.extra.x_mult = card.ability.extra.x_mult
+                + folly_utils.pseudorandom_range(
+                    card.ability.extra.low,
+                    card.ability.extra.high,
+                    self.key
+                )
             return {
-                message = localize('k_folly_glorp')
+                message = localize("k_folly_glorp"),
             }
         end
     end,
@@ -180,10 +201,10 @@ SMODS.Joker({
             vars = {
                 card.ability.extra.low,
                 card.ability.extra.high,
-                card.ability.extra.x_mult
-            }
+                card.ability.extra.x_mult,
+            },
         }
-    end
+    end,
 })
 
 SMODS.Consumable({
@@ -213,10 +234,9 @@ SMODS.Consumable({
     end,
     can_use = function(self, card)
         return #G.jokers.cards < G.jokers.config.card_limit
-    end
+    end,
 })
 
 return {
     key = "rocket",
 }
-

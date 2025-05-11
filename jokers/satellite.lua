@@ -38,5 +38,5 @@ return {
                 G.GAME.planet_rate = 0
             end
         end
-    end
+    end,
 }

@@ -56,15 +56,21 @@ return {
             if sound == space_sounds.dollar then
                 retval.level_up = false
                 -- use func instead of retval.dollar since it has better timing
-                retval.func = function() ease_dollars(1) end
+                retval.func = function()
+                    ease_dollars(1)
+                end
             elseif sound == space_sounds.lmao then
                 retval.level_up = false
-                retval.func = function() level_up_hand(card, context.scoring_name, nil, -1) end
+                retval.func = function()
+                    level_up_hand(card, context.scoring_name, nil, -1)
+                end
             elseif sound == space_sounds.big_american_tts then
                 -- level up twice
                 -- "Holy cow, two big ones" - Northernlion
                 retval.level_up = false
-                retval.func = function() level_up_hand(card, context.scoring_name, nil, 2) end
+                retval.func = function()
+                    level_up_hand(card, context.scoring_name, nil, 2)
+                end
             elseif sound == space_sounds.mark then
                 for _, playing_card in pairs(context.scoring_hand) do
                     playing_card:add_sticker("folly_mark_sticker", true)
@@ -72,10 +78,14 @@ return {
             elseif sound == space_sounds.question_mark then
                 -- shuffle jokers cards
                 -- for funnsies
-                retval.func = function() folly_utils.shuffle_cardarea() end
+                retval.func = function()
+                    folly_utils.shuffle_cardarea()
+                end
             elseif sound == space_sounds.aeiou then
                 -- shuffle played cards
-                retval.func = function() folly_utils.shuffle_cardarea(G.play) end
+                retval.func = function()
+                    folly_utils.shuffle_cardarea(G.play)
+                end
             end
             return retval
         end

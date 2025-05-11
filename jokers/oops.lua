@@ -76,9 +76,11 @@ return {
     remove_from_deck = function(self, card, from_debuff)
         -- set cardareas to 6
         -- joker
-        G.jokers.config.card_limit = card.ability.extra.joker_limit - (6 - G.jokers.config.card_limit)
+        G.jokers.config.card_limit = card.ability.extra.joker_limit
+            - (6 - G.jokers.config.card_limit)
         --consumables
-        G.consumeables.config.card_limit = card.ability.extra.consumables_limit - (6 - G.consumeables.config.card_limit)
+        G.consumeables.config.card_limit = card.ability.extra.consumables_limit
+            - (6 - G.consumeables.config.card_limit)
         -- hand size
         G.hand:change_size(-card.ability.extra.hand_size_offset)
 
@@ -105,7 +107,9 @@ return {
             G.GAME.hands[key].s_mult = card.ability.extra.poker_hands[key].s_mult
             G.GAME.hands[key].s_chips = card.ability.extra.poker_hands[key].s_chips
             -- reset level and recalculates current hand level and chips and mult
-            local new_level = card.ability.extra.poker_hands[key].level + G.GAME.hands[key].level - 6
+            local new_level = card.ability.extra.poker_hands[key].level
+                + G.GAME.hands[key].level
+                - 6
             G.GAME.hands[key].level = 0
             level_up_hand(card, key, true, new_level)
         end

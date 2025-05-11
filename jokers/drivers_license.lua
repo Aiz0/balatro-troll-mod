@@ -4,7 +4,9 @@ return {
     pos = { x = 0, y = 0 },
     calculate = function(self, card, context)
         if context.joker_main and (card.ability.driver_tally or 0) >= 16 then
-            if not context.blueprint then card.ability.driver_used = true end
+            if not context.blueprint then
+                card.ability.driver_used = true
+            end
             return {
                 xmult = card.ability.extra,
             }
@@ -52,7 +54,10 @@ return {
             trigger = "after",
             delay = 0.1,
             func = function()
-                SMODS.calculate_effect({ message = localize("k_folly_drivers_license_renewed") }, card)
+                SMODS.calculate_effect(
+                    { message = localize("k_folly_drivers_license_renewed") },
+                    card
+                )
                 SMODS.debuff_card(card, false, "drivers_license_expired")
                 card.ability.drivers_license_renewed = true
                 card.ability.folly_show_button = false
@@ -60,7 +65,9 @@ return {
 
                 play_sound("card1")
                 inc_career_stat("c_shop_dollars_spent", card.cost)
-                if card.cost ~= 0 then ease_dollars(-card.cost) end
+                if card.cost ~= 0 then
+                    ease_dollars(-card.cost)
+                end
 
                 card.area:remove_from_highlighted(card)
                 G.CONTROLLER.locks.selling_card = nil

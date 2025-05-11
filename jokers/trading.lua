@@ -21,7 +21,7 @@ return {
         },
         name = "fj_trading",
     },
-    
+
     calculate = function(self, card, context)
         if context.first_hand_drawn and not context.blueprint then
             local eval = function()
@@ -30,21 +30,36 @@ return {
             juice_card_until(card, eval, true)
         end
 
-        if context.discard
-                and not context.blueprint
-                and G.GAME.current_round.discards_used <= 0 and #context.full_hand <= card.ability.extra.discards then
+        if
+            context.discard
+            and not context.blueprint
+            and G.GAME.current_round.discards_used <= 0
+            and #context.full_hand <= card.ability.extra.discards
+        then
             local playing_card = {
                 attack = context.other_card.base.nominal,
                 health = context.other_card.base.id - 1,
             }
             card.ability.extra.health = card.ability.extra.health - playing_card.attack
             if card.ability.extra.health <= 0 then
-                card:shatter();
-                SMODS.calculate_effect({ message = card.ability.extra.attack .. localize("k_folly_tc_dead"), colour = G.C.BLUE }, context.other_card)
+                card:shatter()
+                SMODS.calculate_effect(
+                    {
+                        message = card.ability.extra.attack .. localize("k_folly_tc_dead"),
+                        colour = G.C.BLUE,
+                    },
+                    context.other_card
+                )
             end
 
             if card.ability.extra.attack < playing_card.health then
-                SMODS.calculate_effect({ message = card.ability.extra.attack .. localize("k_folly_tc_damage"), colour = G.C.BLUE }, context.other_card)
+                SMODS.calculate_effect(
+                    {
+                        message = card.ability.extra.attack .. localize("k_folly_tc_damage"),
+                        colour = G.C.BLUE,
+                    },
+                    context.other_card
+                )
                 SMODS.modify_rank(context.other_card, -card.ability.extra.attack)
                 self.update_atlas_stats(card)
                 return
@@ -53,7 +68,7 @@ return {
                 self.add_level(card, self.level_stat_sheet)
                 self.update_atlas_stats(card)
                 return {
-                    message = localize('$') .. card.ability.extra.money,
+                    message = localize("$") .. card.ability.extra.money,
                     colour = G.C.MONEY,
                     delay = 0.45,
                     remove = true,
@@ -72,14 +87,17 @@ return {
     end,
 
     loc_vars = function(self, info_queue, card)
-        local key = self.key.."_alt"
-        if card.ability.extra.discards > 1 then key = key.."_multiple" end
-        return { 
+        local key = self.key .. "_alt"
+        if card.ability.extra.discards > 1 then
+            key = key .. "_multiple"
+        end
+        return {
             key = key,
             vars = {
-            card.ability.extra.discards,
-            card.ability.extra.money,
-        }, }
+                card.ability.extra.discards,
+                card.ability.extra.money,
+            },
+        }
     end,
 
     level_stat_sheet = {
@@ -117,9 +135,12 @@ return {
         card.ability.extra.max_health = level_stats.max_health
         card.ability.extra.money = level_stats.money
     end,
-    
+
     update_atlas_stats = function(card)
-        card.children.center:set_sprite_pos({ x = card.ability.extra.attack - 4, y = card.ability.extra.health - 1 })
+        card.children.center:set_sprite_pos({
+            x = card.ability.extra.attack - 4,
+            y = card.ability.extra.health - 1,
+        })
     end,
     set_sprites = function(self, card, front)
         if card.ability then

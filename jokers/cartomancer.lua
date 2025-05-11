@@ -8,7 +8,8 @@ return {
             context.setting_blind
             and not context.blueprint
             and not card.getting_sliced
-            and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit
+            and #G.consumeables.cards + G.GAME.consumeable_buffer
+                < G.consumeables.config.card_limit
         then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
             return {

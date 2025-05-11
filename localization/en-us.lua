@@ -14,6 +14,7 @@ return {
             k_folly_tc_heal = "Heal!",
             k_folly_tc_damage = " Damage!",
             k_folly_tc_dead = "Defeat!",
+            k_folly_gluttenous = "Hungy",
             k_folly_moonbase_alpha_999 = "9999999!",
             k_folly_moonbase_alpha_question_mark_exclamation_point = "?!?!",
             k_folly_moonbase_alpha_aeiou = "aeiou",
@@ -27,7 +28,7 @@ return {
             k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
             k_folly_tc_damage = "Defeat!",
             k_folly_glorp = "Glorp",
-            
+
             --Object Types
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
@@ -129,20 +130,20 @@ return {
             j_folly_alien = {
                 name = "Alien",
                 text = {
-                    "{C:chips}+#1#{} chips"
-                }
+                    "{C:chips}+#1#{} chips",
+                },
             },
             j_folly_super_alien = {
                 name = "Super Alien",
                 text = {
-                    "{C:mult}+#1#{} Mult"
-                }
+                    "{C:mult}+#1#{} Mult",
+                },
             },
             j_folly_giga_alien = {
                 name = "Giga Alien",
                 text = {
-                    "{X:mult,C:white}X#1#{} Mult"
-                }
+                    "{X:mult,C:white}X#1#{} Mult",
+                },
             },
             j_folly_glorp_alien = {
                 name = "Glorp",
@@ -204,9 +205,9 @@ return {
                     "{C:mult}+4{} Mult",
                     "Counts as {C:attention}best",
                     "suit or rank",
-                    "in {C:attention}poker hands"
+                    "in {C:attention}poker hands",
                 },
-            }
+            },
         },
         funny = {
             c_folly_six = {
@@ -234,7 +235,7 @@ return {
                 text = {
                     "Beware of what",
                     "lies beyond",
-                    "the stars"
+                    "the stars",
                 },
             },
         },
