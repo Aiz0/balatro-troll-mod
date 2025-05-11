@@ -6,7 +6,9 @@ return {
             local temp_ID = math.huge
             local raised_card = nil
             for i = 1, #G.hand.cards do
-                if temp_ID >= G.hand.cards[i].base.id and not SMODS.has_no_rank(G.hand.cards[i]) then
+                if
+                    temp_ID >= G.hand.cards[i].base.id and not SMODS.has_no_rank(G.hand.cards[i])
+                then
                     temp_ID = G.hand.cards[i].base.id
                     raised_card = G.hand.cards[i]
                 end
