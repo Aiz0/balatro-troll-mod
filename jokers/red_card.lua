@@ -1,8 +1,8 @@
 local colours = {
-    red = { next = "blue", loc = "j_folly_red_card", pos = { x = 0, y = 2 }, col = G.C.RED },
-    blue = { next = "yellow", loc = "j_folly_blue_card", pos = { x = 1, y = 2 }, col = G.C.BLUE },
-    yellow = { next = "green", loc = "j_folly_yellow_card", pos = { x = 2, y = 2 }, col = G.C.YELLOW },
-    green = { next = "red", loc = "j_folly_green_card", pos = { x = 3, y = 2 }, col = G.C.GREEN },
+    red = { next = "blue", loc_key = "j_folly_red_card", pos = { x = 0, y = 2 }, message_colour = G.C.RED },
+    blue = { next = "yellow", loc_key = "j_folly_blue_card", pos = { x = 1, y = 2 }, message_colour = G.C.BLUE },
+    yellow = { next = "green", loc_key = "j_folly_yellow_card", pos = { x = 2, y = 2 }, message_colour = G.C.YELLOW },
+    green = { next = "red", loc_key = "j_folly_green_card", pos = { x = 3, y = 2 }, message_colour = G.C.GREEN },
 }
 
 return {
@@ -26,7 +26,7 @@ return {
         end
     end,
     add_to_deck = function(self, card, from_debuff)
-        if from_debuff and card.ability.extra.colour == "green" then
+        if card.ability.extra.colour == "green" then
             self.update_probabilities(card)
         end
     end,
@@ -58,13 +58,13 @@ return {
             if card.ability.extra.colour == "green" then
                 vars = { card.ability.extra.probability }
             end
-            SMODS.calculate_effect({
-                        message = localize{
-                            type = "variable",
-                            key = "a_folly_"..card.ability.extra.colour.."_card",
-                            vars = vars },
-                        colour = colours[card.ability.extra.colour].col 
-            }, card)
+            return {
+                message = localize{
+                    type = "variable",
+                    key = "a_folly_"..card.ability.extra.colour.."_card",
+                    vars = vars },
+                colour = colours[card.ability.extra.colour].message_colour
+            }
         end
 
         if context.joker_main then
@@ -93,7 +93,7 @@ return {
             vars = { card.ability.extra.probability * card.ability.extra.triggers, card.ability.extra.probability }
         end
         return {
-            key = colours[card.ability.extra.colour].loc,
+            key = colours[card.ability.extra.colour].loc_key,
             vars = vars
         }
     end,
