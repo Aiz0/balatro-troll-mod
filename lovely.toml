@@ -79,3 +79,30 @@ end
 '''
 match_indent = true
 times = 1
+
+
+# chaos joker
+# make pseudorandom not random
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "function pseudorandom(seed, min, max)"
+position = "after"
+payload = '''
+local chaos_jokers = SMODS.find_card('j_folly_chaos')
+if next(chaos_jokers) then
+    -- if multiple return max or 1
+    if #chaos_jokers > 1 then
+        if min and max then return max end
+        return 1
+    end
+    -- if 1 return that chaos jokers preselected number
+    if min and max then
+        return math.floor(
+            folly_utils.lerp(min, max, chaos_jokers[1].ability.random)
+            )
+    end
+    return chaos_jokers[1].ability.random
+end'''
+match_indent = true
+times = 1
