@@ -6,6 +6,11 @@ SMODS.Enhancement({
     key = "eated",
     atlas = "folly_enhancers",
     pos = { x = 2, y = 0 },
+    no_collection = true, -- it's not used as a enhancment right now
+    weight = 0,
+    in_pool = function(self, args)
+        return false
+    end,
 })
 return {
     key = "gluttenous_joker",
