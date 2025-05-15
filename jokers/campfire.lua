@@ -1,5 +1,7 @@
 SMODS.Joker({
     key = "charcoal",
+    atlas = "folly_jokers",
+    pos = { x = 3, y = 0 },
     config = {
         extra = {
             mult = -5,
