@@ -9,7 +9,7 @@ for i = 1, alien_sound_count do
 end
 
 local function play_random_alien(pitch)
-    local sound = math.floor(math.random() * (alien_sound_count - 1) + 0.5 + 1)
+    local sound = math.random(alien_sound_count)
     play_sound(mod_prefix .. "_alien_" .. sound, pitch)
 end
 
