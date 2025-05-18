@@ -43,24 +43,18 @@ return {
             card.ability.extra.health = card.ability.extra.health - playing_card.attack
             if card.ability.extra.health <= 0 then
                 card:shatter()
-                SMODS.calculate_effect(
-                    {
-                        message = card.ability.extra.attack .. localize("k_folly_tc_dead"),
-                        colour = G.C.BLUE,
-                    },
-                    context.other_card
-                )
+                SMODS.calculate_effect({
+                    message = card.ability.extra.attack .. localize("k_folly_tc_dead"),
+                    colour = G.C.BLUE,
+                }, context.other_card)
             end
 
             if card.ability.extra.attack < playing_card.health then
-                SMODS.calculate_effect(
-                    {
-                        message = card.ability.extra.attack .. localize("k_folly_tc_damage"),
-                        colour = G.C.BLUE,
-                    },
-                    context.other_card
-                )
-                SMODS.modify_rank(context.other_card, -card.ability.extra.attack)
+                SMODS.calculate_effect({
+                    message = card.ability.extra.attack .. localize("k_folly_tc_damage"),
+                    colour = G.C.BLUE,
+                }, context.other_card)
+                assert(SMODS.modify_rank(context.other_card, -card.ability.extra.attack))
                 self.update_atlas_stats(card)
                 return
             else
