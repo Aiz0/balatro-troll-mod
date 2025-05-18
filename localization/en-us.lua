@@ -26,7 +26,6 @@ return {
             k_folly_moonbase_alpha_mark = "mark!",
             k_folly_moonbase_alpha_snake = "snake?",
             k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
-            k_folly_tc_damage = "Defeat!",
             k_folly_glorp = "Glorp",
 
             --Object Types
