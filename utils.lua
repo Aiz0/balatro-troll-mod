@@ -29,6 +29,7 @@ folly_utils = {
     end,
 
     prefix = {
+        mod = SMODS.current_mod.prefix,
         joker = "j_" .. SMODS.current_mod.prefix .. "_",
     },
 

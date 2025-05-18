@@ -29,8 +29,6 @@ for _, sound in pairs(space_sounds) do
     })
 end
 
-local mod_prefix = SMODS.current_mod.prefix
-
 return {
     key = "space",
     config = {
@@ -49,8 +47,8 @@ return {
             local sound = pseudorandom_element(space_sounds, pseudoseed(self.key))
 
             local retval = {
-                message = localize("k_" .. mod_prefix .. "_" .. sound),
-                sound = mod_prefix .. "_" .. sound,
+                message = localize("k_" .. folly_utils.prefix.mod .. "_" .. sound),
+                sound = folly_utils.prefix.mod .. "_" .. sound,
                 level_up = true,
             }
             if sound == space_sounds.dollar then
