@@ -39,7 +39,7 @@ SMODS.Consumable({
                     v:set_edition(card.ability.extra.edition)
                     v:set_seal(card.ability.extra.seal)
                     v:set_ability(card.ability.extra.enhancement)
-                    SMODS.change_base(v, card.ability.extra.suit, "6")
+                    assert(SMODS.change_base(v, card.ability.extra.suit, "6"))
                     return true
                 end,
             }))
@@ -115,7 +115,7 @@ return {
                         )
                         local suit = pseudorandom_element(SMODS.Suits, pseudoseed("suit"))
                         created_card.ability.extra.suit = suit.key
-                        SMODS.change_base(created_card, suit.key, "6")
+                        assert(SMODS.change_base(created_card, suit.key, "6"))
                         created_card:set_edition(edition, true, true)
                         created_card.ability.extra.edition = edition
                         local seal = SMODS.poll_seal({ mod = 10 })
