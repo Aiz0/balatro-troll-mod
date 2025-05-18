@@ -1,5 +1,4 @@
 local alien_sound_count = 12
-local mod_prefix = SMODS.current_mod.prefix
 
 for i = 1, alien_sound_count do
     SMODS.Sound({
@@ -10,7 +9,7 @@ end
 
 local function play_random_alien(pitch)
     local sound = math.floor(math.random() * (alien_sound_count - 1) + 0.5 + 1)
-    play_sound(mod_prefix .. "_alien_" .. sound, pitch)
+    play_sound(folly_utils.prefix.mod .. "_alien_" .. sound, pitch)
 end
 
 SMODS.Joker({

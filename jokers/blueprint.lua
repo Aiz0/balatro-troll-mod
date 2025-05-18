@@ -161,7 +161,6 @@ SMODS.Sound({
     path = "house_bach.ogg",
 })
 
-local mod_prefix = SMODS.current_mod.prefix
 SMODS.Joker({
     key = "dr_house",
     name = "Dr. House",
@@ -188,7 +187,7 @@ SMODS.Joker({
                     SMODS.debuff_card(v, true, "house_md")
                 end
             end
-            play_sound(mod_prefix .. "_house_bach", 1, 1)
+            play_sound(folly_utils.prefix.mod .. "_house_bach", 1, 1)
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
                 delay = 2,
