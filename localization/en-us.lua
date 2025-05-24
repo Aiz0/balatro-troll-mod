@@ -36,6 +36,14 @@ return {
         labels = {
             folly_mark_sticker = "Marked",
         },
+        poker_hands = {
+            folly_ruminate = "Ruminate",
+        },
+        poker_hand_descriptions = {
+            folly_ruminate = {
+                "5 glass catrds",
+            },
+        },
     },
     descriptions = {
         Joker = {
