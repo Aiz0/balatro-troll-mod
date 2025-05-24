@@ -1,5 +1,4 @@
 local alien_sound_count = 12
-local mod_prefix = SMODS.current_mod.prefix
 
 for i = 1, alien_sound_count do
     SMODS.Sound({
