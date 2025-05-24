@@ -5,6 +5,43 @@
 --     l_mult = 4,
 --     l_chips = 4,
 -- })
+--
+SMODS.PokerHand({
+    key = "karate",
+    mult = 4,
+    chips = 30,
+    l_mult = 3,
+    l_chips = 10,
+    visible = false,
+    example = {
+        { "H_K", true },
+        { "D_A", true },
+        { "S_7", true },
+        { "S_2", true },
+        { "C_8", true },
+    },
+    evaluate = function(parts, hand)
+        local ret = {}
+        if #hand < 5 or not G.GAME.hands["folly_karate"].visible then
+            return {}
+        end
+
+        local karate = { 13, 14, 7, 2, 8 }
+        for i = 1, #hand do
+            for j = 1, #karate do
+                if hand[i]:get_id() == karate[j] then
+                    table.insert(ret, hand[i])
+                    table.remove(karate, j)
+                    break
+                end
+            end
+        end
+        if #ret == 5 then
+            return { ret }
+        end
+        return {}
+    end,
+})
 
 SMODS.PokerHand({
     key = "ruminate",
@@ -39,6 +76,7 @@ SMODS.PokerHand({
 
 local to_do_list_extra_poker_hands = {
     folly_ruminate = true,
+    folly_karate = true,
 }
 
 return {
