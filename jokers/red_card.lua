@@ -15,7 +15,7 @@ local colours = {
         next = "green",
         loc_key = "j_folly_yellow_card",
         pos = { x = 2, y = 2 },
-        message_colour = G.C.YELLOW,
+        message_colour = G.C.MONEY,
     },
     green = {
         next = "red",
