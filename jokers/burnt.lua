@@ -2,6 +2,10 @@ SMODS.Enhancement({
     key = "burnt",
     atlas = "folly_enhancers",
     pos = { x = 0, y = 0 },
+    weight = 0,
+    in_pool = function(self, args)
+        return false
+    end,
     config = {
         extra = {
             base_gain = 2,
