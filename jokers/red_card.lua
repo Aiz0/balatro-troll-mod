@@ -37,7 +37,7 @@ return {
             mult = 3,
             chips = 10,
             money = 1,
-            probability = 0.2,
+            reroll = 0.2,
         },
     },
     calc_dollar_bonus = function(self, card)
@@ -47,14 +47,15 @@ return {
     end,
     add_to_deck = function(self, card, from_debuff)
         if card.ability.extra.colour == "green" then
-            self.update_probabilities(card)
+            self.update_reroll_cost(card)
         end
     end,
     remove_from_deck = function(self, card, from_debuff)
         local old = card.ability.extra.colour
         card.ability.extra.colour = "red"
         card.ability.extra.triggers = card.ability.extra.triggers + 1
-        self.update_probabilities(card)
+        self.update_reroll_cost(card)
+        card.ability.extra.triggers = card.ability.extra.triggers - 1
         card.ability.extra.colour = old
     end,
     set_sprites = function(self, card, front)
@@ -76,7 +77,7 @@ return {
                 vars = { card.ability.extra.money }
             end
             if card.ability.extra.colour == "green" then
-                vars = { card.ability.extra.probability }
+                vars = { card.ability.extra.reroll }
             end
             return {
                 message = localize({
@@ -115,8 +116,8 @@ return {
         end
         if card.ability.extra.colour == "green" then
             vars = {
-                card.ability.extra.probability * card.ability.extra.triggers,
-                card.ability.extra.probability,
+                card.ability.extra.reroll * card.ability.extra.triggers,
+                card.ability.extra.reroll,
             }
         end
         return {
@@ -134,30 +135,22 @@ return {
         card.children.center:set_sprite_pos(colour.pos)
 
         if next == "green" or prev == "green" then
-            self.update_probabilities(card)
+            self.update_reroll_cost(card)
         end
     end,
 
-    update_probabilities = function(card)
-        local oops = SMODS.find_card("j_oops")
-        local probability_mult = 1
-        if next(oops) then
-            probability_mult = 2 ^ #oops
-        end
+    update_reroll_cost = function(card)
         local triggers = card.ability.extra.triggers
         if card.ability.extra.colour ~= "green" then
             triggers = triggers - 1
         end
-        local probability = triggers * card.ability.extra.probability * probability_mult
-
+        local reroll_cost = card.ability.extra.reroll * triggers
         if card.ability.extra.colour == "green" then
-            for i, v in pairs(G.GAME.probabilities) do
-                G.GAME.probabilities[i] = G.GAME.probabilities[i] + probability
-            end
+            G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost - reroll_cost
+            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost - reroll_cost)
         else
-            for i, v in pairs(G.GAME.probabilities) do
-                G.GAME.probabilities[i] = G.GAME.probabilities[i] - probability
-            end
+            G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost + reroll_cost
+            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost + reroll_cost)
         end
     end,
 }
