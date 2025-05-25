@@ -38,12 +38,17 @@ return {
         },
         poker_hands = {
             folly_jog = "Jog",
+            folly_karate = "Karate",
             folly_ruminate = "Ruminate",
         },
         poker_hand_descriptions = {
             folly_jog = {
                 "5 cards in a row (consecutive ranks)",
                 "with gaps of 1 rank between each card",
+            },
+            folly_karate = {
+                '5 cards that vaguely spell out "Karate"',
+                "King, Ace, 72, 8",
             },
             folly_ruminate = {
                 "5 glass catrds",
