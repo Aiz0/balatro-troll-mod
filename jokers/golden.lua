@@ -1,8 +1,8 @@
 return {
     key = "golden",
-    cost = 0,
+    cost = 1,
     set_ability = function(self, card, initial, delay_sprites)
-        card.cost = G.GAME.dollars + 1
+        card.base_cost = G.GAME.dollars + 1
     end,
     dollars_updated = function(self, card, change)
         card.cost = G.GAME.dollars + 1
