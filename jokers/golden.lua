@@ -10,10 +10,13 @@ return {
         return 0
     end,
     dollars_updated = function(self, card, change)
-        local discount = 1 - G.GAME.discount_percent / 100
-        card.base_cost = (G.GAME.dollars + 1) / discount
+
         if card.area == G.jokers then
+            local discount = 1 - G.GAME.discount_percent / 100
+            card.base_cost = (G.GAME.dollars + 1) / discount
             card:set_cost()
+        else
+            card.cost = G.GAME.dollars + 1
         end
     end,
     loc_vars = function(self, info_queue, card)
