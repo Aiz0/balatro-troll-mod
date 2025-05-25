@@ -39,6 +39,7 @@ return {
         poker_hands = {
             folly_jog = "Jog",
             folly_karate = "Karate",
+            folly_spectrum = "Eat Candy",
             folly_ruminate = "Ruminate",
         },
         poker_hand_descriptions = {
@@ -49,6 +50,10 @@ return {
             folly_karate = {
                 '5 cards that vaguely spell out "Karate"',
                 "King, Ace, 72, 8",
+            },
+            folly_spectrum = {
+                "4 cards with different suits, may",
+                "be played with 1 other unscored card",
             },
             folly_ruminate = {
                 "5 glass catrds",

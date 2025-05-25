@@ -97,6 +97,70 @@ SMODS.PokerHand({
     end,
 })
 
+-- spectrum stolen from six suits mod
+-- modified to only require 4 suits
+SMODS.PokerHandPart({
+    key = "spectrum_4",
+    func = function(hand)
+        local suits = {}
+        for _, v in ipairs(SMODS.Suit.obj_buffer) do
+            suits[v] = 0
+        end
+        if #hand < 4 then
+            return {}
+        end
+        local scored = {}
+        for i = 1, #hand do
+            if hand[i].ability.name ~= "Wild Card" then
+                for k, v in pairs(suits) do
+                    if hand[i]:is_suit(k, nil, true) and v == 0 then
+                        suits[k] = v + 1
+                        table.insert(scored, hand[i])
+                        break
+                    end
+                end
+            end
+        end
+        for i = 1, #hand do
+            if hand[i].ability.name == "Wild Card" then
+                for k, v in pairs(suits) do
+                    if hand[i]:is_suit(k, nil, true) and v == 0 then
+                        suits[k] = v + 1
+                        table.insert(scored, hand[i])
+                        break
+                    end
+                end
+            end
+        end
+        local num_suits = 0
+        for _, v in pairs(suits) do
+            if v > 0 then
+                num_suits = num_suits + 1
+            end
+        end
+        return (num_suits >= 4) and { scored } or {}
+    end,
+})
+
+SMODS.PokerHand({
+    key = "spectrum",
+    chips = 15,
+    mult = 2,
+    l_chips = 5,
+    l_mult = 1,
+    visible = false,
+    example = {
+        { "H_2", true },
+        { "C_7", true },
+        { "S_J", true },
+        { "D_2", true },
+        { "D_K", false },
+    },
+    evaluate = function(parts)
+        return parts.folly_spectrum_4
+    end,
+})
+
 SMODS.PokerHand({
     key = "ruminate",
     mult = 4,
@@ -132,6 +196,7 @@ local to_do_list_extra_poker_hands = {
     folly_ruminate = true,
     folly_karate = true,
     folly_jog = true,
+    folly_spectrum = true,
 }
 
 return {
