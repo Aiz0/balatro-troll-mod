@@ -1,11 +1,65 @@
--- SMODS.PokerHand({
---     key = "jog",
---     mult = 4,
---     chips = 30,
---     l_mult = 4,
---     l_chips = 4,
--- })
---
+---@param hand Card[]|table[]
+--- Returns true if no ranks are next for another rank
+local function all_skip_rank(hand)
+    local ranks = {}
+    for _, playing_card in ipairs(hand) do
+        local id = playing_card:get_id()
+        if id > 0 then
+            for k, v in pairs(SMODS.Ranks) do
+                if v.id == id then
+                    table.insert(ranks, v)
+                    break
+                end
+            end
+        end
+    end
+    for i, rank in ipairs(ranks) do
+        for j, other_rank in ipairs(ranks) do
+            if i ~= j then
+                if rank == other_rank then
+                    return false
+                end
+                for _, next_rank in ipairs(rank.next) do
+                    if SMODS.Ranks[next_rank] == other_rank then
+                        return false
+                    end
+                end
+            end
+        end
+    end
+    return true
+end
+
+SMODS.PokerHand({
+    key = "jog",
+    mult = 6,
+    chips = 30,
+    l_mult = 3,
+    l_chips = 10,
+    visible = false,
+    example = {
+        { "C_T", true },
+        { "D_8", true },
+        { "D_6", true },
+        { "S_4", true },
+        { "H_2", true },
+    },
+    evaluate = function(parts, hand)
+        if not G.GAME.hands["folly_jog"].visible then
+            return {}
+        end
+        -- get straighs with skips enabled
+        local straights =
+            get_straight(hand, next(SMODS.find_card("j_four_fingers")) and 4 or 5, true)
+        for i = #straights, 1, -1 do
+            --keep if they all skip a rank
+            if not all_skip_rank(straights[i]) then
+                table.remove(straights, i)
+            end
+        end
+        return straights
+    end,
+})
 SMODS.PokerHand({
     key = "karate",
     mult = 4,
@@ -77,6 +131,7 @@ SMODS.PokerHand({
 local to_do_list_extra_poker_hands = {
     folly_ruminate = true,
     folly_karate = true,
+    folly_jog = true,
 }
 
 return {

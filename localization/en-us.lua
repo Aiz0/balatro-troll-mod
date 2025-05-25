@@ -37,9 +37,14 @@ return {
             folly_mark_sticker = "Marked",
         },
         poker_hands = {
+            folly_jog = "Jog",
             folly_ruminate = "Ruminate",
         },
         poker_hand_descriptions = {
+            folly_jog = {
+                "5 cards in a row (consecutive ranks)",
+                "with gaps of 1 rank between each card",
+            },
             folly_ruminate = {
                 "5 glass catrds",
             },
