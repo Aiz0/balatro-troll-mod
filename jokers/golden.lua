@@ -4,6 +4,9 @@ return {
     set_ability = function(self, card, initial, delay_sprites)
         card.base_cost = G.GAME.dollars + 1
     end,
+    calculate_dollar_bonus = function(self, card)
+        return 0
+    end,
     dollars_updated = function(self, card, change)
         card.cost = G.GAME.dollars + 1
     end,
