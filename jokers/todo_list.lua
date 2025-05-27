@@ -50,7 +50,7 @@ local spectrum = SMODS.PokerHandPart({
         end
         local scored = {}
         for i = 1, #hand do
-            if hand[i].ability.name ~= "Wild Card" then
+            if not SMODS.has_any_suit(hand[i]) then
                 for k, v in pairs(suits) do
                     if hand[i]:is_suit(k, nil, true) and v == 0 then
                         suits[k] = v + 1
@@ -61,7 +61,7 @@ local spectrum = SMODS.PokerHandPart({
             end
         end
         for i = 1, #hand do
-            if hand[i].ability.name == "Wild Card" then
+            if SMODS.has_any_suit(hand[i]) then
                 for k, v in pairs(suits) do
                     if hand[i]:is_suit(k, nil, true) and v == 0 then
                         suits[k] = v + 1
