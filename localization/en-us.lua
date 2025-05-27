@@ -184,7 +184,7 @@ return {
                 name = "Green Card",
                 text = {
                     "{C:green}Rerolls{} cost {C:money}$#1#{} less",
-                    "reduced by {C:money}$#2#{} when",
+                    "reduced further by {C:money}$#2#{} when",
                     "any {C:attention}Booster Pack{} is skipped",
                 },
             },

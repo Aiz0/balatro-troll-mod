@@ -1,25 +1,25 @@
 local colours = {
     red = {
         next = "blue",
-        loc_key = "j_folly_red_card",
+        loc_key = folly_utils.prefix.joker .. "red_card",
         pos = { x = 0, y = 2 },
         message_colour = G.C.RED,
     },
     blue = {
         next = "yellow",
-        loc_key = "j_folly_blue_card",
+        loc_key = folly_utils.prefix.joker .. "blue_card",
         pos = { x = 1, y = 2 },
         message_colour = G.C.BLUE,
     },
     yellow = {
         next = "green",
-        loc_key = "j_folly_yellow_card",
+        loc_key = folly_utils.prefix.joker .. "yellow_card",
         pos = { x = 2, y = 2 },
         message_colour = G.C.MONEY,
     },
     green = {
         next = "red",
-        loc_key = "j_folly_green_card",
+        loc_key = folly_utils.prefix.joker .. "green_card",
         pos = { x = 3, y = 2 },
         message_colour = G.C.GREEN,
     },
@@ -67,26 +67,36 @@ return {
     calculate = function(self, card, context)
         if context.skipping_booster and not context.blueprint then
             card.ability.extra.triggers = card.ability.extra.triggers + 1
-            self:switch_colour(card)
-            --red by default
-            local vars = { card.ability.extra.mult }
-            if card.ability.extra.colour == "blue" then
-                vars = { card.ability.extra.chips }
-            end
-            if card.ability.extra.colour == "yellow" then
-                vars = { card.ability.extra.money }
-            end
-            if card.ability.extra.colour == "green" then
-                vars = { card.ability.extra.reroll }
-            end
-            return {
-                message = localize({
-                    type = "variable",
-                    key = "a_folly_" .. card.ability.extra.colour .. "_card",
-                    vars = vars,
-                }),
-                colour = colours[card.ability.extra.colour].message_colour,
-            }
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    self:switch_colour(card)
+                    --red by default
+                    local vars = { card.ability.extra.mult }
+                    if card.ability.extra.colour == "blue" then
+                        vars = { card.ability.extra.chips }
+                    end
+                    if card.ability.extra.colour == "yellow" then
+                        vars = { card.ability.extra.money }
+                    end
+                    if card.ability.extra.colour == "green" then
+                        vars = { card.ability.extra.reroll }
+                    end
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card.children.center:set_sprite_pos(colours[card.ability.extra.colour].pos)
+                            return true
+                        end
+                    }))
+                    SMODS.calculate_effect({
+                        message = localize{
+                            type = "variable",
+                            key = "a_folly_"..card.ability.extra.colour.."_card",
+                            vars = vars },
+                        colour = colours[card.ability.extra.colour].message_colour
+                    }, card)
+                    return true
+                end
+            }))
         end
 
         if context.joker_main then
@@ -129,10 +139,7 @@ return {
     switch_colour = function(self, card)
         local prev = card.ability.extra.colour
         local next = colours[card.ability.extra.colour].next
-        local colour = colours[next]
-
         card.ability.extra.colour = next
-        card.children.center:set_sprite_pos(colour.pos)
 
         if next == "green" or prev == "green" then
             self.update_reroll_cost(card)
@@ -147,10 +154,10 @@ return {
         local reroll_cost = card.ability.extra.reroll * triggers
         if card.ability.extra.colour == "green" then
             G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost - reroll_cost
-            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost - reroll_cost)
+            G.GAME.current_round.reroll_cost = G.GAME.current_round.reroll_cost - reroll_cost
         else
             G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost + reroll_cost
-            G.GAME.current_round.reroll_cost = math.max(0, G.GAME.current_round.reroll_cost + reroll_cost)
+            G.GAME.current_round.reroll_cost = G.GAME.current_round.reroll_cost + reroll_cost
         end
     end,
 }
