@@ -38,6 +38,7 @@ return {
         },
         poker_hands = {
             folly_jog = "Jog",
+            folly_oil_change = "Oil Change",
             folly_karate = "Karate",
             folly_spectrum = "Eat Candy",
             folly_ruminate = "Ruminate",
@@ -46,6 +47,9 @@ return {
             folly_jog = {
                 "5 cards in a row (consecutive ranks)",
                 "with gaps of 1 rank between each card",
+            },
+            folly_oil_change = {
+                "2 polychrome spades and 3 gold diamonds",
             },
             folly_karate = {
                 '5 cards that vaguely spell out "Karate"',

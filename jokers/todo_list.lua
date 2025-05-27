@@ -60,6 +60,48 @@ SMODS.PokerHand({
         return straights
     end,
 })
+
+SMODS.PokerHand({
+    key = "oil_change",
+    mult = 10,
+    chips = 100,
+    l_mult = 5,
+    l_chips = 50,
+    visible = false,
+    example = {
+        { "S_K", true, edition = "e_polychrome" },
+        { "S_A", true, edition = "e_polychrome" },
+        { "D_7", true, edition = "e_polychrome" },
+        { "D_2", true, enhancement = "m_gold" },
+        { "D_8", true, enhancement = "m_gold" },
+    },
+    evaluate = function(parts, hand)
+        if #hand < 5 or not G.GAME.hands["folly_oil_change"].visible then
+            return {}
+        end
+        local oil = 0
+        local gold = 0
+        for _, playing_card in ipairs(hand) do
+            if
+                playing_card:is_suit("Spades")
+                and playing_card.edition
+                and playing_card.edition.polychrome
+            then
+                oil = oil + 1
+            elseif
+                playing_card:is_suit("Diamonds") and SMODS.has_enhancement(playing_card, "m_gold")
+            then
+                gold = gold + 1
+            end
+        end
+
+        if oil == 2 and gold == 3 then
+            return { hand }
+        end
+        return {}
+    end,
+})
+
 SMODS.PokerHand({
     key = "karate",
     mult = 4,
@@ -197,6 +239,7 @@ local to_do_list_extra_poker_hands = {
     folly_karate = true,
     folly_jog = true,
     folly_spectrum = true,
+    folly_oil_change = true,
 }
 
 return {
