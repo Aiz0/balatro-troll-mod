@@ -60,7 +60,7 @@ return {
                 "be played with 1 other unscored card",
             },
             folly_ruminate = {
-                "5 glass catrds",
+                "5 glass cards",
             },
         },
     },
