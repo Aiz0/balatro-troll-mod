@@ -1,3 +1,10 @@
+---@param key string
+---@return boolean
+--- Returns true if pokerhand is visible
+local function is_visible(key)
+    return G.GAME.hands[key] and G.GAME.hands[key].visible
+end
+
 ---@param hand Card[]|table[]
 --- Returns true if no ranks are next for another rank
 local function all_skip_rank(hand)
@@ -29,119 +36,9 @@ local function all_skip_rank(hand)
     end
     return true
 end
-
-SMODS.PokerHand({
-    key = "jog",
-    mult = 6,
-    chips = 30,
-    l_mult = 3,
-    l_chips = 10,
-    visible = false,
-    example = {
-        { "C_T", true },
-        { "D_8", true },
-        { "D_6", true },
-        { "S_4", true },
-        { "H_2", true },
-    },
-    evaluate = function(parts, hand)
-        if not G.GAME.hands["folly_jog"].visible then
-            return {}
-        end
-        -- get straighs with skips enabled
-        local straights =
-            get_straight(hand, next(SMODS.find_card("j_four_fingers")) and 4 or 5, true)
-        for i = #straights, 1, -1 do
-            --keep if they all skip a rank
-            if not all_skip_rank(straights[i]) then
-                table.remove(straights, i)
-            end
-        end
-        return straights
-    end,
-})
-
-SMODS.PokerHand({
-    key = "oil_change",
-    mult = 10,
-    chips = 100,
-    l_mult = 5,
-    l_chips = 50,
-    visible = false,
-    example = {
-        { "S_K", true, edition = "e_polychrome" },
-        { "S_A", true, edition = "e_polychrome" },
-        { "D_7", true, edition = "e_polychrome" },
-        { "D_2", true, enhancement = "m_gold" },
-        { "D_8", true, enhancement = "m_gold" },
-    },
-    evaluate = function(parts, hand)
-        if #hand < 5 or not G.GAME.hands["folly_oil_change"].visible then
-            return {}
-        end
-        local oil = 0
-        local gold = 0
-        for _, playing_card in ipairs(hand) do
-            if
-                playing_card:is_suit("Spades")
-                and playing_card.edition
-                and playing_card.edition.polychrome
-            then
-                oil = oil + 1
-            elseif
-                playing_card:is_suit("Diamonds") and SMODS.has_enhancement(playing_card, "m_gold")
-            then
-                gold = gold + 1
-            end
-        end
-
-        if oil == 2 and gold == 3 then
-            return { hand }
-        end
-        return {}
-    end,
-})
-
-SMODS.PokerHand({
-    key = "karate",
-    mult = 4,
-    chips = 30,
-    l_mult = 3,
-    l_chips = 10,
-    visible = false,
-    example = {
-        { "H_K", true },
-        { "D_A", true },
-        { "S_7", true },
-        { "S_2", true },
-        { "C_8", true },
-    },
-    evaluate = function(parts, hand)
-        local ret = {}
-        if #hand < 5 or not G.GAME.hands["folly_karate"].visible then
-            return {}
-        end
-
-        local karate = { 13, 14, 7, 2, 8 }
-        for i = 1, #hand do
-            for j = 1, #karate do
-                if hand[i]:get_id() == karate[j] then
-                    table.insert(ret, hand[i])
-                    table.remove(karate, j)
-                    break
-                end
-            end
-        end
-        if #ret == 5 then
-            return { ret }
-        end
-        return {}
-    end,
-})
-
 -- spectrum stolen from six suits mod
 -- modified to only require 4 suits
-SMODS.PokerHandPart({
+local spectrum = SMODS.PokerHandPart({
     key = "spectrum_4",
     func = function(hand)
         local suits = {}
@@ -184,63 +81,173 @@ SMODS.PokerHandPart({
     end,
 })
 
-SMODS.PokerHand({
-    key = "spectrum",
-    chips = 15,
-    mult = 2,
-    l_chips = 5,
-    l_mult = 1,
-    visible = false,
-    example = {
-        { "H_2", true },
-        { "C_7", true },
-        { "S_J", true },
-        { "D_2", true },
-        { "D_K", false },
-    },
-    evaluate = function(parts)
-        return parts.folly_spectrum_4
-    end,
-})
-
-SMODS.PokerHand({
-    key = "ruminate",
-    mult = 4,
-    chips = 30,
-    l_mult = 3,
-    l_chips = 10,
-    visible = false,
-    example = {
-        { "S_K", true, enhancement = "m_glass" },
-        { "S_9", true, enhancement = "m_glass" },
-        { "D_9", true, enhancement = "m_glass" },
-        { "H_6", true, enhancement = "m_glass" },
-        { "D_3", true, enhancement = "m_glass" },
-    },
-    evaluate = function(parts, hand)
-        local ret = {}
-        if #hand < 5 or not G.GAME.hands["folly_ruminate"].visible then
-            return {}
-        end
-        for i = 1, #hand do
-            if SMODS.has_enhancement(hand[i], "m_glass") then
-                table.insert(ret, hand[i])
+local extra_poker_hands = {}
+local poker_hands = {
+    jog = SMODS.PokerHand({
+        key = "jog",
+        mult = 6,
+        chips = 30,
+        l_mult = 3,
+        l_chips = 10,
+        visible = false,
+        example = {
+            { "C_T", true },
+            { "D_8", true },
+            { "D_6", true },
+            { "S_4", true },
+            { "H_2", true },
+        },
+        evaluate = function(parts, hand)
+            if not is_visible(extra_poker_hands.jog) then
+                return {}
             end
-        end
-        if #ret == 5 then
-            return { ret }
-        end
-        return {}
-    end,
-})
+            -- get straighs with skips enabled
+            local straights =
+                get_straight(hand, next(SMODS.find_card("j_four_fingers")) and 4 or 5, true)
+            for i = #straights, 1, -1 do
+                --keep if they all skip a rank
+                if not all_skip_rank(straights[i]) then
+                    table.remove(straights, i)
+                end
+            end
+            return straights
+        end,
+    }),
 
-local to_do_list_extra_poker_hands = {
-    folly_ruminate = true,
-    folly_karate = true,
-    folly_jog = true,
-    folly_spectrum = true,
-    folly_oil_change = true,
+    oil_change = SMODS.PokerHand({
+        key = "oil_change",
+        mult = 10,
+        chips = 100,
+        l_mult = 5,
+        l_chips = 50,
+        visible = false,
+        example = {
+            { "S_K", true, edition = "e_polychrome" },
+            { "S_A", true, edition = "e_polychrome" },
+            { "D_7", true, edition = "e_polychrome" },
+            { "D_2", true, enhancement = "m_gold" },
+            { "D_8", true, enhancement = "m_gold" },
+        },
+        evaluate = function(parts, hand)
+            if #hand < 5 or not is_visible(extra_poker_hands.oil_change) then
+                return {}
+            end
+            local oil = 0
+            local gold = 0
+            for _, playing_card in ipairs(hand) do
+                if
+                    playing_card:is_suit("Spades")
+                    and playing_card.edition
+                    and playing_card.edition.polychrome
+                then
+                    oil = oil + 1
+                elseif
+                    playing_card:is_suit("Diamonds")
+                    and SMODS.has_enhancement(playing_card, "m_gold")
+                then
+                    gold = gold + 1
+                end
+            end
+
+            if oil == 2 and gold == 3 then
+                return { hand }
+            end
+            return {}
+        end,
+    }),
+
+    karate = SMODS.PokerHand({
+        key = "karate",
+        mult = 4,
+        chips = 30,
+        l_mult = 3,
+        l_chips = 10,
+        visible = false,
+        example = {
+            { "H_K", true },
+            { "D_A", true },
+            { "S_7", true },
+            { "S_2", true },
+            { "C_8", true },
+        },
+        evaluate = function(parts, hand)
+            local ret = {}
+            if #hand < 5 or not is_visible(extra_poker_hands.karate) then
+                return {}
+            end
+
+            local karate = { 13, 14, 7, 2, 8 }
+            for i = 1, #hand do
+                for j = 1, #karate do
+                    if hand[i]:get_id() == karate[j] then
+                        table.insert(ret, hand[i])
+                        table.remove(karate, j)
+                        break
+                    end
+                end
+            end
+            if #ret == 5 then
+                return { ret }
+            end
+            return {}
+        end,
+    }),
+
+    eat_candy = SMODS.PokerHand({
+        key = "eat_candy",
+        chips = 15,
+        mult = 2,
+        l_chips = 5,
+        l_mult = 1,
+        visible = false,
+        example = {
+            { "H_2", true },
+            { "C_7", true },
+            { "S_J", true },
+            { "D_2", true },
+            { "D_K", false },
+        },
+        evaluate = function(parts)
+            return is_visible(extra_poker_hands.eat_candy) and parts[spectrum.key] or {}
+        end,
+    }),
+
+    ruminate = SMODS.PokerHand({
+        key = "ruminate",
+        mult = 4,
+        chips = 30,
+        l_mult = 3,
+        l_chips = 10,
+        visible = false,
+        example = {
+            { "S_K", true, enhancement = "m_glass" },
+            { "S_9", true, enhancement = "m_glass" },
+            { "D_9", true, enhancement = "m_glass" },
+            { "H_6", true, enhancement = "m_glass" },
+            { "D_3", true, enhancement = "m_glass" },
+        },
+        evaluate = function(parts, hand)
+            local ret = {}
+            if #hand < 5 or not is_visible(extra_poker_hands.ruminate) then
+                return {}
+            end
+            for i = 1, #hand do
+                if SMODS.has_enhancement(hand[i], "m_glass") then
+                    table.insert(ret, hand[i])
+                end
+            end
+            if #ret == 5 then
+                return { ret }
+            end
+            return {}
+        end,
+    }),
 }
+local extra_poker_hands_set = {}
+for key, poker_hand in pairs(poker_hands) do
+    extra_poker_hands_set[poker_hand.key] = true
+    extra_poker_hands[key] = poker_hand.key
+end
 
 return {
     key = "todo_list",
@@ -254,7 +261,7 @@ return {
             local _poker_hands = {}
             for k, v in pairs(G.GAME.hands) do
                 if
-                    (to_do_list_extra_poker_hands[k] or v.visible)
+                    (v.visible or extra_poker_hands_set[k])
                     and k ~= card.ability.to_do_poker_hand
                 then
                     table.insert(_poker_hands, k)
@@ -262,7 +269,6 @@ return {
             end
             card.ability.to_do_poker_hand = pseudorandom_element(_poker_hands, pseudoseed("to_do"))
             if not G.GAME.hands[card.ability.to_do_poker_hand].visible then
-                folly_utils.log.Info("henlo")
                 G.GAME.hands[card.ability.to_do_poker_hand].visible = true
             end
             return {

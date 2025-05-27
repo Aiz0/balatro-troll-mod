@@ -40,7 +40,7 @@ return {
             folly_jog = "Jog",
             folly_oil_change = "Oil Change",
             folly_karate = "Karate",
-            folly_spectrum = "Eat Candy",
+            folly_eat_candy = "Eat Candy",
             folly_ruminate = "Ruminate",
         },
         poker_hand_descriptions = {
@@ -55,7 +55,7 @@ return {
                 '5 cards that vaguely spell out "Karate"',
                 "King, Ace, 72, 8",
             },
-            folly_spectrum = {
+            folly_eat_candy = {
                 "4 cards with different suits, may",
                 "be played with 1 other unscored card",
             },
