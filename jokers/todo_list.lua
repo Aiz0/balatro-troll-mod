@@ -124,7 +124,7 @@ local poker_hands = {
         example = {
             { "S_K", true, edition = "e_polychrome" },
             { "S_A", true, edition = "e_polychrome" },
-            { "D_7", true, edition = "e_polychrome" },
+            { "D_7", true, enhancement = "m_gold" },
             { "D_2", true, enhancement = "m_gold" },
             { "D_8", true, enhancement = "m_gold" },
         },
