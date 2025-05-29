@@ -37,6 +37,7 @@ return {
             a_folly_blue_card = "+#1# Chips",
             a_folly_yellow_card = "+$#1#",
             a_folly_green_card = "$#1# Less",
+            a_folly_fortune_teller = "You have $#1#!",
         },
         labels = {
             folly_mark_sticker = "Marked",
