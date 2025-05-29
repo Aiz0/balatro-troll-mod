@@ -152,6 +152,7 @@ return {
         if card.ability.extra.colour == "green" then
             G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost - reroll_cost
             G.GAME.current_round.reroll_cost = G.GAME.current_round.reroll_cost - reroll_cost
+            calculate_reroll_cost(true)
         else
             G.GAME.round_resets.reroll_cost = G.GAME.round_resets.reroll_cost + reroll_cost
             G.GAME.current_round.reroll_cost = G.GAME.current_round.reroll_cost + reroll_cost
