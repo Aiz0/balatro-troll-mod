@@ -8,7 +8,7 @@ target = "card.lua"
 pattern = "function Card:calculate_seal(context)"
 position = "after"
 payload = '''
-    if context.card_area == G.consumables then
+    if context.cardarea == G.consumeables then
         return nil, true
     end
 '''

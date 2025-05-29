@@ -1,5 +1,7 @@
 SMODS.Joker({
     key = "apartment",
+    atlas = "folly_jokers",
+    pos = { x = 0, y = 2 },
     config = {
         extra = 0,
     },
@@ -55,6 +57,8 @@ SMODS.Joker({
 
 SMODS.Joker({
     key = "house",
+    atlas = "folly_jokers",
+    pos = { x = 1, y = 2 },
     rarity = 2,
     cost = 10,
     in_pool = function(self, args)
@@ -79,6 +83,8 @@ SMODS.Joker({
 
 SMODS.Joker({
     key = "mansion",
+    atlas = "folly_jokers",
+    pos = { x = 2, y = 2 },
     rarity = 3,
     cost = 10,
     config = {
@@ -100,7 +106,7 @@ SMODS.Joker({
                         trigger = "after",
                         delay = 0.1,
                         func = function()
-                            SMODS.modify_rank(v, -1)
+                            assert(SMODS.modify_rank(v, -1))
                             v:juice_up()
                             return true
                         end,
@@ -135,6 +141,7 @@ SMODS.Joker({
 
 SMODS.DrawStep({
     key = "folly_debuff",
+    atlas = "folly_jokers",
     order = 70,
     func = function(self)
         if self.folly_debuff then
@@ -161,10 +168,12 @@ SMODS.Sound({
     path = "house_bach.ogg",
 })
 
-local mod_prefix = SMODS.current_mod.prefix
 SMODS.Joker({
     key = "dr_house",
     name = "Dr. House",
+    atlas = "folly_jokers",
+    pos = { x = 3, y = 2 },
+    soul_pos = { x = 4, y = 2 },
     rarity = 4,
     cost = 10,
     config = {
@@ -188,7 +197,7 @@ SMODS.Joker({
                     SMODS.debuff_card(v, true, "house_md")
                 end
             end
-            play_sound(mod_prefix .. "_house_bach", 1, 1)
+            play_sound(folly_utils.prefix.mod .. "_house_bach", 1, 1)
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
                 delay = 2,
@@ -248,10 +257,12 @@ SMODS.Joker({
                     poker_hands = context.poker_hands,
                     joker_main = true,
                 })
-                card:juice_up()
-                ret.x_mult_mod = card.ability.extra.xmult
-                ret.message_card = context.other_joker
-                return ret
+                if ret then
+                    card:juice_up()
+                    ret.x_mult_mod = card.ability.extra.xmult
+                    ret.message_card = context.other_joker
+                    return ret
+                end
             end
         end
     end,

@@ -31,7 +31,6 @@ SMODS.Sound({
     path = "it_burns.ogg",
 })
 
-local mod_prefix = SMODS.current_mod.prefix
 return {
     key = "burnt",
     calculate = function(self, card, context)
@@ -46,7 +45,7 @@ return {
                     delay = 1,
                     trigger = "before",
                     func = function()
-                        play_sound(mod_prefix .. "_it_burns")
+                        play_sound(folly_utils.prefix.mod .. "_it_burns")
                         other_card:juice_up()
                         return true
                     end,

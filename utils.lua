@@ -29,6 +29,7 @@ folly_utils = {
     end,
 
     prefix = {
+        mod = SMODS.current_mod.prefix,
         joker = "j_" .. SMODS.current_mod.prefix .. "_",
     },
 
@@ -81,7 +82,7 @@ folly_utils = {
         if offset <= 0 then
             return key
         end
-        return get_previous_rank(SMODS.Ranks[key].prev[1], offset - 1)
+        return folly_utils.get_previous_rank(SMODS.Ranks[key].prev[1], offset - 1)
     end,
 
     pseudorandom_range = function(min, max, seed)
