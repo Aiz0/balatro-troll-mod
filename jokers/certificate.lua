@@ -1,5 +1,5 @@
 --                      2, 3, 4, 5, 6, 7, 8, 9, 10,J, Q, K, A
-local rank_approval = { 2, 2, 2, 2, 2, 2, 1, 1, 2, 3, 3, 4, 2 }
+local rank_approval = { 2, 2, 2, 2, 2, 1, 1, 2, 2, 3, 3, 4, 2 }
 local suit_approval = { Spades = 1, Clubs = 2, Diamonds = 3, Hearts = 4 }
 local enhancement_approval = { ["Bonus"] = 1, ["Mult"] = 2, ["Wild Card"] = 1, ["Glass Card"] = 4, ["Steel Card"] = 3, ["Stone Card"] = 1, ["Gold Card"] = 3, ["Lucky Card"] = 3 }
 local editions_approval = { ["foil"] = 2, ["holo"] = 3, ["polychrome"] = 4, ["negative"] = 4 }
@@ -11,7 +11,7 @@ SMODS.Seal({
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
             local approval = 1
-            if card.base.id <= #rank_approval then
+            if card.base.id - 1 <= #rank_approval then
                 approval = approval * rank_approval[card.base.id - 1]
             end
             if suit_approval[card.base.suit] then
