@@ -201,8 +201,11 @@ return {
             j_folly_red_bull = {
                 name = "Red Bull",
                 text = {
-                    "This space has intentionally",
-                    "been left blank.",
+                    "After all cards have been scored",
+                    "{X:mult,C:white}X#1#{} Mult on",
+                    "first hand of round",
+                    "{X:mult,C:white}X#2#{} Mult on",
+                    "all other hands",
                 },
             },
         },

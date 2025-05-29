@@ -38,51 +38,70 @@ return {
     red_bull_pos = { x = 5, y = 0 },
 
     config = {
-        extra = 2,
-        red_bull = false,
-        bull_seen_red = false,
-        angry_bull_base = 8,
-        angry_bull_loss = 2,
+        name = "j_folly_bull",
+        extra = {
+            chips = 2,
+            red_bull = {
+                active = false,
+                xmult_first = 25,
+                xmult_rest = 0.25,
+            },
+            angry_bull = {
+                active = false,
+                chips_base = 8,
+                chips_loss = 2,
+            },
+        },
     },
     loc_vars = function(self, info_queue, card)
-        local key
-        if card.ability.red_bull then
-            key = "j_" .. mod_prefix .. "_red_bull"
-        elseif card.ability.bull_seen_red then
-            key = "j_" .. mod_prefix .. "_angry_bull"
-        end
-        return {
-            key = key or "j_bull",
+        local loc_table = {
+            key = "j_bull",
+            vars = {
+                card.ability.extra.chips,
+                card.ability.extra.chips * (G.GAME.dollars + (G.GAME.dollar_buffer or 0)),
+            },
         }
+
+        if card.ability.extra.angry_bull.active then
+            loc_table.key = "j_" .. mod_prefix .. "_angry_bull"
+        elseif card.ability.extra.red_bull.active then
+            loc_table.key = "j_" .. mod_prefix .. "_red_bull"
+            loc_table.vars = {
+                card.ability.extra.red_bull.xmult_first,
+                card.ability.extra.red_bull.xmult_rest,
+            }
+        end
+        return loc_table
     end,
     calculate = function(self, card, context)
         if context.setting_blind and not context.blueprint and not card.getting_sliced then
-            if not card.ability.bull_seen_red and find_red_joker() then
+            if
+                not (card.ability.extra.angry_bull.active or card.ability.extra.red_bull.active) and find_red_joker()
+            then
                 return {
                     message = localize("k_folly_bull_angry"),
                     colour = G.C.RED,
                     func = function()
-                        card.ability.bull_seen_red = true
-                        card.ability.extra = card.ability.angry_bull_base
+                        card.ability.extra.angry_bull.active = true
+                        card.ability.extra.chips = card.ability.extra.angry_bull.chips_base
                         card.children.center:set_sprite_pos(self.angry_bull_pos)
                         card:set_eternal(true)
                     end,
                 }
             end
         elseif
-            card.ability.bull_seen_red
-            and not card.ability.red_bull
+            card.ability.extra.angry_bull.active
             and context.end_of_round
             and not context.individual
             and not context.repetition
             and not context.blueprint
         then
-            card.ability.extra = card.ability.extra - card.ability.angry_bull_loss
+            card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.angry_bull.chips_loss
             return { message = localize("k_folly_bull_angry"), colour = G.C.RED }
         elseif context.selling_card then
             -- Turn into redbull when diet cola sold while angry
             if
-                card.ability.bull_seen_red
+                card.ability.extra.angry_bull.active
                 and (
                     context.card.config.center_key == "j_diet_cola"
                     or context.card.config.center_key == "j_" .. mod_prefix .. "_diet_cola"
@@ -92,19 +111,32 @@ return {
                     message = localize("k_folly_red_bull"),
                     colour = G.C.RED,
                     func = function()
-                        card.ability.red_bull = true
+                        card.ability.extra.red_bull.active = true
+                        card.ability.extra.angry_bull.active = false
                         card.children.center:set_sprite_pos(self.red_bull_pos)
                         card:set_eternal(false)
                     end,
                 }
             end
+        elseif
+            context.joker_main
+            and not card.ability.extra.red_bull.active
+            and (G.GAME.dollars + (G.GAME.dollar_buffer or 0)) > 0
+        then
+            return {
+                chips = card.ability.extra.chips * (G.GAME.dollars + (G.GAME.dollar_buffer or 0)),
+            }
+        elseif context.final_scoring_step and card.ability.extra.red_bull.active then
+            local xmult = G.GAME.current_round.hands_played == 0 and card.ability.extra.red_bull.xmult_first
+                or card.ability.extra.red_bull.xmult_rest
+            return { xmult = xmult }
         end
     end,
     set_sprites = function(self, card, front)
         if card.ability then
-            if card.ability.red_bull then
+            if card.ability.extra.red_bull.active then
                 card.children.center:set_sprite_pos(self.red_bull_pos)
-            elseif card.ability.bull_seen_red then
+            elseif card.ability.extra.angry_bull.active then
                 card.children.center:set_sprite_pos(self.angry_bull_pos)
             end
         end
