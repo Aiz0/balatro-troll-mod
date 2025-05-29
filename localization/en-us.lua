@@ -31,6 +31,9 @@ return {
             --Object Types
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
+
+            --Seals
+            k_approval_seal = "Seal of Approval",
         },
         v_dictionary = {
             a_folly_red_card = "+#1# Mult",
@@ -226,6 +229,15 @@ return {
                     "been {C:attention}marked",
                 },
             },
+            
+            --seals
+            folly_approval_seal = {
+                name = "Seal of Approval",
+                text = {
+                    "Adds {C:attention}approval",
+                    "{C:attention}rating{} to Mult"
+                }
+            }
         },
         Planet = {
             c_folly_strange_planet = {
