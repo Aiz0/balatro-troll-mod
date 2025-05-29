@@ -2,25 +2,25 @@ local colours = {
     red = {
         next = "blue",
         loc_key = folly_utils.prefix.joker .. "red_card",
-        pos = { x = 0, y = 2 },
+        pos = { x = 0, y = 3 },
         message_colour = G.C.RED,
     },
     blue = {
         next = "yellow",
         loc_key = folly_utils.prefix.joker .. "blue_card",
-        pos = { x = 1, y = 2 },
+        pos = { x = 1, y = 3 },
         message_colour = G.C.BLUE,
     },
     yellow = {
         next = "green",
         loc_key = folly_utils.prefix.joker .. "yellow_card",
-        pos = { x = 2, y = 2 },
+        pos = { x = 2, y = 3 },
         message_colour = G.C.MONEY,
     },
     green = {
         next = "red",
         loc_key = folly_utils.prefix.joker .. "green_card",
-        pos = { x = 3, y = 2 },
+        pos = { x = 3, y = 3 },
         message_colour = G.C.GREEN,
     },
 }
