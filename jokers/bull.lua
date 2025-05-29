@@ -16,12 +16,11 @@ local red_jokers = {
     "chicot",
 }
 
-local mod_prefix = SMODS.current_mod.prefix
 local function find_red_joker()
     for _, joker in pairs(red_jokers) do
         if
             next(SMODS.find_card("j_" .. joker))
-            or next(SMODS.find_card("j_" .. mod_prefix .. "_" .. joker))
+            or next(SMODS.find_card(folly_utils.prefix.joker .. joker))
         then
             return true
         end
@@ -38,7 +37,7 @@ return {
     red_bull_pos = { x = 5, y = 0 },
 
     config = {
-        name = "j_folly_bull",
+        name = folly_utils.prefix.joker .. "bull",
         extra = {
             chips = 2,
             red_bull = {
@@ -63,9 +62,9 @@ return {
         }
 
         if card.ability.extra.angry_bull.active then
-            loc_table.key = "j_" .. mod_prefix .. "_angry_bull"
+            loc_table.key = folly_utils.prefix.joker .. "angry_bull"
         elseif card.ability.extra.red_bull.active then
-            loc_table.key = "j_" .. mod_prefix .. "_red_bull"
+            loc_table.key = folly_utils.prefix.joker .. "red_bull"
             loc_table.vars = {
                 card.ability.extra.red_bull.xmult_first,
                 card.ability.extra.red_bull.xmult_rest,
@@ -76,7 +75,8 @@ return {
     calculate = function(self, card, context)
         if context.setting_blind and not context.blueprint and not card.getting_sliced then
             if
-                not (card.ability.extra.angry_bull.active or card.ability.extra.red_bull.active) and find_red_joker()
+                not (card.ability.extra.angry_bull.active or card.ability.extra.red_bull.active)
+                and find_red_joker()
             then
                 return {
                     message = localize("k_folly_bull_angry"),
@@ -96,7 +96,8 @@ return {
             and not context.repetition
             and not context.blueprint
         then
-            card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.angry_bull.chips_loss
+            card.ability.extra.chips = card.ability.extra.chips
+                - card.ability.extra.angry_bull.chips_loss
             return { message = localize("k_folly_bull_angry"), colour = G.C.RED }
         elseif context.selling_card then
             -- Turn into redbull when diet cola sold while angry
@@ -104,7 +105,7 @@ return {
                 card.ability.extra.angry_bull.active
                 and (
                     context.card.config.center_key == "j_diet_cola"
-                    or context.card.config.center_key == "j_" .. mod_prefix .. "_diet_cola"
+                    or context.card.config.center_key == folly_utils.prefix.joker .. "diet_cola"
                 )
             then
                 return {
@@ -127,7 +128,8 @@ return {
                 chips = card.ability.extra.chips * (G.GAME.dollars + (G.GAME.dollar_buffer or 0)),
             }
         elseif context.final_scoring_step and card.ability.extra.red_bull.active then
-            local xmult = G.GAME.current_round.hands_played == 0 and card.ability.extra.red_bull.xmult_first
+            local xmult = G.GAME.current_round.hands_played == 0
+                    and card.ability.extra.red_bull.xmult_first
                 or card.ability.extra.red_bull.xmult_rest
             return { xmult = xmult }
         end
