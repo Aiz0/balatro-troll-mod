@@ -67,36 +67,33 @@ return {
     calculate = function(self, card, context)
         if context.skipping_booster and not context.blueprint then
             card.ability.extra.triggers = card.ability.extra.triggers + 1
+         self:switch_colour(card)
+            --red by default
+            local vars = { card.ability.extra.mult }
+            if card.ability.extra.colour == "blue" then
+                vars = { card.ability.extra.chips }
+            end
+            if card.ability.extra.colour == "yellow" then
+                vars = { card.ability.extra.money }
+            end
+            if card.ability.extra.colour == "green" then
+                vars = { card.ability.extra.reroll }
+            end
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    self:switch_colour(card)
-                    --red by default
-                    local vars = { card.ability.extra.mult }
-                    if card.ability.extra.colour == "blue" then
-                        vars = { card.ability.extra.chips }
-                    end
-                    if card.ability.extra.colour == "yellow" then
-                        vars = { card.ability.extra.money }
-                    end
-                    if card.ability.extra.colour == "green" then
-                        vars = { card.ability.extra.reroll }
-                    end
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            card.children.center:set_sprite_pos(colours[card.ability.extra.colour].pos)
-                            return true
-                        end
-                    }))
-                    SMODS.calculate_effect({
-                        message = localize{
-                            type = "variable",
-                            key = "a_folly_"..card.ability.extra.colour.."_card",
-                            vars = vars },
-                        colour = colours[card.ability.extra.colour].message_colour
-                    }, card)
+                    card.children.center:set_sprite_pos(colours[card.ability.extra.colour].pos)
                     return true
-                end
+                end,
             }))
+
+            return {
+                message = localize({
+                    type = "variable",
+                    key = "a_folly_" .. card.ability.extra.colour .. "_card",
+                    vars = vars,
+                }),
+                colour = colours[card.ability.extra.colour].message_colour,
+            }
         end
 
         if context.joker_main then
