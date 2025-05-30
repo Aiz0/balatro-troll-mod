@@ -22,8 +22,6 @@ return {
         if card.area == G.jokers then
             return { vars = { 0 } }
         end
-        return { vars = {
-                localize("k_folly_golden")
-            } }
+        return { vars = { localize("k_folly_golden") } }
     end,
 }
