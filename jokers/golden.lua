@@ -20,9 +20,7 @@ return {
     end,
     loc_vars = function(self, info_queue, card)
         if card.area == G.jokers then
-            return { vars = {
-                0,
-            } }
+            return { vars = { 0 } }
         end
         return { vars = {
                 localize("k_folly_golden")
