@@ -8,7 +8,7 @@ return {
     calc_dollar_bonus = function(self, card)
         return 0
     end,
-    dollars_updated = function(self, card, change)
+    folly_dollars_updated = function(self, card, change)
         if card.area == G.jokers then
             local discount = 1 - G.GAME.discount_percent / 100
             card.base_cost = (G.GAME.dollars + 1) / discount
