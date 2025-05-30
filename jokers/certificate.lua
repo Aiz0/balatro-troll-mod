@@ -94,6 +94,7 @@ SMODS.Seal({
             end
             ret.message = localize("k_folly_spheal")
             ret.colour = G.C.BLUE
+            ret.remove_default_message = true
             return ret
         end
     end
