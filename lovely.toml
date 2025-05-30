@@ -98,7 +98,7 @@ payload = '''
         local card = G.shop_jokers.cards[i]
         local obj = card.config.center
         if obj.set == "Joker" and obj.dollars_updated and type(obj.dollars_updated) == "function" then
-            obj:dollars_updated(card, mod)
+            obj:folly_dollars_updated(card, mod)
         end
     end
   end
