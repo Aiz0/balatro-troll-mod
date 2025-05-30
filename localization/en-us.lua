@@ -27,13 +27,11 @@ return {
             k_folly_moonbase_alpha_snake = "snake?",
             k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
             k_folly_glorp = "Glorp",
+            k_folly_spheal = "Go Spheal!",
 
             --Object Types
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
-
-            --Seals
-            k_approval_seal = "Seal of Approval",
         },
         v_dictionary = {
             a_folly_red_card = "+#1# Mult",
@@ -43,6 +41,10 @@ return {
         },
         labels = {
             folly_mark_sticker = "Marked",
+
+            --Seals
+            folly_approval_seal = "Seal of Approval",
+            folly_spheal_seal = "Spheal",
         },
     },
     descriptions = {
@@ -236,6 +238,13 @@ return {
                 text = {
                     "Adds {C:attention}approval",
                     "{C:attention}rating{} to Mult"
+                }
+            },
+            folly_spheal_seal = {
+                name = "Spheal",
+                text = {
+                    "Splashes",
+                    "{C:attention}adjacent cards"
                 }
             }
         },
