@@ -268,12 +268,8 @@ return {
                 end
             end
             card.ability.to_do_poker_hand = pseudorandom_element(_poker_hands, pseudoseed("to_do"))
-            if not G.GAME.hands[card.ability.to_do_poker_hand].visible then
-                G.GAME.hands[card.ability.to_do_poker_hand].visible = true
-            end
-            return {
-                message = localize("k_reset"),
-            }
+            G.GAME.hands[card.ability.to_do_poker_hand].visible = true
+            return { message = localize("k_reset") }
         end
     end,
 }
