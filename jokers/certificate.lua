@@ -67,19 +67,19 @@ SMODS.Seal({
                 local right = eval_card(right_card, context)
                 if right.playing_card then
                     if ret.chips
-                    then ret.chips = ret.chips + right.playing_card.chips or 0
+                    then ret.chips = ret.chips + (right.playing_card.chips or 0)
                     else ret.chips = right.playing_card.chips or nil end
                     if ret.mult
-                    then ret.mult = ret.mult + right.playing_card.mult or 0
+                    then ret.mult = ret.mult + (right.playing_card.mult or 0)
                     else ret.mult = right.playing_card.mult or nil end
                     if ret.x_mult
-                    then ret.x_mult = ret.x_mult + right.playing_card.x_mult or 0
+                    then ret.x_mult = ret.x_mult + (right.playing_card.x_mult or 0)
                     else ret.x_mult = right.playing_card.x_mult or nil end
                     if ret.p_dollars
-                    then ret.p_dollars = ret.p_dollars + right.playing_card.p_dollars or 0
+                    then ret.p_dollars = ret.p_dollars + (right.playing_card.p_dollars or 0)
                     else ret.p_dollars = right.playing_card.p_dollars or nil end
                     if ret.x_chips
-                    then ret.x_chips = ret.x_chips + right.playing_card.x_chips or 0
+                    then ret.x_chips = ret.x_chips + (right.playing_card.x_chips or 0)
                     else ret.x_chips = right.playing_card.x_chips or nil end
                     table.insert(juice_targets, function()
                         SMODS.calculate_effect(right.playing_card, right_card, false)
