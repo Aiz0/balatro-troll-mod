@@ -259,12 +259,12 @@ return {
             and not context.blueprint
         then
             local _poker_hands = {}
-            for k, v in pairs(G.GAME.hands) do
+            for key, poker_hand in pairs(G.GAME.hands) do
                 if
-                    (v.visible or extra_poker_hands_set[k])
-                    and k ~= card.ability.to_do_poker_hand
+                    (poker_hand.visible or extra_poker_hands_set[key])
+                    and key ~= card.ability.to_do_poker_hand
                 then
-                    table.insert(_poker_hands, k)
+                    table.insert(_poker_hands, key)
                 end
             end
             card.ability.to_do_poker_hand = pseudorandom_element(_poker_hands, pseudoseed("to_do"))
