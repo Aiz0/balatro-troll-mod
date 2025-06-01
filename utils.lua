@@ -88,4 +88,15 @@ folly_utils = {
     pseudorandom_range = function(min, max, seed)
         return folly_utils.lerp(min, max, pseudorandom(seed))
     end,
+    
+    merge_ret_tables = function(t, ret)
+        for _, key in ipairs(SMODS.calculation_keys) do
+            if t[key] and ret[key] then
+                t[key] = t[key] + ret[key]
+            end
+            if not t[key] and ret[key] then
+                t[key] = ret[key]
+            end
+        end
+    end
 }

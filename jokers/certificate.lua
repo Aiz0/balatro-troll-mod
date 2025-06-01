@@ -31,6 +31,25 @@ SMODS.Seal({
     end
 })
 
+local function spheal_card(card, context)
+    local eval = eval_card(card, context)
+    if eval.playing_card then
+        return function()
+            if eval.enhancement then
+                folly_utils.merge_ret_tables(eval.playing_card, eval.enhancement)
+            end
+            if eval.seals then
+                folly_utils.merge_ret_tables(eval.playing_card, eval.seals)
+            end
+            SMODS.calculate_effect(eval.playing_card, card, false)
+            if eval.edition then
+                SMODS.calculate_effect(eval.edition, card, true)
+            end
+        end
+    end
+    return nil
+end
+
 SMODS.Seal({
     key = "spheal",
     atlas = "folly_seals",
@@ -38,6 +57,9 @@ SMODS.Seal({
     badge_colour = HEX("8c9eff"),
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
+            if context.spheal then
+                return {}
+            end
             local card_index
             for i = 1, #G.play.cards do
                 if G.play.cards[i] == card then
@@ -47,46 +69,20 @@ SMODS.Seal({
             end
             local ret = {}
             local juice_targets = {}
-            context.extra_enhancement = true
+            context.spheal = true
             if card_index - 1 ~= 0 then
-                local left_card = G.play.cards[card_index - 1];
-                local left = eval_card(left_card, context)
-                if left.playing_card then
-                    ret.chips = left.playing_card.chips or nil
-                    ret.mult = left.playing_card.mult or nil
-                    ret.x_mult = left.playing_card.x_mult or nil
-                    ret.p_dollars = left.playing_card.p_dollars or nil
-                    ret.x_chips = left.playing_card.x_chips or nil
-                    table.insert(juice_targets, function()
-                        SMODS.calculate_effect(left.playing_card, left_card, false)
-                    end)
+                local left_ret = spheal_card(G.play.cards[card_index - 1], context)
+                if left_ret then
+                    table.insert(juice_targets, left_ret)
                 end
             end
             if card_index + 1 <= #G.play.cards then
-                local right_card = G.play.cards[card_index + 1]
-                local right = eval_card(right_card, context)
-                if right.playing_card then
-                    if ret.chips
-                    then ret.chips = ret.chips + (right.playing_card.chips or 0)
-                    else ret.chips = right.playing_card.chips or nil end
-                    if ret.mult
-                    then ret.mult = ret.mult + (right.playing_card.mult or 0)
-                    else ret.mult = right.playing_card.mult or nil end
-                    if ret.x_mult
-                    then ret.x_mult = ret.x_mult + (right.playing_card.x_mult or 0)
-                    else ret.x_mult = right.playing_card.x_mult or nil end
-                    if ret.p_dollars
-                    then ret.p_dollars = ret.p_dollars + (right.playing_card.p_dollars or 0)
-                    else ret.p_dollars = right.playing_card.p_dollars or nil end
-                    if ret.x_chips
-                    then ret.x_chips = ret.x_chips + (right.playing_card.x_chips or 0)
-                    else ret.x_chips = right.playing_card.x_chips or nil end
-                    table.insert(juice_targets, function()
-                        SMODS.calculate_effect(right.playing_card, right_card, false)
-                    end)
+                local right_ret = spheal_card(G.play.cards[card_index + 1], context)
+                if right_ret then
+                    table.insert(juice_targets, right_ret)
                 end
             end
-            context.extra_enhancement = nil
+            context.spheal = nil
             ret.func = function()
                 for i, v in pairs(juice_targets) do
                     v()
