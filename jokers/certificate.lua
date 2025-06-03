@@ -108,6 +108,26 @@ SMODS.DrawStep({
     end
 })
 
+SMODS.Gradient({
+    key = "fragile",
+    colours = {
+        HEX("ff0000"),
+        HEX("ffffff"),
+    },
+    cycle = 1.5,
+    interpolation = "trig"
+})
+
+SMODS.Gradient({
+    key = "fragile_inverse",
+    colours = {
+        HEX("ffffff"),
+        HEX("ff0000"),
+    },
+    cycle = 1.5,
+    interpolation = "trig"
+})
+
 SMODS.Seal({
     key = "glass",
     atlas = "folly_seals",
@@ -131,11 +151,40 @@ SMODS.Seal({
     end
 })
 
+SMODS.Sound({
+    key = "navy",
+    path = "navy.ogg"
+})
+
 SMODS.Seal({
     key = "navy",
     atlas = "folly_seals",
     pos = { x = 3, y = 0 },
+    badge_colour = HEX("000056"),
+    seal_height = 0,
     calculate = function(self, card, context)
+        if context.before then
+            self.seal_height = 0
+        end
+        if context.main_scoring and context.cardarea == G.play then
+            local seal = self.seal_height;
+            play_sound("folly_navy", 1 - seal / 10)
+            G.E_MANAGER:add_event(Event({
+                trigger = "before",
+                func = function()
+                    attention_text({
+                        scale = 0.25,
+                        text = localize("k_folly_navy_seal"),
+                        hold = 135,
+                        align = "cm",
+                        offset = { x = -1, y = seal },
+                        major = G.play,
+                    })
+                    return true
+                end,
+            }))
+            self.seal_height = self.seal_height - 0.2
+        end
     end
 })
 

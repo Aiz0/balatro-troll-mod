@@ -28,6 +28,24 @@ return {
             k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
             k_folly_glorp = "Glorp",
             k_folly_spheal = "Go Spheal!",
+            k_folly_navy_seal = {
+                "What the fuck did you just fucking say about me, you little bitch?",
+                "I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",
+                "I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces.",
+                "You are nothing to me but just another target.",
+                "I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words.",
+                "You think you can get away with saying that shit to me over the Internet?",
+                "Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot.",
+                "The storm that wipes out the pathetic little thing you call your life.",
+                "You're fucking dead, kid.",
+                "I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands.",
+                "Not only am I extensively trained in unarmed combat,",
+                " but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit.",
+                "If only you could have known what unholy retribution your little \"clever\" comment was about to bring down upon you, maybe you would have held your fucking tongue.",
+                "But you couldn't, you didn't, and now you're paying the price, you goddamn idiot.",
+                "I will shit fury all over you and you will drown in it.",
+                "You're fucking dead, kiddo.",
+            },
 
             --Object Types
             k_funny = "Funny :)",
@@ -46,6 +64,7 @@ return {
             folly_approval_seal = "Seal of Approval",
             folly_spheal_seal = "Spheal",
             folly_glass_seal = "Glass Seal",
+            folly_navy_seal = "Navy Seal",
         },
     },
     descriptions = {
@@ -239,24 +258,30 @@ return {
                 text = {
                     "Adds {C:attention}approval",
                     "{C:attention}rating{} to Mult"
-                }
+                },
             },
             folly_spheal_seal = {
                 name = "Spheal",
                 text = {
-                    "Splashes {C:attention}adjacent",
+                    "{C:blue,E:1}Splashes {C:attention}adjacent",
                     "cards {C:attention}once{} when",
                     "this card is scored",
-                }
+                },
             },
             folly_glass_seal = {
                 name = "Glass Seal",
                 text = {
-                    "{C:red}Fragile",
+                    "{s:1.25,X:folly_fragile_inverse,C:folly_fragile}FRAGILE",
                     "Retrigger this",
-                    "card {C:green}0 to 3{} times",
-                }
-            }
+                    "card {C:green}#1# to 3{} times",
+                },
+            },
+            folly_navy_seal = {
+                name = "Navy Seal",
+                text = {
+                    "Obnoxious."
+                },
+            },
         },
         Planet = {
             c_folly_strange_planet = {
