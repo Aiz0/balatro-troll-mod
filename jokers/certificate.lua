@@ -168,10 +168,10 @@ SMODS.Seal({
         end
         if context.main_scoring and context.cardarea == G.play then
             local seal = self.seal_height;
-            play_sound("folly_navy", 1 - seal / 10)
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
                 func = function()
+                    play_sound("folly_navy", 1 - seal / 10)
                     attention_text({
                         scale = 0.25,
                         text = localize("k_folly_navy_seal"),
