@@ -174,3 +174,13 @@ function get_straight(hand, min_length, skip, wrap)
     end)
     return ret
 end
+
+function SMODS.shatters(card)
+    local enhancements = SMODS.get_enhancements(card)
+    for key, _ in pairs(enhancements) do
+        if G.P_CENTERS[key].shatters or key == 'm_glass' then return true end
+    end
+    if card.seal == "folly_glass" then
+        return true
+    end
+end

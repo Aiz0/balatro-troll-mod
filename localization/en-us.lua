@@ -45,6 +45,7 @@ return {
             --Seals
             folly_approval_seal = "Seal of Approval",
             folly_spheal_seal = "Spheal",
+            folly_glass_seal = "Glass Seal",
         },
     },
     descriptions = {
@@ -243,8 +244,17 @@ return {
             folly_spheal_seal = {
                 name = "Spheal",
                 text = {
-                    "Splashes",
-                    "{C:attention}adjacent cards"
+                    "Splashes {C:attention}adjacent",
+                    "cards {C:attention}once{} when",
+                    "this card is scored",
+                }
+            },
+            folly_glass_seal = {
+                name = "Glass Seal",
+                text = {
+                    "{C:red}Fragile",
+                    "Retrigger this",
+                    "card {C:green}0 to 3{} times",
                 }
             }
         },

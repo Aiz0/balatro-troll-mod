@@ -36,10 +36,10 @@ local function spheal_card(card, context)
     if eval.playing_card then
         return function()
             if eval.enhancement then
-                folly_utils.merge_ret_tables(eval.playing_card, eval.enhancement)
+                folly_utils.merge_numerical_ret_values(eval.playing_card, eval.enhancement)
             end
             if eval.seals then
-                folly_utils.merge_ret_tables(eval.playing_card, eval.seals)
+                folly_utils.merge_numerical_ret_values(eval.playing_card, eval.seals)
             end
             SMODS.calculate_effect(eval.playing_card, card, false)
             if eval.edition then
@@ -56,10 +56,7 @@ SMODS.Seal({
     pos = { x = 1, y = 0 },
     badge_colour = HEX("8c9eff"),
     calculate = function(self, card, context)
-        if context.main_scoring and context.cardarea == G.play then
-            if context.spheal then
-                return {}
-            end
+        if context.main_scoring and context.cardarea == G.play and not context.spheal and not card.sphealed then
             local card_index
             for i = 1, #G.play.cards do
                 if G.play.cards[i] == card then
@@ -91,7 +88,11 @@ SMODS.Seal({
             ret.message = localize("k_folly_spheal")
             ret.colour = G.C.BLUE
             ret.remove_default_message = true
+            card.sphealed = true
             return ret
+        end
+        if context.after and context.cardarea == G.play then
+            card.sphealed = false
         end
     end
 })
@@ -111,8 +112,22 @@ SMODS.Seal({
     key = "glass",
     atlas = "folly_seals",
     pos = { x = 2, y = 0 },
+    badge_colour = HEX("d0d5db"),
     calculate = function(self, card, context)
-
+        if context.repetition then
+            --honestly who the fuck invented random anyway?
+            local repetitions = folly_utils.pseudorandom_range_rounded(math.min(3, G.GAME.probabilities.normal - 1), 3, self.key)
+            if repetitions ~= 0 then
+                return { repetitions = repetitions }
+            end
+        end
+        if context.destroy_card and context.destroy_card.seal == "folly_glass" then
+            
+            return { remove = true }
+        end
+    end,
+    loc_vars = function(self, info_queue, card)
+        return { vars = { math.min(3, G.GAME.probabilities.normal - 1) } }
     end
 })
 
@@ -121,7 +136,6 @@ SMODS.Seal({
     atlas = "folly_seals",
     pos = { x = 3, y = 0 },
     calculate = function(self, card, context)
-
     end
 })
 

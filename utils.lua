@@ -89,12 +89,17 @@ folly_utils = {
         return folly_utils.lerp(min, max, pseudorandom(seed))
     end,
     
-    merge_ret_tables = function(t, ret)
+    pseudorandom_range_rounded = function(min, max, seed)
+        local rand = folly_utils.pseudorandom_range(min, max + 1, seed)
+        return math.min(math.floor(rand), max);
+    end,
+
+    merge_numerical_ret_values = function(t, ret)
         for _, key in ipairs(SMODS.calculation_keys) do
-            if t[key] and ret[key] then
+            if t[key] and ret[key] and type(t[key]) == "number" then
                 t[key] = t[key] + ret[key]
             end
-            if not t[key] and ret[key] then
+            if not t[key] and ret[key] and type(ret[key]) == "number" then
                 t[key] = ret[key]
             end
         end
