@@ -167,10 +167,14 @@ SMODS.Seal({
         if context.before then
             self.seal_height = 0
         end
+        if context.hand_drawn and context.cardarea == G.hand then
+            card.ability.forced_selection = true
+        end
         if context.main_scoring and context.cardarea == G.play then
             local seal = self.seal_height;
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
+                delay = 0.5,
                 func = function()
                     play_sound("folly_navy", 1 - seal / 10)
                     attention_text({

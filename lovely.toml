@@ -98,6 +98,14 @@ end
 '''
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+pattern = "if v.ability.forced_selection and not self.highlighted[1] then"
+position = 'at'
+payload = "if v.ability.forced_selection and not self.highlighted[1] or v.seal == 'folly_navy' then"
+match_indent = true
+
 
 # chaos joker
 # make pseudorandom not random
