@@ -80,6 +80,29 @@ end
 match_indent = true
 times = 1
 
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = 'G.GAME.dollars = G.GAME.dollars + mod'
+position = 'after'
+payload = '''
+  for i = 1, #G.jokers.cards do
+    local card = G.jokers.cards[i]
+    local obj = card.config.center
+    if obj.folly_dollars_updated and type(obj.folly_dollars_updated) == "function" then
+      obj:folly_dollars_updated(card, mod)
+    end
+  end
+  if G.shop_jokers.cards then
+    for i = 1, #G.shop_jokers.cards do
+        local card = G.shop_jokers.cards[i]
+        local obj = card.config.center
+        if obj.set == "Joker" and obj.folly_dollars_updated and type(obj.folly_dollars_updated) == "function" then
+            obj:folly_dollars_updated(card, mod)
+        end
+    end
+  end
+'''
 
 # chaos joker
 # make pseudorandom not random
