@@ -80,6 +80,24 @@ end
 match_indent = true
 times = 1
 
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+pattern = "pseudoshuffle(self.cards, pseudoseed(_seed or 'shuffle'))"
+position = 'after'
+payload = '''
+local obnoxious_cards = {}
+for i = #self.cards, 1, -1 do
+    if self.cards[i].seal == "folly_navy" then
+        table.insert(obnoxious_cards, table.remove(self.cards, i))
+    end
+end
+for _, v in pairs(obnoxious_cards) do
+    table.insert(self.cards, v)
+end
+'''
+match_indent = true
+
 
 # chaos joker
 # make pseudorandom not random
