@@ -33,6 +33,12 @@ return {
             k_funny = "Funny :)",
             b_funny_cards = "Funny :)",
         },
+        v_dictionary = {
+            a_folly_red_card = "+#1# Mult",
+            a_folly_blue_card = "+#1# Chips",
+            a_folly_yellow_card = "+$#1#",
+            a_folly_green_card = "$#1# Less",
+        },
         labels = {
             folly_mark_sticker = "Marked",
         },
@@ -146,6 +152,40 @@ return {
                     "{X:red,C:white}X#1#{} to {X:red,C:white}X#2#{} Mult every",
                     "time a {C:planet}Strange Planet{} is used",
                     "{C:inactive}(Currently {X:red,C:white}X#3#{C:inactive} Mult)",
+                },
+            },
+            j_folly_red_card = {
+                name = "Red Card",
+                text = {
+                    "This Joker gains",
+                    "{C:red}+#1#{} Mult when any",
+                    "{C:attention}Booster Pack{} is skipped",
+                    "{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+                },
+            },
+            j_folly_blue_card = {
+                name = "Blue Card",
+                text = {
+                    "This Joker gains",
+                    "{C:blue}+#1#{} Chips when any",
+                    "{C:attention}Booster Pack{} is skipped",
+                    "{C:inactive}(Currently {C:blue}+#2#{C:inactive} Chips)",
+                },
+            },
+            j_folly_yellow_card = {
+                name = "Yellow Card",
+                text = {
+                    "Earn {C:money}$#1#{} at end of round",
+                    "Payout increases by {C:money}$#2#{} when",
+                    "any {C:attention}Booster Pack{} is skipped",
+                },
+            },
+            j_folly_green_card = {
+                name = "Green Card",
+                text = {
+                    "{C:green}Rerolls{} cost {C:money}$#1#{} less",
+                    "reduced further by {C:money}$#2#{} when",
+                    "any {C:attention}Booster Pack{} is skipped",
                 },
             },
         },
