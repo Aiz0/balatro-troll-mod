@@ -29,7 +29,7 @@ return {
     key = "red_card",
     name = "fj_red_card",
     atlas = "folly_jokers",
-    pos = { x = 0, y = 2 },
+    pos = colours.red.pos,
     config = {
         extra = {
             colour = "red",
@@ -67,7 +67,7 @@ return {
     calculate = function(self, card, context)
         if context.skipping_booster and not context.blueprint then
             card.ability.extra.triggers = card.ability.extra.triggers + 1
-         self:switch_colour(card)
+            self:switch_colour(card)
             --red by default
             local vars = { card.ability.extra.mult }
             if card.ability.extra.colour == "blue" then
