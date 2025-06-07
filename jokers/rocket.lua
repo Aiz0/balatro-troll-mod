@@ -9,7 +9,7 @@ end
 
 local function play_random_alien(pitch)
     local sound = math.random(alien_sound_count)
-    play_sound(mod_prefix .. "_alien_" .. sound, pitch)
+    play_sound(folly_utils.prefix.mod .. "_alien_" .. sound, pitch)
 end
 
 SMODS.Joker({
