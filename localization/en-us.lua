@@ -65,6 +65,7 @@ return {
             folly_spheal_seal = "Spheal",
             folly_glass_seal = "Glass Seal",
             folly_navy_seal = "Navy Seal",
+            folly_navy_seal = "Gay",
         },
     },
     descriptions = {
@@ -280,6 +281,13 @@ return {
                 name = "Navy Seal",
                 text = {
                     "Obnoxious."
+                },
+            },
+            folly_gay_seal = {
+                name = "Gay",
+                text = {
+                    "Allows for {C:folly_gay}Gay",
+                    "poker hand"
                 },
             },
         },

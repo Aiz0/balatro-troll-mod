@@ -193,6 +193,103 @@ SMODS.Seal({
     end
 })
 
+SMODS.DrawStep({
+    key = "folly_gay_poly",
+    atlas = "folly_seals",
+    order = 60,
+    func = function(self)
+        if self.seal == "folly_gay" then
+            G.shared_seals[self.seal]:draw_shader('polychrome', nil, self.ARGS.send_to_shader, nil, self.children.center)
+        end
+    end
+})
+
+local gay_gradient = SMODS.Gradient({
+    key = "gay",
+    colours = {
+        HEX("A100D2"),
+        HEX("2180E9"),
+        HEX("82CB02"),
+        HEX("F9D200"),
+        HEX("FB6F01"),
+        HEX("F10000"),
+    },
+    cycle = 3,
+    interpolation = "linear"
+})
+
+SMODS.PokerHand({
+    key = "men",
+    chips = 5,
+    mult = 10,
+    l_chips = 10,
+    l_mult = 1,
+    example = {
+        { "H_K", true, seal = "folly_gay" },
+        { "H_K", true, seal = "folly_gay" },
+        { "S_J", false },
+        { "D_7", false },
+        { "C_3", false },
+    },
+    evaluate = function(parts, hand)
+        return SMODS.merge_lists(parts._flush, parts._straight)
+    end
+})
+
+SMODS.PokerHand({
+    key = "women",
+    chips = 10,
+    mult = 5,
+    l_chips = 5,
+    l_mult = 2,
+    example = {
+        { "H_Q", true, seal = "folly_gay" },
+        { "H_Q", true, seal = "folly_gay" },
+        { "S_J", false },
+        { "D_7", false },
+        { "C_3", false },
+    },
+    evaluate = function(parts, hand)
+        return SMODS.merge_lists(parts._flush, parts._straight)
+    end
+})
+
+SMODS.Seal({
+    key = "gay",
+    atlas = "folly_seals",
+    pos = { x = 4, y = 0 },
+    badge_colour = gay_gradient,
+    seal_height = 0,
+    calculate = function(self, card, context)
+        if context.before then
+            self.seal_height = 0
+        end
+        if context.hand_drawn and context.cardarea == G.hand then
+            card.ability.forced_selection = true
+        end
+        if context.main_scoring and context.cardarea == G.play then
+            local seal = self.seal_height;
+            G.E_MANAGER:add_event(Event({
+                trigger = "before",
+                delay = 1,
+                func = function()
+                    play_sound("folly_navy", 1 - seal / 10)
+                    attention_text({
+                        scale = 0.25,
+                        text = localize("k_folly_navy_seal"),
+                        hold = 135,
+                        align = "cm",
+                        offset = { x = -1, y = seal },
+                        major = G.play,
+                    })
+                    return true
+                end,
+            }))
+            self.seal_height = self.seal_height - 0.2
+        end
+    end
+})
+
 return {
     key = "certificate",
     name = "fj_certificate",
