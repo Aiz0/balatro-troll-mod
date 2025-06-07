@@ -67,6 +67,25 @@ return {
             folly_navy_seal = "Navy Seal",
             folly_navy_seal = "Gay",
         },
+        poker_hands = {
+            folly_men = "Men",
+            folly_women = "Women",
+            folly_enby = "Enbies",
+        },
+        poker_hand_descriptions = {
+            folly_men = {
+                "2 kings with the same suit with gay seals, may",
+                "be played with 3 other unscored card",
+            },
+            folly_women = {
+                "2 kings with the same suit with gay seals, may",
+                "be played with 3 other unscored card",
+            },
+            folly_women = {
+                "2 jacks with the same suit with gay seals, may",
+                "be played with 3 other unscored card",
+            },
+        },
     },
     descriptions = {
         Joker = {

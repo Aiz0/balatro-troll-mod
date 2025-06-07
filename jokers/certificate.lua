@@ -232,7 +232,7 @@ SMODS.PokerHand({
         { "C_3", false },
     },
     evaluate = function(parts, hand)
-        return SMODS.merge_lists(parts._flush, parts._straight)
+        --TODO AIZ
     end
 })
 
@@ -250,7 +250,25 @@ SMODS.PokerHand({
         { "C_3", false },
     },
     evaluate = function(parts, hand)
-        return SMODS.merge_lists(parts._flush, parts._straight)
+        --TODO AIZ
+    end
+})
+
+SMODS.PokerHand({
+    key = "enby",
+    chips = 7,
+    mult = 8,
+    l_chips = 3,
+    l_mult = 3,
+    example = {
+        { "J_Q", true, seal = "folly_gay" },
+        { "J_Q", true, seal = "folly_gay" },
+        { "S_J", false },
+        { "D_7", false },
+        { "C_3", false },
+    },
+    evaluate = function(parts, hand)
+        --TODO AIZ
     end
 })
 
