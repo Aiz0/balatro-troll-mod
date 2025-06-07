@@ -299,35 +299,6 @@ SMODS.Seal({
     atlas = "folly_seals",
     pos = { x = 4, y = 0 },
     badge_colour = gay_gradient,
-    seal_height = 0,
-    calculate = function(self, card, context)
-        if context.before then
-            self.seal_height = 0
-        end
-        if context.hand_drawn and context.cardarea == G.hand then
-            card.ability.forced_selection = true
-        end
-        if context.main_scoring and context.cardarea == G.play then
-            local seal = self.seal_height;
-            G.E_MANAGER:add_event(Event({
-                trigger = "before",
-                delay = 1,
-                func = function()
-                    play_sound("folly_navy", 1 - seal / 10)
-                    attention_text({
-                        scale = 0.25,
-                        text = localize("k_folly_navy_seal"),
-                        hold = 135,
-                        align = "cm",
-                        offset = { x = -1, y = seal },
-                        major = G.play,
-                    })
-                    return true
-                end,
-            }))
-            self.seal_height = self.seal_height - 0.2
-        end
-    end
 })
 
 return {
