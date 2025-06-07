@@ -218,6 +218,28 @@ local gay_gradient = SMODS.Gradient({
     interpolation = "linear"
 })
 
+local function get_gays(hand, rank)
+    for _, suit in ipairs(SMODS.Suit.obj_buffer) do
+        local gays = {}
+        for _, card in ipairs(hand) do
+            if
+                card:is_suit(suit, nil, true)
+                and card:get_seal(true) == "folly_gay"
+                and SMODS.Ranks[card.base.value].key == rank
+            then
+                table.insert(gays, card)
+            end
+            if SMODS.has_enhancement(card, "m_folly_jimbo") then
+                table.insert(gays, card)
+            end
+            if #gays == 2 then
+                return { gays }
+            end
+        end
+    end
+    return {}
+end
+
 SMODS.PokerHand({
     key = "men",
     chips = 5,
@@ -232,7 +254,7 @@ SMODS.PokerHand({
         { "C_3", false },
     },
     evaluate = function(parts, hand)
-        --TODO AIZ
+        return get_gays(hand, "King")
     end
 })
 
@@ -250,7 +272,7 @@ SMODS.PokerHand({
         { "C_3", false },
     },
     evaluate = function(parts, hand)
-        --TODO AIZ
+        return get_gays(hand, "Queen")
     end
 })
 
@@ -268,7 +290,7 @@ SMODS.PokerHand({
         { "C_3", false },
     },
     evaluate = function(parts, hand)
-        --TODO AIZ
+        return get_gays(hand, "Jack")
     end
 })
 
@@ -277,35 +299,6 @@ SMODS.Seal({
     atlas = "folly_seals",
     pos = { x = 4, y = 0 },
     badge_colour = gay_gradient,
-    seal_height = 0,
-    calculate = function(self, card, context)
-        if context.before then
-            self.seal_height = 0
-        end
-        if context.hand_drawn and context.cardarea == G.hand then
-            card.ability.forced_selection = true
-        end
-        if context.main_scoring and context.cardarea == G.play then
-            local seal = self.seal_height;
-            G.E_MANAGER:add_event(Event({
-                trigger = "before",
-                delay = 1,
-                func = function()
-                    play_sound("folly_navy", 1 - seal / 10)
-                    attention_text({
-                        scale = 0.25,
-                        text = localize("k_folly_navy_seal"),
-                        hold = 135,
-                        align = "cm",
-                        offset = { x = -1, y = seal },
-                        major = G.play,
-                    })
-                    return true
-                end,
-            }))
-            self.seal_height = self.seal_height - 0.2
-        end
-    end
 })
 
 return {
