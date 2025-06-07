@@ -81,7 +81,7 @@ return {
                 "2 kings with the same suit with gay seals, may",
                 "be played with 3 other unscored card",
             },
-            folly_women = {
+            folly_enby = {
                 "2 jacks with the same suit with gay seals, may",
                 "be played with 3 other unscored card",
             },
