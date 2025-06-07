@@ -174,7 +174,7 @@ SMODS.Seal({
             local seal = self.seal_height;
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
-                delay = 0.5,
+                delay = 1,
                 func = function()
                     play_sound("folly_navy", 1 - seal / 10)
                     attention_text({

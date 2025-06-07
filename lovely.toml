@@ -103,7 +103,7 @@ match_indent = true
 target = 'cardarea.lua'
 pattern = "if v.ability.forced_selection and not self.highlighted[1] then"
 position = 'at'
-payload = "if v.ability.forced_selection and not self.highlighted[1] or v.seal == 'folly_navy' then"
+payload = "if v.ability.forced_selection and not table.contains(self.highlighted, v) then"
 match_indent = true
 
 

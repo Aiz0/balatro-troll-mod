@@ -103,5 +103,14 @@ folly_utils = {
                 t[key] = ret[key]
             end
         end
-    end
+    end,
 }
+
+table.contains = function(list, item)
+    for _, v in pairs(list) do
+        if item == v then
+            return true
+        end
+    end
+    return false
+end
