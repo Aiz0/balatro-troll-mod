@@ -29,6 +29,7 @@ return {
             k_folly_glorp = "Glorp",
             k_folly_bull_angry = "Angry!",
             k_folly_red_bull = "Red bull!",
+            k_folly_golden = "1 Gazillion",
 
             --Object Types
             k_funny = "Funny :)",
