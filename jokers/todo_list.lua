@@ -102,8 +102,7 @@ local poker_hands = {
                 return {}
             end
             -- get straighs with skips enabled
-            local straights =
-                get_straight(hand, next(SMODS.find_card("j_four_fingers")) and 4 or 5, true)
+            local straights = get_straight(hand, SMODS.four_fingers(), true)
             for i = #straights, 1, -1 do
                 --keep if they all skip a rank
                 if not all_skip_rank(straights[i]) then
