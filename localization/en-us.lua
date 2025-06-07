@@ -74,15 +74,15 @@ return {
         },
         poker_hand_descriptions = {
             folly_men = {
-                "2 kings with the same suit with gay seals, may",
+                "2 kings that share the same suit with gay seals, may",
                 "be played with 3 other unscored card",
             },
             folly_women = {
-                "2 kings with the same suit with gay seals, may",
+                "2 kings that share the same suit with gay seals, may",
                 "be played with 3 other unscored card",
             },
             folly_enby = {
-                "2 jacks with the same suit with gay seals, may",
+                "2 jacks that share the same suit with gay seals, may",
                 "be played with 3 other unscored card",
             },
         },
