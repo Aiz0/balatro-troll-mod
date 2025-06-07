@@ -218,6 +218,28 @@ local gay_gradient = SMODS.Gradient({
     interpolation = "linear"
 })
 
+local function get_gays(hand, rank)
+    for _, suit in ipairs(SMODS.Suit.obj_buffer) do
+        local gays = {}
+        for _, card in ipairs(hand) do
+            if
+                card:is_suit(suit, nil, true)
+                and card:get_seal(true) == "folly_gay"
+                and SMODS.Ranks[card.base.value].key == rank
+            then
+                table.insert(gays, card)
+            end
+            if SMODS.has_enhancement(card, "m_folly_jimbo") then
+                table.insert(gays, card)
+            end
+            if #gays == 2 then
+                return { gays }
+            end
+        end
+    end
+    return {}
+end
+
 SMODS.PokerHand({
     key = "men",
     chips = 5,
@@ -232,7 +254,7 @@ SMODS.PokerHand({
         { "C_3", false },
     },
     evaluate = function(parts, hand)
-        --TODO AIZ
+        return get_gays(hand, "King")
     end
 })
 
@@ -250,7 +272,7 @@ SMODS.PokerHand({
         { "C_3", false },
     },
     evaluate = function(parts, hand)
-        --TODO AIZ
+        return get_gays(hand, "Queen")
     end
 })
 
@@ -268,7 +290,7 @@ SMODS.PokerHand({
         { "C_3", false },
     },
     evaluate = function(parts, hand)
-        --TODO AIZ
+        return get_gays(hand, "Jack")
     end
 })
 
