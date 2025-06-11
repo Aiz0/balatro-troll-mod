@@ -30,6 +30,8 @@ return {
             k_folly_bull_angry = "Angry!",
             k_folly_red_bull = "Red bull!",
             k_folly_golden = "1 Gazillion",
+            k_folly_val_down = "Value Down!",
+            k_folly_hatched = "Hatched!",
 
             --Object Types
             k_funny = "Funny :)",
@@ -243,6 +245,25 @@ return {
                     "first hand of round",
                     "{X:mult,C:white}X#2#{} Mult on",
                     "all other hands",
+                },
+            },
+            j_folly_egg = {
+                name = "Egg",
+                text = {
+                    "Gains {C:money}$#1#{} of",
+                    "{C:attention}sell value{} at",
+                    "end of round",
+                },
+            },
+            j_folly_chicken = {
+                name = "Chicken",
+                text = {
+                    "{C:dark_edition}+#1#{} Joker slots",
+                    "When {C:attention}Blind{} is selected,",
+                    "create a {C:dark_edition}Negative {C:attention}Eternal Egg",
+                    "Remove {C:money}$#2#{} of {C:attention}sell value",
+                    "from every {C:attention}Chicken{}",
+                    "at end of round",
                 },
             },
         },
