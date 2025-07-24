@@ -61,7 +61,7 @@ return {
                         return true
                     end,
                 }))
-                return { message = localize("j_folly_cavendish") }
+                return { message = localize("k_folly_cavendish") }
             end
         end
     end,
