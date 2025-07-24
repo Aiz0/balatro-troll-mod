@@ -1,13 +1,11 @@
 return {
     key = "cavendish",
-    name = "fj_cavendish",
     config = {
         extra = {
             Xmult = 3,
             odds = 1000,
             rot = 1,
         },
-        name = "fj_cavendish",
     },
     loc_vars = function(self, info_queue, card)
         local numerator, new_odds = SMODS.get_probability_vars(card, 1, odds, self.key)
