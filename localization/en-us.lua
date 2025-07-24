@@ -27,6 +27,8 @@ return {
             k_folly_moonbase_alpha_snake = "snake?",
             k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
             k_folly_glorp = "Glorp",
+            k_folly_bull_angry = "Angry!",
+            k_folly_red_bull = "Red bull!",
             k_folly_golden = "1 Gazillion",
 
             --Object Types
@@ -213,6 +215,25 @@ return {
                     "{C:green}Rerolls{} cost {C:money}$#1#{} less",
                     "reduced further by {C:money}$#2#{} when",
                     "any {C:attention}Booster Pack{} is skipped",
+                },
+            },
+            j_folly_angry_bull = {
+                name = "Angry Bull",
+                text = {
+                    "{C:chips}+#1#{} Chips for",
+                    "each {C:money}$1{} you have",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                    "{C:eternal}Eternal",
+                },
+            },
+            j_folly_red_bull = {
+                name = "Red Bull",
+                text = {
+                    "After all cards have been scored",
+                    "{X:mult,C:white}X#1#{} Mult on",
+                    "first hand of round",
+                    "{X:mult,C:white}X#2#{} Mult on",
+                    "all other hands",
                 },
             },
         },
