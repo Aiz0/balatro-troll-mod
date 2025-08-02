@@ -42,6 +42,33 @@ return {
         labels = {
             folly_mark_sticker = "Marked",
         },
+        poker_hands = {
+            folly_jog = "Jog",
+            folly_oil_change = "Oil Change",
+            folly_karate = "Karate",
+            folly_eat_candy = "Eat Candy",
+            folly_ruminate = "Ruminate",
+        },
+        poker_hand_descriptions = {
+            folly_jog = {
+                "5 cards in a row (consecutive ranks)",
+                "with gaps of 1 rank between each card",
+            },
+            folly_oil_change = {
+                "2 polychrome spades and 3 gold diamonds",
+            },
+            folly_karate = {
+                '5 cards that vaguely spell out "Karate"',
+                "King, Ace, 72, 8",
+            },
+            folly_eat_candy = {
+                "4 cards with different suits, may",
+                "be played with 1 other unscored card",
+            },
+            folly_ruminate = {
+                "5 glass cards",
+            },
+        },
     },
     descriptions = {
         Joker = {
