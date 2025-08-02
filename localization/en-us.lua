@@ -227,6 +227,18 @@ return {
                     "been {C:attention}marked",
                 },
             },
+            madness_eaten = {
+                name = "Madness has eaten",
+                text = {
+                    "#1# Jokers",
+                    "#1#$",
+                    "#1# Hands per Round",
+                    "#1# Discards per Round",
+                    "#1# Hand size",
+                    "#1# Playing cards",
+                    "#1# Consumables",
+                }
+            }
         },
         Planet = {
             c_folly_strange_planet = {
