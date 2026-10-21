@@ -7,7 +7,12 @@ return {
             and not context.blueprint
             and context.other_card.lucky_trigger
         then
-            card.ability.x_mult = card.ability.x_mult + card.ability.extra
+            SMODS.scale_card(card, {
+                ref_table = card.ability,
+                ref_value = "x_mult",
+                scalar_value = "extra",
+                no_message = true,
+            })
             return {
                 message = localize("k_upgrade_ex"),
                 colour = G.C.MULT,
