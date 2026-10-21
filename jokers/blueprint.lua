@@ -65,6 +65,9 @@ SMODS.Joker({
     key = "house",
     atlas = "folly_jokers",
     pos = { x = 1, y = 2 },
+    config = {
+        extra = 1
+    },
     rarity = 2,
     cost = 10,
     in_pool = function(self, args)
@@ -72,12 +75,16 @@ SMODS.Joker({
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
-            context.other_card.ability.perma_mult = (context.other_card.ability.perma_mult or 0) + 1
-
-            return {
-                extra = { message = localize("k_upgrade_ex"), colour = G.C.MULT },
-                colour = G.C.MULT,
-            }
+            SMODS.scale_card(context.other_card, {
+                ref_table = context.other_card.ability,
+                ref_value = "perma_mult",
+                scalar_table = card.ability,
+                scalar_value = "extra",
+                scaling_message = {
+                    key = "k_upgrade_ex",
+                    colour = G.C.MULT,
+                },
+            })
         end
     end,
 
