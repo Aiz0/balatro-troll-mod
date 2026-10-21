@@ -112,21 +112,37 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.final_scoring_step and not context.blueprint then
             for k, v in ipairs(context.scoring_hand) do
-                if v.base.nominal ~= 2 then
-                    card.ability.extra.xmult = card.ability.extra.xmult
-                        + card.ability.extra.xmult_mod
-                    G.E_MANAGER:add_event(Event({
-                        trigger = "after",
-                        delay = 0.1,
-                        func = function()
-                            assert(SMODS.modify_rank(v, -1))
-                            v:juice_up()
-                            return true
-                        end,
-                    }))
+                if v.config.center ~= G.P_CENTERS.m_stone then
+                    if v.base.nominal ~= 2 then
+                        G.E_MANAGER:add_event(Event({
+                            trigger = "after",
+                            delay = 0.1,
+                            func = function()
+                                assert(SMODS.modify_rank(v, -1))
+                                v:juice_up()
+                                return true
+                            end,
+                        }))
+                    else
+                        G.E_MANAGER:add_event(Event({
+                            delay = 0.1,
+                            trigger = "before",
+                            func = function()
+                                v:set_ability(G.P_CENTERS.m_stone, nil)
+                                v:juice_up()
+                                return true
+                            end,
+                        }))
+                    end
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability.extra,
+                        ref_value = "xmult",
+                        scalar_value = "xmult_mod",
+                        no_message = true,
+                    })
                 end
             end
-
+        
             return {
                 message = localize("k_folly_mansion"),
                 colour = G.C.RED,
