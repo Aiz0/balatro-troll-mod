@@ -34,15 +34,8 @@ SMODS.Joker({
                         ref_value = "extra",
                         scalar_table = raised_card.base,
                         scalar_value = "nominal",
-                        scaling_message = {
-                            message = localize({
-                                type = "variable",
-                                key = "a_chips",
-                                vars = { raised_card.base.nominal },
-                            }),
-                            colour = G.C.BLUE,
-                        },
-
+                        message_key = "a_chips",
+                        message_colour = G.C.BLUE,
                     })
                 end
             end
