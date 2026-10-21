@@ -193,6 +193,15 @@ SMODS.Joker({
             return {
                 message = localize("k_folly_glorp"),
             }
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "x_mult",
+                operation = function (ref_table, ref_value, initial, change)
+                    ref_table[ref_value] = initial
+                        + folly_utils.pseudorandom_range(ref_table.low, ref_table.high, self.key)
+                end,
+                scalar_message = localize("k_folly_glorp")
+            })
         end
     end,
     loc_vars = function(self, info_queue, card)
