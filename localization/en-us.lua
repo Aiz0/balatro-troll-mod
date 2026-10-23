@@ -106,7 +106,7 @@ return {
                 text = {
                     "Every played {C:attention}card{}",
                     "permanently gains",
-                    "{C:mult}+1{} Mult when scored",
+                    "{C:mult}+#1#{} Mult when scored",
                 },
             },
             j_folly_mansion = {

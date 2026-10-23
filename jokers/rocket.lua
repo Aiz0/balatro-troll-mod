@@ -184,15 +184,18 @@ SMODS.Joker({
             and context.using_consumeable
             and context.consumeable.ability.name == "c_folly_strange_planet"
         then
-            card.ability.extra.x_mult = card.ability.extra.x_mult
-                + folly_utils.pseudorandom_range(
-                    card.ability.extra.low,
-                    card.ability.extra.high,
-                    self.key
-                )
-            return {
-                message = localize("k_folly_glorp"),
-            }
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "x_mult",
+                operation = function(ref_table, ref_value, initial, change)
+                    ref_table[ref_value] = initial
+                        + folly_utils.pseudorandom_range(ref_table.low, ref_table.high, self.key)
+                end,
+                scaling_message = {
+                    message = localize("k_folly_glorp"),
+                    colour = G.C.MULT,
+                },
+            })
         end
     end,
     loc_vars = function(self, info_queue, card)

@@ -33,7 +33,14 @@ return {
                     self.key
                 )
             then
-                card.ability.extra.odds = card.ability.extra.odds - card.ability.extra.rot
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "odds",
+                    scalar_value = "rot",
+                    operation = "-",
+                    no_message = true,
+                })
+                -- while these do scale they're not the main thing that does scale, so we don't need to send individual events
                 card.ability.extra.rot = card.ability.extra.rot * 2
                 card.ability.extra.odds = math.max(card.ability.extra.odds, 6)
                 return { message = localize("k_safe_ex") }
