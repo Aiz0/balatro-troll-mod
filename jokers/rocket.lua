@@ -179,22 +179,22 @@ SMODS.Joker({
             }
         end
 
-        if not context.blueprint
-           and context.using_consumeable
-           and context.consumeable.ability.name == "c_folly_strange_planet"
+        if
+            not context.blueprint
+            and context.using_consumeable
+            and context.consumeable.ability.name == "c_folly_strange_planet"
         then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "x_mult",
-                operation = function (ref_table, ref_value, initial, change)
+                operation = function(ref_table, ref_value, initial, change)
                     ref_table[ref_value] = initial
                         + folly_utils.pseudorandom_range(ref_table.low, ref_table.high, self.key)
                 end,
                 scaling_message = {
                     message = localize("k_folly_glorp"),
-                    colour = G.C.MULT
-                }
-                    
+                    colour = G.C.MULT,
+                },
             })
         end
     end,

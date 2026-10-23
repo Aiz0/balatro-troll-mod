@@ -59,7 +59,7 @@ SMODS.Joker({
     atlas = "folly_jokers",
     pos = { x = 1, y = 2 },
     config = {
-        extra = 1
+        extra = 1,
     },
     rarity = 2,
     cost = 10,
@@ -135,7 +135,7 @@ SMODS.Joker({
                     })
                 end
             end
-        
+
             return {
                 message = localize("k_folly_mansion"),
                 colour = G.C.RED,
