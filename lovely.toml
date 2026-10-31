@@ -93,7 +93,7 @@ payload = '''
       obj:folly_dollars_updated(card, mod)
     end
   end
-  if G.shop_jokers.cards then
+  if G.shop_jokers and G.shop_jokers.cards then
     for i = 1, #G.shop_jokers.cards do
         local card = G.shop_jokers.cards[i]
         local obj = card.config.center

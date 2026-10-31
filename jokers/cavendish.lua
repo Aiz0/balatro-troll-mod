@@ -1,19 +1,18 @@
 return {
     key = "cavendish",
-    name = "fj_cavendish",
     config = {
         extra = {
             Xmult = 3,
             odds = 1000,
             rot = 1,
         },
-        name = "fj_cavendish",
     },
     loc_vars = function(self, info_queue, card)
+        local numerator, new_odds = SMODS.get_probability_vars(card, 1, odds, self.key)
         return {
             vars = {
                 card.ability.extra.Xmult,
-                G.GAME.probabilities.normal,
+                numerator,
                 card.ability.extra.odds,
             },
         }
@@ -25,7 +24,15 @@ return {
             and not context.repetition
             and not context.blueprint
         then
-            if pseudorandom(self.key) >= G.GAME.probabilities.normal / card.ability.extra.odds then
+            if
+                not SMODS.pseudorandom_probability(
+                    card,
+                    self.key,
+                    1,
+                    card.ability.extra.odds,
+                    self.key
+                )
+            then
                 card.ability.extra.odds = card.ability.extra.odds - card.ability.extra.rot
                 card.ability.extra.rot = card.ability.extra.rot * 2
                 card.ability.extra.odds = math.max(card.ability.extra.odds, 6)
@@ -52,7 +59,7 @@ return {
                         return true
                     end,
                 }))
-                return { message = localize("j_folly_cavendish") }
+                return { message = localize("k_folly_cavendish") }
             end
         end
     end,
