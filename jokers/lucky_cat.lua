@@ -7,12 +7,17 @@ return {
             and not context.blueprint
             and context.other_card.lucky_trigger
         then
-            card.ability.x_mult = card.ability.x_mult + card.ability.extra
+            SMODS.scale_card(card, {
+                ref_table = card.ability,
+                ref_value = "x_mult",
+                scalar_value = "extra",
+                no_message = true,
+            })
             return {
                 message = localize("k_upgrade_ex"),
                 colour = G.C.MULT,
                 func = function()
-                    if pseudorandom(self.key) < G.GAME.probabilities.normal / 100 then
+                    if SMODS.pseudorandom_probability(card, self.key, 1, 100, self.key) then
                         SMODS.calculate_effect({ message = localize("k_folly_mega_jackpot") }, card)
                         for i = 1, 100 do
                             --TODO: make this not speed up

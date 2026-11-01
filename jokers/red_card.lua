@@ -66,7 +66,13 @@ return {
     end,
     calculate = function(self, card, context)
         if context.skipping_booster and not context.blueprint then
-            card.ability.extra.triggers = card.ability.extra.triggers + 1
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "triggers",
+                scalar_table = { x = 1 },
+                scalar_value = "x",
+                no_message = true,
+            })
             self:switch_colour(card)
             --red by default
             local vars = { card.ability.extra.mult }
