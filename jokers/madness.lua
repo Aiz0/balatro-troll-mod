@@ -13,13 +13,15 @@ return {
     name = "fj_madness",
     config = {
         extra = {
-            joker = 0,
-            money = 0,
-            hands = 0,
-            discards = 0,
-            hand_size = 0,
-            playing_card = 0,
-            consumable = 0,
+            consumed = {
+                joker = 0,
+                money = 0,
+                hands = 0,
+                discards = 0,
+                hand_size = 0,
+                playing_card = 0,
+                consumable = 0,
+            },
             
             should_eat_playing_card = false,
         },
@@ -30,7 +32,7 @@ return {
             
             -- eat joker
             if event == madness_events.joker then
-                card.ability.extra.joker = card.ability.extra.joker + 1
+                card.ability.extra.consumed.joker = card.ability.extra.consumed.joker + 1
                 local destructable_jokers = {}
                 for i = 1, #G.jokers.cards do
                     if G.jokers.cards[i] ~= card and not G.jokers.cards[i].ability.eternal and not G.jokers.cards[i].getting_sliced then destructable_jokers[#destructable_jokers+1] = G.jokers.cards[i] end
@@ -49,45 +51,45 @@ return {
             -- I really wish I could just do a switch statement
             -- eat money
             if event == madness_events.money then
-                card.ability.extra.money = card.ability.extra.money + G.GAME.dollars
+                card.ability.extra.consumed.money = card.ability.extra.consumed.money + G.GAME.dollars
                 ease_dollars(-G.GAME.dollars)
             end
 
             -- eat hands per round
             if event == madness_events.hands then
-                card.ability.extra.hands = card.ability.extra.hands + 1
+                card.ability.extra.consumed.hands = card.ability.extra.consumed.hands + 1
                 G.GAME.round_resets.hands = G.GAME.round_resets.hands - 1
                 ease_hands_played(-1)
             end
             
             -- eat discards per round
             if event == madness_events.discards then
-                card.ability.extra.discards = card.ability.extra.discards + 1
+                card.ability.extra.consumed.discards = card.ability.extra.consumed.discards + 1
                 G.GAME.round_resets.discards = G.GAME.round_resets.discards - 1
                 ease_discard(-1)
             end
             
             -- eat hand size
             if event == madness_events.hand_size then
-                card.ability.extra.hand_size = card.ability.extra.hand_size + 1
+                card.ability.extra.consumed.hand_size = card.ability.extra.consumed.hand_size + 1
                 G.hand:change_size(-1)
             end
             
             -- eat playing card
             if event == madness_events.playing_card then
-                card.ability.extra.should_eat_playing_card = true
+                card.ability.extra.consumed.should_eat_playing_card = true
             end
 
             if event == madness_events.consumable then
                 local consumable_to_destroy = #G.consumeables.cards > 0 and pseudorandom_element(G.consumeables.cards, pseudoseed(self.key)) or nil
-                card.ability.extra.consumable = card.ability.extra.consumable + 1
+                card.ability.extra.consumed.consumable = card.ability.extra.consumed.consumable + 1
                 if consumable_to_destroy and not (context.blueprint_card or card).getting_sliced then
                     consumable_to_destroy.getting_sliced = true
                     G.E_MANAGER:add_event(Event({func = function()
                         consumable_to_destroy:start_dissolve({G.C.RED}, nil, 1.6)
                         return true end }))
                     if consumable_to_destroy.ability.set == "Spectral" then
-                        card.ability.extra.consumable = card.ability.extra.consumable + 1
+                        card.ability.extra.consumed.consumable = card.ability.extra.consumed.consumable + 1
                     end
                 end
             end
@@ -99,8 +101,8 @@ return {
 
         end
 
-        if context.first_hand_drawn and not card.getting_sliced and not context.blueprint and card.ability.extra.should_eat_playing_card then
-            card.ability.extra.should_eat_playing_card = false
+        if context.first_hand_drawn and not card.getting_sliced and not context.blueprint and card.ability.extra.consumed.should_eat_playing_card then
+            card.ability.extra.consumed.should_eat_playing_card = false
             local destroyed_card = pseudorandom_element(G.hand.cards, pseudoseed(self.key))
             if SMODS.shatters(destroyed_card) then
                 destroyed_card:shatter()
@@ -108,7 +110,7 @@ return {
                 destroyed_card:start_dissolve()
             end
             delay(0.3)
-            card.ability.extra.playing_card = card.ability.extra.playing_card + destroyed_card.base.nominal
+            card.ability.extra.consumed.playing_card = card.ability.extra.consumed.playing_card + destroyed_card.base.nominal
             SMODS.calculate_context({ remove_playing_cards = true, removed = {destroyed_card} })
             delay(0.5)
             if not (context.blueprint_card or card).getting_sliced then
@@ -118,7 +120,7 @@ return {
         end
 
         if context.joker_main then
-            local ret = self.calculate_x_mult(card);
+            local ret = self.calculate_x_mult(card)
             if ret ~= 1 then
                 return {
                     x_mult = self.calculate_x_mult(card)
@@ -127,19 +129,30 @@ return {
         end
     end,
     calculate_x_mult = function(card)
-        local x = 1
-        x = x + card.ability.extra.joker * 0.5
-        x = x + card.ability.extra.money * 0.01
-        x = x + card.ability.extra.hands * 1.5
-        x = x + card.ability.extra.discards * 1.5
-        x = x + card.ability.extra.hand_size * 1.5
-        x = x + card.ability.extra.playing_card * 0.025
-        x = x + card.ability.extra.consumable * 0.1
+        local x = 1.0
+        x = x + card.ability.extra.consumed.joker * 0.5
+        x = x + card.ability.extra.consumed.money * 0.01
+        x = x + card.ability.extra.consumed.hands * 1.5
+        x = x + card.ability.extra.consumed.discards * 1.5
+        x = x + card.ability.extra.consumed.hand_size * 1.5
+        x = x + card.ability.extra.consumed.playing_card * 0.025
+        x = x + card.ability.extra.consumed.consumable * 0.1
         return x
     end,
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {0.5, self.calculate_x_mult(card)},
-        }
+    generate_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+        full_UI_table.name = localize{type = "name", key = self.key, set = self.set, nodes = full_UI_table.name}
+        localize{type = "descriptions", key = self.key, set = self.set, nodes = desc_nodes, vars = {0.5, self.calculate_x_mult(card)}}
+        local added = false
+        for k, v in pairs(card.ability.extra.consumed) do
+            if v > 0 then
+                if not added then
+                    full_UI_table.info[#full_UI_table.info+1] = {}
+                    desc_nodes = full_UI_table.info[#full_UI_table.info]
+                    desc_nodes.name = localize{type = "name_text", set = "Other", key = "madness_eaten"}
+                    added = true
+                end
+                desc_nodes[#desc_nodes + 1] = localize{type = "text", key = "a_folly_madness_"..k, nodes = desc_nodes, vars = {v}}
+            end
+        end
     end,
 }

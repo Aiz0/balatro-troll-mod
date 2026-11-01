@@ -39,6 +39,15 @@ return {
             a_folly_yellow_card = "+$#1#",
             a_folly_green_card = "$#1# Less",
         },
+        v_text = {
+            a_folly_madness_joker = {"Jokers: {C:attention}#1#"},
+            a_folly_madness_money = {"Money: {C:money}$#1#"},
+            a_folly_madness_hands = {"Hands: {C:chips}#1#"},
+            a_folly_madness_discards = {"Discards: {C:mult}#1#"},
+            a_folly_madness_hand_size = {"Hand Size: {C:attention}#1#"},
+            a_folly_madness_playing_card = {"Playing Card Ranks: {C:green}#1#"},
+            a_folly_madness_consumable = {"Consumables: {C:tarot}#1#"},
+        },
         labels = {
             folly_mark_sticker = "Marked",
         },
@@ -255,17 +264,8 @@ return {
                 },
             },
             madness_eaten = {
-                name = "Madness has eaten",
-                text = {
-                    "#1# Jokers",
-                    "#1#$",
-                    "#1# Hands per Round",
-                    "#1# Discards per Round",
-                    "#1# Hand size",
-                    "#1# Playing cards",
-                    "#1# Consumables",
-                }
-            }
+                name = "Things Eated",
+            },
         },
         Planet = {
             c_folly_strange_planet = {
