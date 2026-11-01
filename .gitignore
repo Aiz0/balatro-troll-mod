@@ -2,4 +2,4 @@
 Folder.DotSettings.user
 node_modules
 .lovelyignore
-Run Stylua.bat
+run_stylua.sh
