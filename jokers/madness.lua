@@ -149,11 +149,11 @@ return {
     calculate_x_mult = function(card)
         local x = 1.0
         x = x + card.ability.extra.consumed.joker * 0.5
-        x = x + card.ability.extra.consumed.money * 0.01
+        x = x + card.ability.extra.consumed.money * 0.05
         x = x + card.ability.extra.consumed.hands * 1.5
         x = x + card.ability.extra.consumed.discards * 1.5
         x = x + card.ability.extra.consumed.hand_size * 1.5
-        x = x + card.ability.extra.consumed.playing_card * 0.025
+        x = x + card.ability.extra.consumed.playing_card * 0.05
         x = x + card.ability.extra.consumed.consumable * 0.1
         return x
     end,
