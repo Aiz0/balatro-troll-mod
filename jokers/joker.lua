@@ -8,6 +8,9 @@ SMODS.Enhancement({
     replace_base_card = true,
     no_rank = true,
     no_suit = true,
+    in_pool = function(self, args) 
+            return false
+        end,
 })
 
 G.FUNCS.get_most_of_rank = function(hand)
