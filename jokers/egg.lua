@@ -5,17 +5,16 @@ local chicken = SMODS.Joker({
     config = {
         extra = {
             sell_value = 1,
-            joker_slots = 1,
             joker = folly_utils.prefix.joker .. "egg",
             odds = 4,
         },
+        card_limit = 1,
     },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.extra.joker]
         -- should not be needed since chicken will always be eternal
         --info_queue[#info_queue + 1] = { key = "eternal", set = "Other" }
-        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
-        return { vars = { card.ability.extra.joker_slots, card.ability.extra.sell_value } }
+        return { vars = { card.ability.card_limit, card.ability.extra.sell_value } }
     end,
     in_pool = function(self, args)
         return false
@@ -62,16 +61,6 @@ local chicken = SMODS.Joker({
                 message = localize("k_folly_val_down"),
                 colour = G.C.MONEY,
             }
-        end
-    end,
-    add_to_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            G.jokers.config.card_limit = G.jokers.config.card_limit + card.ability.extra.joker_slots
-        end
-    end,
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            G.jokers.config.card_limit = G.jokers.config.card_limit - card.ability.extra.joker_slots
         end
     end,
 })

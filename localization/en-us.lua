@@ -258,7 +258,6 @@ return {
             j_folly_chicken = {
                 name = "Chicken",
                 text = {
-                    "{C:dark_edition}+#1#{} Joker slots",
                     "When {C:attention}Blind{} is selected,",
                     "create a {C:dark_edition}Negative {C:attention}Eternal Egg",
                     "Remove {C:money}$#2#{} of {C:attention}sell value",
