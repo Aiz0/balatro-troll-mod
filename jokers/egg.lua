@@ -25,7 +25,9 @@ local chicken = SMODS.Joker({
     end,
     calculate = function(self, card, context)
         if context.setting_blind then
-            if pseudorandom(self.key) < G.GAME.probabilities.normal / card.ability.extra.odds then
+            if
+                SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds, self.key)
+            then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         SMODS.add_card({
@@ -87,7 +89,9 @@ return {
             and context.main_eval
             and not context.blueprint
         then
-            if pseudorandom(self.key) < G.GAME.probabilities.normal / card.ability.extra.odds then
+            if
+                SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra.odds, self.key)
+            then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         -- first play some sound effects and juice up card
