@@ -1,5 +1,5 @@
 ﻿.idea
+.direnv
 Folder.DotSettings.user
-node_modules
 .lovelyignore
 run_stylua.sh
