@@ -4,7 +4,7 @@ local chicken = SMODS.Joker({
     pos = { x = 4, y = 3 },
     config = {
         extra = {
-            sell_value = 1,
+            sell_value_lost = 1,
             joker = folly_utils.prefix.joker .. "egg",
             odds = 4,
         },
@@ -14,7 +14,7 @@ local chicken = SMODS.Joker({
         info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.extra.joker]
         -- should not be needed since chicken will always be eternal
         --info_queue[#info_queue + 1] = { key = "eternal", set = "Other" }
-        return { vars = { card.ability.card_limit, card.ability.extra.sell_value } }
+        return { vars = { card.ability.card_limit, card.ability.extra.sell_value_lost } }
     end,
     in_pool = function(self, args)
         return false
@@ -50,13 +50,8 @@ local chicken = SMODS.Joker({
             and context.main_eval
             and not context.blueprint
         then
-            for _, other_card in ipairs(SMODS.find_card(self.key)) do
-                if other_card.set_cost then
-                    other_card.ability.extra_value = (other_card.ability.extra_value or 0)
-                        - card.ability.extra.sell_value
-                    other_card:set_cost()
-                end
-            end
+            card.ability.extra_value = card.ability.extra_value - card.ability.extra.sell_value_lost
+            card:set_cost()
             return {
                 message = localize("k_folly_val_down"),
                 colour = G.C.MONEY,
