@@ -325,7 +325,7 @@ return {
                     if context_blueprint_card then
                         context_blueprint_card:juice_up()
                     else
-                        self:juice_up()
+                        card:juice_up()
                     end
                     return true
                 end }))
