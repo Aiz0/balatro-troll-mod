@@ -131,12 +131,14 @@ SMODS.Gradient({
 SMODS.Seal({
     key = "glass",
     atlas = "folly_seals",
+    -- not great but the values aren't stored on the card
+    max_retrigs = 3,
     pos = { x = 2, y = 0 },
     badge_colour = HEX("d0d5db"),
     calculate = function(self, card, context)
         if context.repetition then
             --honestly who the fuck invented random anyway?
-            local repetitions = folly_utils.pseudorandom_range_rounded(math.min(3, G.GAME.probabilities.normal - 1), 3, self.key)
+            local repetitions = folly_utils.pseudorandom_range_rounded(math.min(self.max_retrigs, context.numerator - 1), self.max_retrigs, self.key)
             if repetitions ~= 0 then
                 return { repetitions = repetitions }
             end
@@ -147,8 +149,11 @@ SMODS.Seal({
         end
     end,
     loc_vars = function(self, info_queue, card)
-        return { vars = { math.min(3, G.GAME.probabilities.normal - 1) } }
-        
+        return { vars = {
+            self.max_retrigs,
+            math.min(self.max_retrigs, G.GAME.probabilities.normal - 1)
+                }
+            }
     end
 })
 
