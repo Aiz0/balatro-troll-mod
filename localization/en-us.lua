@@ -293,7 +293,7 @@ return {
                 text = {
                     "{s:1.25,X:folly_fragile_inverse,C:folly_fragile}FRAGILE",
                     "Retrigger this",
-                    "card {C:green}#1# to 3{} times",
+                    "card {C:green}#1# to #2#{} times",
                 },
             },
             folly_navy_seal = {

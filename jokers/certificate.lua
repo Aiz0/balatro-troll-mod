@@ -150,8 +150,8 @@ SMODS.Seal({
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = {
+            math.min(self.max_retrigs, G.GAME.probabilities.normal - 1),
             self.max_retrigs,
-            math.min(self.max_retrigs, G.GAME.probabilities.normal - 1)
                 }
             }
     end
