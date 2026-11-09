@@ -222,15 +222,16 @@ local function get_gays(hand, rank)
     for _, suit in ipairs(SMODS.Suit.obj_buffer) do
         local gays = {}
         for _, card in ipairs(hand) do
-            if
-                card:is_suit(suit, nil, true)
-                and card:get_seal(true) == "folly_gay"
-                and SMODS.Ranks[card.base.value].key == rank
-            then
-                table.insert(gays, card)
-            end
-            if SMODS.has_enhancement(card, "m_folly_jimbo") then
-                table.insert(gays, card)
+            if card:get_seal(true) == "folly_gay" then
+                if
+                    card:is_suit(suit, nil, true)
+                    and SMODS.Ranks[card.base.value].key == rank
+                then
+                    table.insert(gays, card)
+                end
+                if SMODS.has_enhancement(card, "m_folly_jimbo") then
+                    table.insert(gays, card)
+                end
             end
             if #gays == 2 then
                 return { gays }
