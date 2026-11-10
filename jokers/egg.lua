@@ -50,12 +50,16 @@ local chicken = SMODS.Joker({
             and context.main_eval
             and not context.blueprint
         then
-            card.ability.extra_value = card.ability.extra_value - card.ability.extra.sell_value_lost
+            SMODS.scale_card(card, {
+                ref_table = card.ability,
+                ref_value = "extra_value",
+                scalar_table = card.ability.extra,
+                scalar_value = "sell_value_lost",
+                operation = "-",
+                message_key = "a_folly_val_down",
+            })
+
             card:set_cost()
-            return {
-                message = localize("k_folly_val_down"),
-                colour = G.C.MONEY,
-            }
         end
     end,
 })
@@ -102,12 +106,18 @@ return {
                 }))
                 return { message = localize("k_folly_hatched") }
             else
-                card.ability.extra_value = card.ability.extra_value + card.ability.extra.price
-                card:set_cost()
-                return {
+                SMODS.scale_card(card, {
+                    ref_table = card.ability,
+                    ref_value = "extra_value",
+                    scalar_table = card.ability.extra,
+                    scalar_value = "price",
                     message = localize("k_val_up"),
-                    colour = G.C.MONEY,
-                }
+                })
+
+                card:set_cost()
+                -- required otherwise it crashes
+                -- it's possible this can be removed
+                return {}
             end
         end
     end,

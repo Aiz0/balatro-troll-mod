@@ -30,7 +30,6 @@ return {
             k_folly_bull_angry = "Angry!",
             k_folly_red_bull = "Red bull!",
             k_folly_golden = "1 Gazillion",
-            k_folly_val_down = "Value Down!",
             k_folly_hatched = "Hatched!",
 
             --Object Types
@@ -42,6 +41,7 @@ return {
             a_folly_blue_card = "+#1# Chips",
             a_folly_yellow_card = "+$#1#",
             a_folly_green_card = "$#1# Less",
+            a_folly_val_down = "Value Down!",
         },
         v_text = {
             a_folly_madness_joker = { "Jokers: {C:attention}#1#" },
