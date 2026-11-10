@@ -14,7 +14,17 @@ local chicken = SMODS.Joker({
         info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.extra.joker]
         -- should not be needed since chicken will always be eternal
         --info_queue[#info_queue + 1] = { key = "eternal", set = "Other" }
-        return { vars = { card.ability.card_limit, card.ability.extra.sell_value_lost } }
+
+        local numerator, denominator =
+            SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "vremade_8ball")
+        return {
+            vars = {
+                numerator,
+                denominator,
+                card.ability.card_limit,
+                card.ability.extra.sell_value_lost,
+            },
+        }
     end,
     in_pool = function(self, args)
         return false

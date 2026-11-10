@@ -258,10 +258,10 @@ return {
             j_folly_chicken = {
                 name = "Chicken",
                 text = {
-                    "When {C:attention}Blind{} is selected,",
-                    "create a {C:dark_edition}Negative {C:attention}Eternal Egg",
-                    "Remove {C:money}$#2#{} of {C:attention}sell value",
-                    "from every {C:attention}Chicken{}",
+                    "{C:green}#1# in #2#{} chance to create",
+                    "a {C:dark_edition}Negative {C:attention}Eternal Egg",
+                    "when {C:attention}Blind{} is selected",
+                    "Loses {C:money}$#3#{} of {C:attention}sell value",
                     "at end of round",
                 },
             },
