@@ -248,6 +248,34 @@ local function get_gays(hand, rank)
     return {}
 end
 
+local function get_polycule(hand)
+    local gays = {}
+    local inserts = 0
+    for _, card in ipairs(hand) do
+        local rank = SMODS.Ranks[card.base.value].key
+        if card:get_seal(true) == "folly_gay" then
+            if
+                card:is_face()
+                and gays[rank] == nil
+                and card.edition
+                and card.edition.polychrome
+            then
+                gays[rank] = card
+                inserts = inserts + 1
+            end
+            if SMODS.has_enhancement(card, "m_folly_jimbo") then
+                gays[rank] = card
+                inserts = inserts + 1
+            end
+        end
+        --folly_utils.log.Info(#gays)
+        if inserts == 3 then
+            return { gays }
+        end
+    end
+    return {}
+end
+
 SMODS.PokerHand({
     key = "men",
     chips = 5,
@@ -291,14 +319,32 @@ SMODS.PokerHand({
     l_chips = 3,
     l_mult = 3,
     example = {
-        { "J_Q", true, seal = "folly_gay" },
-        { "J_Q", true, seal = "folly_gay" },
-        { "S_J", false },
+        { "H_J", true, seal = "folly_gay" },
+        { "H_J", true, seal = "folly_gay" },
+        { "S_Q", false },
         { "D_7", false },
         { "C_3", false },
     },
     evaluate = function(parts, hand)
         return get_gays(hand, "Jack")
+    end
+})
+
+SMODS.PokerHand({
+    key = "polycule",
+    chips = 200,
+    mult = 20,
+    l_chips = 25,
+    l_mult = 5,
+    example = {
+        { "H_K", true, seal = "folly_gay", edition = "e_polychrome" },
+        { "S_Q", true, seal = "folly_gay", edition = "e_polychrome" },
+        { "D_J", true, seal = "folly_gay", edition = "e_polychrome" },
+        { "D_7", false },
+        { "C_3", false },
+    },
+    evaluate = function(parts, hand)
+        return get_polycule(hand)
     end
 })
 

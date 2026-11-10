@@ -65,25 +65,30 @@ return {
             folly_spheal_seal = "Spheal",
             folly_glass_seal = "Glass Seal",
             folly_navy_seal = "Navy Seal",
-            folly_navy_seal = "Gay",
+            folly_gay_seal = "Gay",
         },
         poker_hands = {
             folly_men = "Men",
             folly_women = "Women",
             folly_enby = "Enbies",
+            folly_polycule = "The Polycule",
         },
         poker_hand_descriptions = {
             folly_men = {
-                "2 kings that share the same suit with gay seals, may",
-                "be played with 3 other unscored card",
+                "2 kings that share the same suit with gay seals.",
+                "They may be played with 3 other unscored card",
             },
             folly_women = {
-                "2 kings that share the same suit with gay seals, may",
-                "be played with 3 other unscored card",
+                "2 kings that share the same suit with gay seals.",
+                "They may be played with 3 other unscored card",
             },
             folly_enby = {
-                "2 jacks that share the same suit with gay seals, may",
-                "be played with 3 other unscored card",
+                "2 jacks that share the same suit with gay seals.",
+                "They may be played with 3 other unscored card",
+            },
+            folly_polycule = {
+                "3 Unique Polychrome Face cards with gay seals.",
+                "They may be played with 2 other unscored card",
             },
         },
     },
