@@ -15,6 +15,13 @@ return {
             poker_hands = {},
         },
     },
+
+    calculate = function(self, card, context)
+        if context.fix_probability then
+            return { numerator = 6 }
+        end
+    end,
+
     add_to_deck = function(self, card, from_debuff)
         -- set cardareas to 6
         card.ability.extra.joker_limit = G.jokers.config.card_limit
@@ -25,11 +32,6 @@ return {
 
         card.ability.extra.hand_size_offset = 6 - G.hand.config.card_limit
         G.hand:change_size(card.ability.extra.hand_size_offset)
-
-        if G.GAME.probabilities.normal > 0 then
-            card.ability.extra.odds = 6 / G.GAME.probabilities.normal
-            G.GAME.probabilities.normal = 6
-        end
 
         -- set cards to 6s
         for _, playing_card in ipairs(G.playing_cards) do
@@ -83,8 +85,6 @@ return {
             - (6 - G.consumeables.config.card_limit)
         -- hand size
         G.hand:change_size(-card.ability.extra.hand_size_offset)
-
-        G.GAME.probabilities.normal = G.GAME.probabilities.normal / card.ability.extra.odds
 
         -- hand
         ease_hands_played(-card.ability.extra.hands)

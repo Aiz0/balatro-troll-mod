@@ -1,19 +1,18 @@
 return {
     key = "cavendish",
-    name = "fj_cavendish",
     config = {
         extra = {
             Xmult = 3,
             odds = 1000,
             rot = 1,
         },
-        name = "fj_cavendish",
     },
     loc_vars = function(self, info_queue, card)
+        local numerator, new_odds = SMODS.get_probability_vars(card, 1, odds, self.key)
         return {
             vars = {
                 card.ability.extra.Xmult,
-                G.GAME.probabilities.normal,
+                numerator,
                 card.ability.extra.odds,
             },
         }
@@ -25,8 +24,23 @@ return {
             and not context.repetition
             and not context.blueprint
         then
-            if pseudorandom(self.key) >= G.GAME.probabilities.normal / card.ability.extra.odds then
-                card.ability.extra.odds = card.ability.extra.odds - card.ability.extra.rot
+            if
+                not SMODS.pseudorandom_probability(
+                    card,
+                    self.key,
+                    1,
+                    card.ability.extra.odds,
+                    self.key
+                )
+            then
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "odds",
+                    scalar_value = "rot",
+                    operation = "-",
+                    no_message = true,
+                })
+                -- while these do scale they're not the main thing that does scale, so we don't need to send individual events
                 card.ability.extra.rot = card.ability.extra.rot * 2
                 card.ability.extra.odds = math.max(card.ability.extra.odds, 6)
                 return { message = localize("k_safe_ex") }
@@ -52,7 +66,7 @@ return {
                         return true
                     end,
                 }))
-                return { message = localize("j_folly_cavendish") }
+                return { message = localize("k_folly_cavendish") }
             end
         end
     end,

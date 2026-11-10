@@ -39,23 +39,20 @@ return {
     },
     calculate = function(self, card, context)
         if context.selling_card and not context.blueprint then -- selling adds fuel to the fire
-            card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    card_eval_status_text(
-                        card,
-                        "extra",
-                        nil,
-                        nil,
-                        nil,
-                        { message = localize("k_upgrade_ex") }
-                    )
-                    return true
-                end,
-            }))
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "x_mult",
+                scalar_value = "x_mult_mod",
+            })
         end
         if context.after then -- reduce xMult when a hand is scored
-            card.ability.extra.x_mult = card.ability.extra.x_mult - card.ability.extra.x_mult_mod
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "x_mult",
+                scalar_value = "x_mult_mod",
+                operation = "-",
+                no_message = true,
+            })
             if card.ability.extra.x_mult <= 0 then
                 folly_utils.replace(card, folly_utils.prefix.joker .. "charcoal") -- get charcoaled idiot
             end

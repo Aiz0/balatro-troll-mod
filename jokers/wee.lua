@@ -7,7 +7,12 @@ return {
             and not context.blueprint
             and context.other_card:get_id() == 2
         then
-            card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "chips",
+                scalar_value = "chip_mod",
+                no_message = true,
+            })
             return {
                 message = localize("k_upgrade_ex"),
                 colour = G.C.CHIPS,

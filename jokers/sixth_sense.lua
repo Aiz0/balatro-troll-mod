@@ -97,7 +97,8 @@ return {
             and G.GAME.current_round.hands_played == 0
         then
             if
-                #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit
+                #G.consumeables.cards + G.GAME.consumeable_buffer
+                < G.consumeables.config.card_limit
             then
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                 G.E_MANAGER:add_event(Event({

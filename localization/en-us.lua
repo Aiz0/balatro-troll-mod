@@ -27,6 +27,9 @@ return {
             k_folly_moonbase_alpha_snake = "snake?",
             k_folly_moonbase_alpha_uuuuuuueeeeeeeeeeuuuuuuu = "uuuueeeeuuuu",
             k_folly_glorp = "Glorp",
+            k_folly_bull_angry = "Angry!",
+            k_folly_red_bull = "Red bull!",
+            k_folly_golden = "1 Gazillion",
             k_folly_spheal = "Go Spheal!",
             k_folly_navy_seal = {
                 "What the fuck did you just fucking say about me, you little bitch?",
@@ -56,6 +59,15 @@ return {
             a_folly_blue_card = "+#1# Chips",
             a_folly_yellow_card = "+$#1#",
             a_folly_green_card = "$#1# Less",
+        },
+        v_text = {
+            a_folly_madness_joker = { "Jokers: {C:attention}#1#" },
+            a_folly_madness_money = { "Money: {C:money}$#1#" },
+            a_folly_madness_hands = { "Hands: {C:chips}#1#" },
+            a_folly_madness_discards = { "Discards: {C:mult}#1#" },
+            a_folly_madness_hand_size = { "Hand Size: {C:attention}#1#" },
+            a_folly_madness_playing_card = { "Playing Card Ranks: {C:green}#1#" },
+            a_folly_madness_consumable = { "Consumables: {C:tarot}#1#" },
         },
         labels = {
             folly_mark_sticker = "Marked",
@@ -128,7 +140,7 @@ return {
                 text = {
                     "Every played {C:attention}card{}",
                     "permanently gains",
-                    "{C:mult}+1{} Mult when scored",
+                    "{C:mult}+#1#{} Mult when scored",
                 },
             },
             j_folly_mansion = {
@@ -237,6 +249,25 @@ return {
                     "any {C:attention}Booster Pack{} is skipped",
                 },
             },
+            j_folly_angry_bull = {
+                name = "Angry Bull",
+                text = {
+                    "{C:chips}+#1#{} Chips for",
+                    "each {C:money}$1{} you have",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                    "{C:eternal}Eternal",
+                },
+            },
+            j_folly_red_bull = {
+                name = "Red Bull",
+                text = {
+                    "After all cards have been scored",
+                    "{X:mult,C:white}X#1#{} Mult on",
+                    "first hand of round",
+                    "{X:mult,C:white}X#2#{} Mult on",
+                    "all other hands",
+                },
+            },
         },
         Enhanced = {
             m_folly_burnt = {
@@ -276,8 +307,10 @@ return {
                     "been {C:attention}marked",
                 },
             },
-            
-            --seals
+            madness_eaten = {
+                name = "Things Eated",
+            },
+                        --seals
             folly_approval_seal = {
                 name = "Seal of Approval",
                 text = {

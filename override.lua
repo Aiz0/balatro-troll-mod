@@ -72,10 +72,10 @@ function get_straight(hand, min_length, skip, wrap)
             table.insert(jimbos, v)
         end
     end
+    min_length = min_length or 5
     if #jimbos >= min_length then
         return { straight = jimbos }
     end
-    min_length = min_length or 5
     if min_length < 2 then
         min_length = 2
     end

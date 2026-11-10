@@ -42,7 +42,7 @@ return {
             local other_card = context.other_card
             if
                 other_card.config.center ~= G.P_CENTERS.m_folly_burnt
-                and pseudorandom(self.key) < G.GAME.probabilities.normal / 20
+                and SMODS.pseudorandom_probability(card, self.key, 1, 20, self.key)
             then
                 other_card:set_ability(G.P_CENTERS.m_folly_burnt, nil, true)
                 G.E_MANAGER:add_event(Event({

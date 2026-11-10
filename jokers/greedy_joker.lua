@@ -4,9 +4,7 @@ return {
         if context.end_of_round and not context.individual and not context.repetition then
             return {
                 message = localize("k_folly_greed"),
-                func = function()
-                    ease_dollars(-1)
-                end,
+                dollars = -1,
             }
         end
     end,

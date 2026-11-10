@@ -29,15 +29,14 @@ SMODS.Joker({
                         colour = G.C.RED,
                     }
                 else
-                    local chips = raised_card.base.nominal
-                    card.ability.extra = card.ability.extra + chips
-                    return {
-                        message = localize({
-                            type = "variable",
-                            key = "a_chips",
-                            vars = { context.other_card.base.nominal },
-                        }),
-                    }
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability,
+                        ref_value = "extra",
+                        scalar_table = raised_card.base,
+                        scalar_value = "nominal",
+                        message_key = "a_chips",
+                        message_colour = G.C.BLUE,
+                    })
                 end
             end
         end
@@ -59,6 +58,9 @@ SMODS.Joker({
     key = "house",
     atlas = "folly_jokers",
     pos = { x = 1, y = 2 },
+    config = {
+        extra = 1,
+    },
     rarity = 2,
     cost = 10,
     in_pool = function(self, args)
@@ -66,12 +68,16 @@ SMODS.Joker({
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
-            context.other_card.ability.perma_mult = (context.other_card.ability.perma_mult or 0) + 1
-
-            return {
-                extra = { message = localize("k_upgrade_ex"), colour = G.C.MULT },
-                colour = G.C.MULT,
-            }
+            SMODS.scale_card(context.other_card, {
+                ref_table = context.other_card.ability,
+                ref_value = "perma_mult",
+                scalar_table = card.ability,
+                scalar_value = "extra",
+                scaling_message = {
+                    key = "k_upgrade_ex",
+                    colour = G.C.MULT,
+                },
+            })
         end
     end,
 
@@ -99,18 +105,34 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.final_scoring_step and not context.blueprint then
             for k, v in ipairs(context.scoring_hand) do
-                if v.base.nominal ~= 2 then
-                    card.ability.extra.xmult = card.ability.extra.xmult
-                        + card.ability.extra.xmult_mod
-                    G.E_MANAGER:add_event(Event({
-                        trigger = "after",
-                        delay = 0.1,
-                        func = function()
-                            assert(SMODS.modify_rank(v, -1))
-                            v:juice_up()
-                            return true
-                        end,
-                    }))
+                if v.config.center ~= G.P_CENTERS.m_stone then
+                    if v.base.nominal ~= 2 then
+                        G.E_MANAGER:add_event(Event({
+                            trigger = "after",
+                            delay = 0.1,
+                            func = function()
+                                assert(SMODS.modify_rank(v, -1))
+                                v:juice_up()
+                                return true
+                            end,
+                        }))
+                    else
+                        G.E_MANAGER:add_event(Event({
+                            delay = 0.1,
+                            trigger = "before",
+                            func = function()
+                                v:set_ability(G.P_CENTERS.m_stone, nil)
+                                v:juice_up()
+                                return true
+                            end,
+                        }))
+                    end
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability.extra,
+                        ref_value = "xmult",
+                        scalar_value = "xmult_mod",
+                        no_message = true,
+                    })
                 end
             end
 

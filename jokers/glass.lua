@@ -6,7 +6,7 @@ return {
             and not context.individual
             and not context.repetition
             and not context.blueprint
-            and (pseudorandom(self.key) < G.GAME.probabilities.normal / 4)
+            and (SMODS.pseudorandom_probability(card, self.key, 1, 4, self.key))
         then
             G.E_MANAGER:add_event(Event({
                 func = function()

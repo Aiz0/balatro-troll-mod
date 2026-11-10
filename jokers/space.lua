@@ -36,13 +36,15 @@ return {
         extra = 4,
     },
     loc_vars = function(self, info_queue, card)
-        return { vars = { G.GAME.probabilities.normal or 1, card.ability.extra } }
+        local numerator, denominator =
+            SMODS.get_probability_vars(card, 1, card.ability.extra, self.key)
+        return { vars = { numerator, denominator } }
     end,
     calculate = function(self, card, context)
         if
             context.before
             and context.cardarea == G.jokers
-            and pseudorandom(self.key) < G.GAME.probabilities.normal / card.ability.extra
+            and SMODS.pseudorandom_probability(card, self.key, 1, card.ability.extra, self.key)
         then
             local sound = pseudorandom_element(space_sounds, pseudoseed(self.key))
 

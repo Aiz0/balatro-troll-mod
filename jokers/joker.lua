@@ -8,6 +8,9 @@ SMODS.Enhancement({
     replace_base_card = true,
     no_rank = true,
     no_suit = true,
+    in_pool = function(self, args)
+        return false
+    end,
 })
 
 G.FUNCS.get_most_of_rank = function(hand)
@@ -16,7 +19,7 @@ G.FUNCS.get_most_of_rank = function(hand)
         vals[i] = {}
     end
     for i = #hand, 1, -1 do
-        if not SMODS.has_enhancement(hand[i], "m_folly_jimbo") then
+        if not hand[i].config.center.no_rank then
             table.insert(vals[hand[i]:get_id()], hand[i])
         end
     end

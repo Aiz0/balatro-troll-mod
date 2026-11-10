@@ -21,7 +21,7 @@ return {
             and context.destroy_card:is_suit("Clubs")
             and context.destroy_card.ability.set == "Default"
         then
-            if pseudorandom(self.key) < G.GAME.probabilities.normal / 6 then
+            if SMODS.pseudorandom_probability(card, self.key, 1, 6, self.key) then
                 context.destroy_card:set_ability(G.P_CENTERS.m_folly_eated, nil, true)
                 return {
                     remove = true,
