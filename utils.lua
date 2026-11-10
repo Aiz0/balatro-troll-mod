@@ -58,6 +58,18 @@ folly_utils = {
         return a + (b - a) * t
     end,
 
+    ---prefix number with sign if positive, 0 is currently left alone
+    ---@param value number
+    ---@return string
+    format_signed = function(value)
+        -- needed so we don't break cases were number would be formatted differently if this function wasn't used
+        local formatted = format_ui_value(value)
+        if value > 0 then
+            return "+" .. formatted
+        end
+        return formatted
+    end,
+
     ---Shuffles Cards in cardarea.
     ---@param shuffles number? Defaults to 3
     ---@param area any? Defaults to G.jokers

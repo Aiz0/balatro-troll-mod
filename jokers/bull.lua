@@ -40,13 +40,12 @@ return {
         name = folly_utils.prefix.joker .. "bull",
         extra = {
             chips = 2,
+            mode = "normal",
             red_bull = {
-                active = false,
                 xmult_first = 25,
                 xmult_rest = 0.25,
             },
             angry_bull = {
-                active = false,
                 chips_base = 8,
                 chips_loss = 2,
             },
@@ -61,9 +60,16 @@ return {
             },
         }
 
-        if card.ability.extra.angry_bull.active then
+        if card.ability.extra.mode == "angry" then
             loc_table.key = folly_utils.prefix.joker .. "angry_bull"
-        elseif card.ability.extra.red_bull.active then
+            loc_table.vars = {
+                folly_utils.format_signed(card.ability.extra.chips),
+                folly_utils.format_signed(
+                    card.ability.extra.chips * (G.GAME.dollars + (G.GAME.dollar_buffer or 0))
+                ),
+                card.ability.extra.angry_bull.chips_loss,
+            }
+        elseif card.ability.extra.mode == "red" then
             loc_table.key = folly_utils.prefix.joker .. "red_bull"
             loc_table.vars = {
                 card.ability.extra.red_bull.xmult_first,
@@ -74,15 +80,12 @@ return {
     end,
     calculate = function(self, card, context)
         if context.setting_blind and not context.blueprint and not card.getting_sliced then
-            if
-                not (card.ability.extra.angry_bull.active or card.ability.extra.red_bull.active)
-                and find_red_joker()
-            then
+            if card.ability.extra.mode == "normal" and find_red_joker() then
                 return {
                     message = localize("k_folly_bull_angry"),
                     colour = G.C.RED,
                     func = function()
-                        card.ability.extra.angry_bull.active = true
+                        card.ability.extra.mode = "angry"
                         card.ability.extra.chips = card.ability.extra.angry_bull.chips_base
                         card.children.center:set_sprite_pos(self.angry_bull_pos)
                         card:set_eternal(true)
@@ -90,7 +93,7 @@ return {
                 }
             end
         elseif
-            card.ability.extra.angry_bull.active
+            card.ability.extra.mode == "angry"
             and context.end_of_round
             and not context.individual
             and not context.repetition
@@ -102,7 +105,7 @@ return {
         elseif context.selling_card then
             -- Turn into redbull when diet cola sold while angry
             if
-                card.ability.extra.angry_bull.active
+                card.ability.extra.mode == "angry"
                 and (
                     context.card.config.center_key == "j_diet_cola"
                     or context.card.config.center_key == folly_utils.prefix.joker .. "diet_cola"
@@ -112,8 +115,7 @@ return {
                     message = localize("k_folly_red_bull"),
                     colour = G.C.RED,
                     func = function()
-                        card.ability.extra.red_bull.active = true
-                        card.ability.extra.angry_bull.active = false
+                        card.ability.extra.mode = "red"
                         card.children.center:set_sprite_pos(self.red_bull_pos)
                         card:set_eternal(false)
                     end,
@@ -121,13 +123,13 @@ return {
             end
         elseif
             context.joker_main
-            and not card.ability.extra.red_bull.active
+            and card.ability.extra.mode ~= "red"
             and (G.GAME.dollars + (G.GAME.dollar_buffer or 0)) > 0
         then
             return {
                 chips = card.ability.extra.chips * (G.GAME.dollars + (G.GAME.dollar_buffer or 0)),
             }
-        elseif context.final_scoring_step and card.ability.extra.red_bull.active then
+        elseif context.final_scoring_step and card.ability.extra.mode == "red" then
             local xmult = G.GAME.current_round.hands_played == 0
                     and card.ability.extra.red_bull.xmult_first
                 or card.ability.extra.red_bull.xmult_rest
@@ -136,9 +138,9 @@ return {
     end,
     set_sprites = function(self, card, front)
         if card.ability then
-            if card.ability.extra.red_bull.active then
+            if card.ability.extra.mode == "red" then
                 card.children.center:set_sprite_pos(self.red_bull_pos)
-            elseif card.ability.extra.angry_bull.active then
+            elseif card.ability.extra.mode == "angry" then
                 card.children.center:set_sprite_pos(self.angry_bull_pos)
             end
         end
