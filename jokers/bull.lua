@@ -99,9 +99,17 @@ return {
             and not context.repetition
             and not context.blueprint
         then
-            card.ability.extra.chips = card.ability.extra.chips
-                - card.ability.extra.angry_bull.chips_loss
-            return { message = localize("k_folly_bull_angry"), colour = G.C.RED }
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "chips",
+                scalar_table = card.ability.extra.angry_bull,
+                scalar_value = "chips_loss",
+                operation = "-",
+                scaling_message = {
+                    message = localize("k_folly_bull_angry"),
+                    colour = G.C.RED,
+                },
+            })
         elseif context.selling_card then
             -- Turn into redbull when diet cola sold while angry
             if
