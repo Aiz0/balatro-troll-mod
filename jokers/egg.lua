@@ -33,6 +33,7 @@ local chicken = SMODS.Joker({
                             key = card.ability.extra.joker,
                             edition = "e_negative",
                             stickers = { "eternal" },
+                            force_stickers = { "eternal" },
                         })
                         return true
                     end,
