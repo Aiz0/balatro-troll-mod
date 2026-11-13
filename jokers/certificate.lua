@@ -295,7 +295,6 @@ local function get_polycule(hand)
                 inserts = inserts + 1
             end
         end
-        --folly_utils.log.Info(#gays)
         if inserts == 3 then
             return { gays }
         end
@@ -383,7 +382,6 @@ SMODS.PokerHand({
         return get_polycule(hand)
     end,
     visible = function(self)
-        folly_utils.log.Info("yep, we checked if it should be visible")
         return G.GAME.GAY_SEAL_SPAWNED
     end,
 })
@@ -417,7 +415,6 @@ return {
             })
             created:set_seal(seal)
             if seal == "folly_gay" then
-                folly_utils.log.Info("yep, gay seal spawned alright")
                 G.GAME.GAY_SEAL_SPAWNED = true
             end
             G.E_MANAGER:add_event(Event({
