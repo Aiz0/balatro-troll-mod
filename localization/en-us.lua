@@ -344,7 +344,7 @@ return {
                 name = "Gay",
                 text = {
                     "Allows for {C:folly_gay}Gay",
-                    "poker hand"
+                    "poker hands"
                 },
             },
         },
