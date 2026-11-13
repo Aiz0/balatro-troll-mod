@@ -1,7 +1,16 @@
 --                      2, 3, 4, 5, 6, 7, 8, 9, 10,J, Q, K, A
 local rank_approval = { 2, 2, 2, 2, 2, 1, 1, 2, 2, 3, 3, 4, 2 }
 local suit_approval = { Spades = 1, Clubs = 2, Diamonds = 3, Hearts = 4 }
-local enhancement_approval = { ["Bonus"] = 1, ["Mult"] = 2, ["Wild Card"] = 1, ["Glass Card"] = 4, ["Steel Card"] = 3, ["Stone Card"] = 1, ["Gold Card"] = 3, ["Lucky Card"] = 3 }
+local enhancement_approval = {
+    ["Bonus"] = 1,
+    ["Mult"] = 2,
+    ["Wild Card"] = 1,
+    ["Glass Card"] = 4,
+    ["Steel Card"] = 3,
+    ["Stone Card"] = 1,
+    ["Gold Card"] = 3,
+    ["Lucky Card"] = 3,
+}
 local editions_approval = { ["foil"] = 2, ["holo"] = 3, ["polychrome"] = 4, ["negative"] = 4 }
 
 SMODS.Seal({
@@ -25,10 +34,10 @@ SMODS.Seal({
                 approval = approval * editions_approval[card.edition.type]
             end
             return {
-                mult = approval
+                mult = approval,
             }
         end
-    end
+    end,
 })
 
 local function spheal_card(card, context)
@@ -56,7 +65,12 @@ SMODS.Seal({
     pos = { x = 1, y = 0 },
     badge_colour = HEX("8c9eff"),
     calculate = function(self, card, context)
-        if context.main_scoring and context.cardarea == G.play and not context.spheal and not card.sphealed then
+        if
+            context.main_scoring
+            and context.cardarea == G.play
+            and not context.spheal
+            and not card.sphealed
+        then
             local card_index
             for i = 1, #G.play.cards do
                 if G.play.cards[i] == card then
@@ -94,7 +108,7 @@ SMODS.Seal({
         if context.after and context.cardarea == G.play then
             card.sphealed = false
         end
-    end
+    end,
 })
 
 SMODS.DrawStep({
@@ -103,9 +117,15 @@ SMODS.DrawStep({
     order = 60,
     func = function(self)
         if self.seal == "folly_glass" then
-            G.shared_seals[self.seal]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+            G.shared_seals[self.seal]:draw_shader(
+                "voucher",
+                nil,
+                self.ARGS.send_to_shader,
+                nil,
+                self.children.center
+            )
         end
-    end
+    end,
 })
 
 SMODS.Gradient({
@@ -115,7 +135,7 @@ SMODS.Gradient({
         HEX("ffffff"),
     },
     cycle = 1.5,
-    interpolation = "trig"
+    interpolation = "trig",
 })
 
 SMODS.Gradient({
@@ -125,7 +145,7 @@ SMODS.Gradient({
         HEX("ff0000"),
     },
     cycle = 1.5,
-    interpolation = "trig"
+    interpolation = "trig",
 })
 
 SMODS.Seal({
@@ -140,28 +160,32 @@ SMODS.Seal({
         if context.repetition then
             --honestly who the fuck invented random anyway?
             local num, _ = SMODS.get_probability_vars(card, 0, 0)
-            local repetitions = folly_utils.pseudorandom_range_rounded(math.min(card.ability.seal.max_retrigs, num - 1), card.ability.seal.max_retrigs, self.key)
+            local repetitions = folly_utils.pseudorandom_range_rounded(
+                math.min(card.ability.seal.max_retrigs, num - 1),
+                card.ability.seal.max_retrigs,
+                self.key
+            )
             return { repetitions = repetitions }
         end
         if context.destroy_card and context.destroy_card.seal == "folly_glass" then
-            
             return { remove = true }
         end
     end,
     loc_vars = function(self, info_queue, card)
         local num, _ = SMODS.get_probability_vars(card, 0, 0)
-        return { vars = {
-            math.min(3, num),
-            card.ability.seal.max_retrigs,
-                }
-            }
+        return {
+            vars = {
+                math.min(3, num),
+                card.ability.seal.max_retrigs,
+            },
+        }
     end,
     shatters = true,
 })
 
 SMODS.Sound({
     key = "navy",
-    path = "navy.ogg"
+    path = "navy.ogg",
 })
 
 SMODS.Seal({
@@ -178,7 +202,7 @@ SMODS.Seal({
             card.ability.forced_selection = true
         end
         if context.main_scoring and context.cardarea == G.play then
-            local seal = self.seal_height;
+            local seal = self.seal_height
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
                 delay = 1,
@@ -197,7 +221,7 @@ SMODS.Seal({
             }))
             self.seal_height = self.seal_height - 0.2
         end
-    end
+    end,
 })
 
 SMODS.DrawStep({
@@ -206,9 +230,15 @@ SMODS.DrawStep({
     order = 60,
     func = function(self)
         if self.seal == "folly_gay" then
-            G.shared_seals[self.seal]:draw_shader('polychrome', nil, self.ARGS.send_to_shader, nil, self.children.center)
+            G.shared_seals[self.seal]:draw_shader(
+                "polychrome",
+                nil,
+                self.ARGS.send_to_shader,
+                nil,
+                self.children.center
+            )
         end
-    end
+    end,
 })
 
 local gay_gradient = SMODS.Gradient({
@@ -222,7 +252,7 @@ local gay_gradient = SMODS.Gradient({
         HEX("F10000"),
     },
     cycle = 3,
-    interpolation = "linear"
+    interpolation = "linear",
 })
 
 local function get_gays(hand, rank)
@@ -230,10 +260,7 @@ local function get_gays(hand, rank)
         local gays = {}
         for _, card in ipairs(hand) do
             if card:get_seal(true) == "folly_gay" then
-                if
-                    card:is_suit(suit, nil, true)
-                    and SMODS.Ranks[card.base.value].key == rank
-                then
+                if card:is_suit(suit, nil, true) and SMODS.Ranks[card.base.value].key == rank then
                     table.insert(gays, card)
                 end
                 if SMODS.has_enhancement(card, "m_folly_jimbo") then
@@ -374,15 +401,20 @@ return {
     calculate = function(self, card, context)
         if context.first_hand_drawn then
             local created = create_playing_card({
-                front = pseudorandom_element(G.P_CARDS, pseudoseed('folly_cert_fr')),
-                center = G.P_CENTERS.c_base }, G.discard, true, nil, { G.C.SECONDARY_SET.Enhanced }, true)
-            local seal = SMODS.poll_seal({ guaranteed = true, type_key = 'folly_certsl', options = {
-                                             "folly_approval",
-                                             "folly_spheal",
-                                             "folly_glass",
-                                             "folly_navy",
-                                             "folly_gay",
-                                         } });
+                front = pseudorandom_element(G.P_CARDS, pseudoseed("folly_cert_fr")),
+                center = G.P_CENTERS.c_base,
+            }, G.discard, true, nil, { G.C.SECONDARY_SET.Enhanced }, true)
+            local seal = SMODS.poll_seal({
+                guaranteed = true,
+                type_key = "folly_certsl",
+                options = {
+                    "folly_approval",
+                    "folly_spheal",
+                    "folly_glass",
+                    "folly_navy",
+                    "folly_gay",
+                },
+            })
             created:set_seal(seal)
             if seal == "folly_gay" then
                 folly_utils.log.Info("yep, gay seal spawned alright")
@@ -400,8 +432,9 @@ return {
                         card:juice_up()
                     end
                     return true
-                end }))
+                end,
+            }))
             playing_card_joker_effects({ created })
         end
-    end
+    end,
 }

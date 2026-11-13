@@ -44,7 +44,7 @@ return {
                 "I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands.",
                 "Not only am I extensively trained in unarmed combat,",
                 " but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit.",
-                "If only you could have known what unholy retribution your little \"clever\" comment was about to bring down upon you, maybe you would have held your fucking tongue.",
+                'If only you could have known what unholy retribution your little "clever" comment was about to bring down upon you, maybe you would have held your fucking tongue.',
                 "But you couldn't, you didn't, and now you're paying the price, you goddamn idiot.",
                 "I will shit fury all over you and you will drown in it.",
                 "You're fucking dead, kiddo.",
@@ -310,12 +310,12 @@ return {
             madness_eaten = {
                 name = "Things Eated",
             },
-                        --seals
+            --seals
             folly_approval_seal = {
                 name = "Seal of Approval",
                 text = {
                     "Adds {C:attention}approval",
-                    "{C:attention}rating{} to Mult"
+                    "{C:attention}rating{} to Mult",
                 },
             },
             folly_spheal_seal = {
@@ -337,14 +337,14 @@ return {
             folly_navy_seal = {
                 name = "Navy Seal",
                 text = {
-                    "Obnoxious."
+                    "Obnoxious.",
                 },
             },
             folly_gay_seal = {
                 name = "Gay",
                 text = {
                     "Allows for {C:folly_gay}Gay",
-                    "poker hands"
+                    "poker hands",
                 },
             },
         },

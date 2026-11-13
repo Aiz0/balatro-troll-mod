@@ -88,10 +88,10 @@ folly_utils = {
     pseudorandom_range = function(min, max, seed)
         return folly_utils.lerp(min, max, pseudorandom(seed))
     end,
-    
+
     pseudorandom_range_rounded = function(min, max, seed)
         local rand = folly_utils.pseudorandom_range(min, max + 1, seed)
-        return math.min(math.floor(rand), max);
+        return math.min(math.floor(rand), max)
     end,
 
     merge_numerical_ret_values = function(t, ret)
