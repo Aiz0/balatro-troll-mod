@@ -291,7 +291,10 @@ SMODS.PokerHand({
     },
     evaluate = function(parts, hand)
         return get_gays(hand, "King")
-    end
+    end,
+    visible = function(self)
+        return G.GAME.GAY_SEAL_SPAWNED
+    end,
 })
 
 SMODS.PokerHand({
@@ -309,7 +312,10 @@ SMODS.PokerHand({
     },
     evaluate = function(parts, hand)
         return get_gays(hand, "Queen")
-    end
+    end,
+    visible = function(self)
+        return G.GAME.GAY_SEAL_SPAWNED
+    end,
 })
 
 SMODS.PokerHand({
@@ -327,7 +333,10 @@ SMODS.PokerHand({
     },
     evaluate = function(parts, hand)
         return get_gays(hand, "Jack")
-    end
+    end,
+    visible = function(self)
+        return G.GAME.GAY_SEAL_SPAWNED
+    end,
 })
 
 SMODS.PokerHand({
@@ -345,7 +354,11 @@ SMODS.PokerHand({
     },
     evaluate = function(parts, hand)
         return get_polycule(hand)
-    end
+    end,
+    visible = function(self)
+        folly_utils.log.Info("yep, we checked if it should be visible")
+        return G.GAME.GAY_SEAL_SPAWNED
+    end,
 })
 
 SMODS.Seal({
@@ -371,6 +384,10 @@ return {
                                              "folly_gay",
                                          } });
             created:set_seal(seal)
+            if seal == "folly_gay" then
+                folly_utils.log.Info("yep, gay seal spawned alright")
+                G.GAME.GAY_SEAL_SPAWNED = true
+            end
             G.E_MANAGER:add_event(Event({
                 func = function()
                     G.hand:emplace(created)
