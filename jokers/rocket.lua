@@ -45,12 +45,11 @@ SMODS.Joker({
         end
     end,
     set_ability = function(self, card, initial, delay_sprites)
-        local chips = folly_utils.pseudorandom_range(
+        card.ability.extra.chips = folly_utils.pseudorandom_range_rounded(
             card.ability.extra.low,
             card.ability.extra.high,
             self.key
         )
-        card.ability.extra.chips = round_number(chips, 0)
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
@@ -90,12 +89,11 @@ SMODS.Joker({
         end
     end,
     set_ability = function(self, card, initial, delay_sprites)
-        local mult = folly_utils.pseudorandom_range(
+        card.ability.extra.mult = folly_utils.pseudorandom_range_rounded(
             card.ability.extra.low,
             card.ability.extra.high,
             self.key
         )
-        card.ability.extra.mult = round_number(mult, 0)
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }

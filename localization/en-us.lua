@@ -30,6 +30,25 @@ return {
             k_folly_bull_angry = "Angry!",
             k_folly_red_bull = "Red bull!",
             k_folly_golden = "1 Gazillion",
+            k_folly_spheal = "Go Spheal!",
+            k_folly_navy_seal = {
+                "What the fuck did you just fucking say about me, you little bitch?",
+                "I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",
+                "I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces.",
+                "You are nothing to me but just another target.",
+                "I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words.",
+                "You think you can get away with saying that shit to me over the Internet?",
+                "Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot.",
+                "The storm that wipes out the pathetic little thing you call your life.",
+                "You're fucking dead, kid.",
+                "I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands.",
+                "Not only am I extensively trained in unarmed combat,",
+                " but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit.",
+                'If only you could have known what unholy retribution your little "clever" comment was about to bring down upon you, maybe you would have held your fucking tongue.',
+                "But you couldn't, you didn't, and now you're paying the price, you goddamn idiot.",
+                "I will shit fury all over you and you will drown in it.",
+                "You're fucking dead, kiddo.",
+            },
 
             --Object Types
             k_funny = "Funny :)",
@@ -52,32 +71,36 @@ return {
         },
         labels = {
             folly_mark_sticker = "Marked",
+
+            --Seals
+            folly_approval_seal = "Seal of Approval",
+            folly_spheal_seal = "Spheal",
+            folly_glass_seal = "Glass Seal",
+            folly_navy_seal = "Navy Seal",
+            folly_gay_seal = "Gay",
         },
         poker_hands = {
-            folly_jog = "Jog",
-            folly_oil_change = "Oil Change",
-            folly_karate = "Karate",
-            folly_eat_candy = "Eat Candy",
-            folly_ruminate = "Ruminate",
+            folly_men = "Men",
+            folly_women = "Women",
+            folly_enby = "Enbies",
+            folly_polycule = "The Polycule",
         },
         poker_hand_descriptions = {
-            folly_jog = {
-                "5 cards in a row (consecutive ranks)",
-                "with gaps of 1 rank between each card",
+            folly_men = {
+                "2 kings that share the same suit with gay seals.",
+                "They may be played with 3 other unscored card",
             },
-            folly_oil_change = {
-                "2 polychrome spades and 3 gold diamonds",
+            folly_women = {
+                "2 kings that share the same suit with gay seals.",
+                "They may be played with 3 other unscored card",
             },
-            folly_karate = {
-                '5 cards that vaguely spell out "Karate"',
-                "King, Ace, 72, 8",
+            folly_enby = {
+                "2 jacks that share the same suit with gay seals.",
+                "They may be played with 3 other unscored card",
             },
-            folly_eat_candy = {
-                "4 cards with different suits, may",
-                "be played with 1 other unscored card",
-            },
-            folly_ruminate = {
-                "5 glass cards",
+            folly_polycule = {
+                "3 Unique Polychrome Face cards with gay seals.",
+                "They may be played with 2 other unscored card",
             },
         },
     },
@@ -286,6 +309,43 @@ return {
             },
             madness_eaten = {
                 name = "Things Eated",
+            },
+            --seals
+            folly_approval_seal = {
+                name = "Seal of Approval",
+                text = {
+                    "Adds {C:attention}approval",
+                    "{C:attention}rating{} to Mult",
+                },
+            },
+            folly_spheal_seal = {
+                name = "Spheal",
+                text = {
+                    "{C:blue,E:1}Splashes {C:attention}adjacent",
+                    "cards {C:attention}once{} when",
+                    "this card is scored",
+                },
+            },
+            folly_glass_seal = {
+                name = "Glass Seal",
+                text = {
+                    "{s:1.25,X:folly_fragile_inverse,C:folly_fragile}FRAGILE",
+                    "Retrigger this",
+                    "card {C:green}#1# to #2#{} times",
+                },
+            },
+            folly_navy_seal = {
+                name = "Navy Seal",
+                text = {
+                    "Obnoxious.",
+                },
+            },
+            folly_gay_seal = {
+                name = "Gay",
+                text = {
+                    "Allows for {C:folly_gay}Gay",
+                    "poker hands",
+                },
             },
         },
         Planet = {
