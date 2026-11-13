@@ -360,15 +360,22 @@ return {
     name = "fj_certificate",
     calculate = function(self, card, context)
         if context.first_hand_drawn then
-            local _card = create_playing_card({
-                front = pseudorandom_element(G.P_CARDS, pseudoseed('cert_fr')),
+            local created = create_playing_card({
+                front = pseudorandom_element(G.P_CARDS, pseudoseed('folly_cert_fr')),
                 center = G.P_CENTERS.c_base }, G.discard, true, nil, { G.C.SECONDARY_SET.Enhanced }, true)
-            _card:set_seal(SMODS.poll_seal({ guaranteed = true, type_key = 'certsl' }))
+            local seal = SMODS.poll_seal({ guaranteed = true, type_key = 'folly_certsl', options = {
+                                             "folly_approval",
+                                             "folly_spheal",
+                                             "folly_glass",
+                                             "folly_navy",
+                                             "folly_gay",
+                                         } });
+            created:set_seal(seal)
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    G.hand:emplace(_card)
-                    _card:start_materialize()
-                    G.GAME.blind:debuff_card(_card)
+                    G.hand:emplace(created)
+                    created:start_materialize()
+                    G.GAME.blind:debuff_card(created)
                     G.hand:sort()
                     if context_blueprint_card then
                         context_blueprint_card:juice_up()
@@ -377,7 +384,7 @@ return {
                     end
                     return true
                 end }))
-            playing_card_joker_effects({ _card })
+            playing_card_joker_effects({ created })
         end
     end
 }
