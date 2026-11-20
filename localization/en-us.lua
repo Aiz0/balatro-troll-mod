@@ -229,9 +229,10 @@ return {
             j_folly_angry_bull = {
                 name = "Angry Bull",
                 text = {
-                    "{C:chips}+#1#{} Chips for",
+                    "{C:chips}#1#{} Chips for",
                     "each {C:money}$1{} you have",
-                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                    "{C:inactive}(Currently {C:chips}#2#{C:inactive} Chips)",
+                    "{C:inactive}(Loses {C:chips}#3#{C:inactive} Chips each round)",
                     "{C:eternal}Eternal",
                 },
             },
