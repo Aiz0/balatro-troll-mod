@@ -51,12 +51,14 @@ return {
         end
     end,
     remove_from_deck = function(self, card, from_debuff)
-        local old = card.ability.extra.colour
-        card.ability.extra.colour = "red"
-        card.ability.extra.triggers = card.ability.extra.triggers + 1
-        self.update_reroll_cost(card)
-        card.ability.extra.triggers = card.ability.extra.triggers - 1
-        card.ability.extra.colour = old
+        if card.ability.extra.colour == "green" then
+            local old = card.ability.extra.colour
+            card.ability.extra.colour = "red"
+            card.ability.extra.triggers = card.ability.extra.triggers + 1
+            self.update_reroll_cost(card)
+            card.ability.extra.triggers = card.ability.extra.triggers - 1
+            card.ability.extra.colour = old
+        end
     end,
     set_sprites = function(self, card, front)
         if card.ability then
