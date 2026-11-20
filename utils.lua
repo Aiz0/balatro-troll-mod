@@ -88,4 +88,29 @@ folly_utils = {
     pseudorandom_range = function(min, max, seed)
         return folly_utils.lerp(min, max, pseudorandom(seed))
     end,
+
+    pseudorandom_range_rounded = function(min, max, seed)
+        local rand = folly_utils.pseudorandom_range(min, max + 1, seed)
+        return math.min(math.floor(rand), max)
+    end,
+
+    merge_numerical_ret_values = function(t, ret)
+        for _, key in ipairs(SMODS.calculation_keys) do
+            if t[key] and ret[key] and type(t[key]) == "number" then
+                t[key] = t[key] + ret[key]
+            end
+            if not t[key] and ret[key] and type(ret[key]) == "number" then
+                t[key] = ret[key]
+            end
+        end
+    end,
 }
+
+table.contains = function(list, item)
+    for _, v in pairs(list) do
+        if item == v then
+            return true
+        end
+    end
+    return false
+end

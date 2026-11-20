@@ -82,6 +82,33 @@ times = 1
 
 [[patches]]
 [patches.pattern]
+target = 'cardarea.lua'
+pattern = "pseudoshuffle(self.cards, pseudoseed(_seed or 'shuffle'))"
+position = 'after'
+payload = '''
+local obnoxious_cards = {}
+for i = #self.cards, 1, -1 do
+    if self.cards[i].seal == "folly_navy" then
+        table.insert(obnoxious_cards, table.remove(self.cards, i))
+    end
+end
+for _, v in pairs(obnoxious_cards) do
+    table.insert(self.cards, v)
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+pattern = "if v.ability.forced_selection and not self.highlighted[1] then"
+position = 'at'
+payload = "if v.ability.forced_selection and not table.contains(self.highlighted, v) then"
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
 target = 'functions/common_events.lua'
 pattern = 'G.GAME.dollars = G.GAME.dollars + mod'
 position = 'after'
