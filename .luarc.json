@@ -8,7 +8,8 @@
     "duplicate-set-field",
     "inject-field",
     "undefined-field",
-    "missing-fields"
+    "missing-fields",
+    "param-type-mismatch"
   ],
   "runtime.version": "LuaJIT",
   "type.weakUnionCheck": true,
