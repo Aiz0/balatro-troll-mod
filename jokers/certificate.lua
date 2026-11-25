@@ -399,10 +399,7 @@ return {
     name = "fj_certificate",
     calculate = function(self, card, context)
         if context.first_hand_drawn then
-            local created = create_playing_card({
-                front = pseudorandom_element(G.P_CARDS, pseudoseed("folly_cert_fr")),
-                center = G.P_CENTERS.c_base,
-            }, G.discard, true, nil, { G.C.SECONDARY_SET.Enhanced }, true)
+            
             local seal = SMODS.poll_seal({
                 guaranteed = true,
                 type_key = "folly_certsl",
@@ -414,25 +411,28 @@ return {
                     "folly_gay",
                 },
             })
-            created:set_seal(seal)
-            if seal == "folly_gay" then
-                G.GAME.GAY_SEAL_SPAWNED = true
-            end
+            local created = SMODS.create_card({ set = "Base", seal = seal, area = G.discard, key_append = "folly_cert_fr"})
+            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+            created.playing_card = G.playing_card
+            table.insert(G.playing_cards, created)
             G.E_MANAGER:add_event(Event({
                 func = function()
                     G.hand:emplace(created)
                     created:start_materialize()
                     G.GAME.blind:debuff_card(created)
                     G.hand:sort()
-                    if context_blueprint_card then
-                        context_blueprint_card:juice_up()
+                    if context.blueprint_card then
+                        context.blueprint_card:juice_up()
                     else
                         card:juice_up()
                     end
+                    SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
+                    save_run()
                     return true
                 end,
             }))
-            playing_card_joker_effects({ created })
+            
+            return nil, true -- This is for Joker retrigger purposes, according to VanillaRemade
         end
     end,
 }
