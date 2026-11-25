@@ -239,6 +239,7 @@ SMODS.DrawStep({
             )
         end
     end,
+    conditions = { facing = "front" },
 })
 
 local gay_gradient = SMODS.Gradient({
